@@ -1,0 +1,70 @@
+.features {
+  padding: 2rem 0;
+  width: 100%;
+  background-color: var(--ifm-background-color);
+}
+
+.benchmarkContainer {
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benchmarkTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.benchmarkDescription {
+  text-align: center;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 2rem;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+}
+
+.benchmarkTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 0 auto;
+  display: table;
+}
+
+.benchmarkTable th,
+.benchmarkTable td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  text-align: center;
+}
+
+.benchmarkTable th {
+  background-color: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+}
+
+.benchmarkTable tr:nth-child(even) {
+  background-color: var(--ifm-color-emphasis-50);
+}
+
+.highlightScore {
+  color: #1677ff;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 996px) {
+  .benchmarkTable {
+    font-size: 0.8rem;
+  }
+  
+  .benchmarkTable th,
+  .benchmarkTable td {
+    padding: 0.5rem;
+  }
+}
