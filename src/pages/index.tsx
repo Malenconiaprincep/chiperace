@@ -14,17 +14,17 @@ export default function Home(): ReactNode {
   return (
     <>
       <Navbar />
-      <Layout
+      {/* <Layout
         title={siteConfig.title}
         description="寒武纪官方网站"
         wrapperClassName="homepage"
-      >
-        {/* <HomepageHeader /> */}
-        <MainProduct />
-        <ProductGrid />
-        <NewsSection />
-        <Footer />
-      </Layout>
+      > */}
+      {/* <HomepageHeader /> */}
+      <MainProduct />
+      <ProductGrid />
+      <NewsSection />
+      <Footer />
+      {/* </Layout> */}
     </>
   );
 }
