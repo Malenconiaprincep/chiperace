@@ -1,0 +1,195 @@
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 2rem 0;
+  font-size: 14px;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mainContent {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo img {
+  height: 24px;
+  width: auto;
+}
+
+.logo span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footerLink {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footerLink:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.socialLinkWrapper {
+  position: relative;
+}
+
+.socialLink {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+  background: url('/img/footer-wx.png') no-repeat center;
+  background-size: 20px;
+  background-position: 50% 100%;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.active {
+  background-position: 50% 0%;
+}
+
+/* 微信图标 */
+/* .socialLink::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/img/footer-wx.png') no-repeat center;
+  background-size: 20px;
+  background-position: 50% 50%;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+} */
+
+/* 悬停效果 */
+.socialLink:hover {
+  /* background-color: #2ba245; 微信绿色 */
+  background-position: 50% 0%;
+}
+
+.socialLink:hover::after {
+  opacity: 1;
+}
+
+/* 二维码弹窗样式 */
+.qrCodePopup {
+  width: 128px;
+  height: 128px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 12px;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+}
+
+.qrCodePopup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.qrCodePopup img {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
+
+.wx {
+  background: url('/img/footer-wx.png') no-repeat center;
+  background-size: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.copyright {
+  padding-top: 1.5rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.copyright p {
+  margin: 0.25rem 0;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .mainContent {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+  }
+
+  .qrCodePopup {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+
+  .qrCodePopup::after {
+    left: auto;
+    right: 12px;
+    transform: none;
+  }
+} 

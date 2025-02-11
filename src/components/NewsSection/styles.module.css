@@ -1,0 +1,49 @@
+.newsSection {
+  padding: 4rem 0;
+}
+
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.newsCard {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.newsDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.day {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e88e5;
+}
+
+.month {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.newsContent {
+  flex: 1;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #e3f2fd;
+  color: #1e88e5;
+  border-radius: 4px;
+  font-size: 0.8rem;
+} 
