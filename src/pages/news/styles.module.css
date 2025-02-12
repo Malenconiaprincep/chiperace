@@ -1,0 +1,286 @@
+.newsContainer {
+  width: 100%;
+  background-color: #f5f7fa;
+}
+
+.banner {
+  height: 320px;
+  background: linear-gradient(135deg, #1e3799, #0c2461);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+              linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+  background-size: 60px 60px;
+  opacity: 0.1;
+}
+
+.banner h1 {
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  position: relative;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.newsContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.filterBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.filterItem {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  position: relative;
+}
+
+.filterItem::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: #1890ff;
+  border-radius: 2px;
+}
+
+.yearFilter {
+  display: flex;
+  gap: 30px;
+}
+
+.yearFilter span {
+  color: #666;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.yearFilter span:hover {
+  color: #1890ff;
+  background: rgba(24,144,255,0.1);
+}
+
+.newsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.newsItem {
+  background: white;
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.newsItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.newsImage {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.newsImage::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+}
+
+.newsImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.newsInfo h3 {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+  transition: color 0.3s;
+}
+
+.newsItem:hover .newsInfo h3 {
+  color: #1890ff;
+}
+
+.newsDate {
+  margin-bottom: 15px;
+}
+
+.day {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 8px;
+}
+
+.yearMonth {
+  font-size: 14px;
+  color: #666;
+}
+
+.newsInfo p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 60px;
+}
+
+.pagination span {
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.pagination span:hover:not(.active) {
+  background: rgba(24,144,255,0.1);
+  color: #1890ff;
+}
+
+.pagination span.active {
+  background: #1890ff;
+  color: white;
+}
+
+/* 添加特色新闻的样式 */
+.featureNews {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 0;
+  padding: 0;
+  margin-bottom: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.featureNews .newsImage {
+  height: 460px;
+}
+
+.featureNews .newsContent {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.featureNews .newsInfo h3 {
+  font-size: 26px;
+  line-height: 1.4;
+  margin-bottom: 24px;
+  -webkit-line-clamp: 3;
+  color: #1a1a1a;
+}
+
+.featureNews .newsDate {
+  margin-bottom: 24px;
+}
+
+.featureNews .day {
+  font-size: 36px;
+  color: #1890ff;
+}
+
+/* 响应式布局 */
+@media (max-width: 1024px) {
+  .newsList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .featureNews {
+    grid-template-columns: 1fr;
+  }
+  
+  .featureNews .newsImage {
+    height: 360px;
+  }
+  
+  .featureNews .newsContent {
+    padding: 30px;
+  }
+  
+  .featureNews .newsInfo h3 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 240px;
+  }
+  
+  .banner h1 {
+    font-size: 32px;
+  }
+  
+  .newsList {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .filterBar {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .newsContent {
+    padding: 40px 16px;
+  }
+} 

@@ -5,6 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import Navbar from '@site/src/components/Navbar';
+import Layout from '../components/Layout';
 
 import styles from './index.module.css';
 import MainProduct from '../components/Banner';
@@ -48,26 +49,25 @@ import Footer from '../components/Footer';
 // }
 
 // 创建自定义的页面布局
-function CustomLayout({ children }: { children: ReactNode }) {
-  return (
-    <div className={styles.customLayout}>
-      <Navbar />
-      {children}
-      <Footer />
-    </div>
-  );
-}
+// function CustomLayout({ children }: { children: ReactNode }) {
+//   return (
+//     <div className={styles.customLayout}>
+//       <Navbar />
+//       {children}
+//       <Footer />
+//     </div>
+//   );
+// }
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
   return (
-    // 使用自定义布局替换默认的 Layout
-    <CustomLayout>
+    <Layout>
       <main>
         <MainProduct />
         <ProductGrid />
         <NewsSection />
       </main>
-    </CustomLayout>
+    </Layout>
   );
 }
