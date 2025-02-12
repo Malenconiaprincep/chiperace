@@ -1,10 +1,11 @@
 import { Form, Input, Switch, Button, Card, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { newsApi } from '../services/api';
+import type { NewsData } from '../services/api';
 
 interface NewsFormData {
   title: string;
@@ -16,11 +17,42 @@ interface NewsFormData {
 }
 
 const NewsForm = () => {
+  const { id } = useParams<{ id: string }>();
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [editor, setEditor] = useState<IDomEditor | null>(null);
   const [html, setHtml] = useState('');
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(false);
+
+  // 加载新闻数据
+  useEffect(() => {
+    const fetchNews = async () => {
+      if (!id) return;
+
+      try {
+        setInitialLoading(true);
+        const response = await newsApi.getNewsById(Number(id));
+        const news = response.data;
+
+        form.setFieldsValue({
+          title: news.title,
+          source: news.source,
+          link: news.link,
+          image: news.image,
+          isFeature: news.isFeature
+        });
+        setHtml(news.content || '');
+      } catch (error) {
+        console.error('获取新闻失败:', error);
+        message.error('获取新闻失败');
+      } finally {
+        setInitialLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, [id, form]);
 
   const editorConfig: Partial<IEditorConfig> = {
     placeholder: '请输入内容...',
@@ -40,11 +72,16 @@ const NewsForm = () => {
         date: new Date()
       };
 
-      await newsApi.createNews(formData);
+      if (id) {
+        await newsApi.updateNews(Number(id), formData);
+      } else {
+        await newsApi.createNews(formData);
+      }
+
       message.success('保存成功');
       navigate('/news');
     } catch (error) {
-      console.error('创建新闻失败:', error);
+      console.error('保存新闻失败:', error);
       message.error('保存失败');
     } finally {
       setLoading(false);
@@ -53,7 +90,7 @@ const NewsForm = () => {
 
   return (
     <div>
-      <Card title="新建新闻" style={{ maxWidth: 1000, margin: '0 auto' }}>
+      <Card title={id ? "编辑新闻" : "新建新闻"} style={{ maxWidth: 1000, margin: '0 auto' }}>
         <Form
           form={form}
           layout="vertical"
@@ -135,7 +172,12 @@ const NewsForm = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading} style={{ marginRight: 8 }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loading || initialLoading}
+              style={{ marginRight: 8 }}
+            >
               保存
             </Button>
             <Button onClick={() => navigate('/news')}>
