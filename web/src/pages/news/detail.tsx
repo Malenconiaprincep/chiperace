@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@site/src/components/Layout';
-import axios from 'axios';
 import styles from './styles.module.css';
-
-interface NewsDetail {
-  id: number;
-  title: string;
-  content: string;
-  source: string;
-  link: string;
-  image?: string;
-  date: string;
-}
+import { newsApi, type NewsItem } from '../../services/api';
 
 const NewsDetailPage = (): JSX.Element => {
   const searchParams = new URLSearchParams(window.location.search);
   const id = searchParams.get('id');
-  const [news, setNews] = useState<NewsDetail | null>(null);
+  const [news, setNews] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
-        const response = await axios.get<NewsDetail>(`http://localhost:4000/api/news/${id}`);
+        if (!id) return;
+        const response = await newsApi.getNewsById(id);
         setNews(response.data);
       } catch (error) {
         console.error('获取新闻详情失败:', error);
@@ -31,9 +22,7 @@ const NewsDetailPage = (): JSX.Element => {
       }
     };
 
-    if (id) {
-      fetchNewsDetail();
-    }
+    fetchNewsDetail();
   }, [id]);
 
   if (loading) {

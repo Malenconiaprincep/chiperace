@@ -2,18 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@site/src/components/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
-import axios from 'axios';
-
-interface NewsItem {
-  id: number;
-  title: string;
-  source: string;
-  link: string;
-  image?: string;
-  isFeature?: boolean;
-  date: string;
-  content?: string;
-}
+import { newsApi, type NewsItem } from '../../services/api';
 
 const NewsPage = (): JSX.Element => {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -22,7 +11,7 @@ const NewsPage = (): JSX.Element => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get<NewsItem[]>('http://localhost:4000/api/news');
+        const response = await newsApi.getNewsList();
         setNews(response.data);
       } catch (error) {
         console.error('获取新闻列表失败:', error);
