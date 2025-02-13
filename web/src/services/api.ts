@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const isDev = process.env.NODE_ENV === 'development';
 
-const API_BASE_URL = isDev
+const API_BASE_URL = location.host.indexOf('localhost') !== -1
   ? 'http://localhost:4000/api'  // 开发环境
   : '/api';  // 生产环境
 
