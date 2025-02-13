@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'chi-api',
-    script: 'dist/main.js',
+    script: 'dist/index.js',
     instances: 2,
     exec_mode: 'cluster',
     watch: false,
