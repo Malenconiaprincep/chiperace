@@ -6,6 +6,8 @@
 
 # Production
 /build
+web/build
+manage/build
 
 # Generated files
 .docusaurus
