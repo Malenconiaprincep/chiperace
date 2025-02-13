@@ -5,8 +5,10 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { useState, useEffect } from 'react';
 import { newsApi } from '../services/api';
+// @ts-expect-error
 import type { NewsData } from '../services/api';
 
+// @ts-expect-error
 interface NewsFormData {
   title: string;
   source: string;
@@ -137,7 +139,7 @@ const NewsForm = () => {
             rules={[{
               required: true,
               message: '请输入新闻内容',
-              validator: (_, value) => {
+              validator: (_) => {
                 if (html && html.trim() !== '<p><br></p>') {
                   return Promise.resolve();
                 }
