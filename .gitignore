@@ -5,6 +5,7 @@
 /backend/.next/*
 
 # Production
+*/dist
 /build
 web/build
 manage/build
