@@ -11,7 +11,7 @@ import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
     <ConfigProvider locale={zhCN}>
-      <Router>
+      <Router basename="/admin">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>

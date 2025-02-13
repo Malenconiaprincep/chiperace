@@ -8,5 +8,15 @@ export default defineConfig({
     port: 3010, // 设置开发服务器端口为3000
     open: true, // 自动打开浏览器
     host: '0.0.0.0', // 允许外部访问
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+      },
+    },
+  },
+  base: '/admin/',
+  build: {
+    outDir: 'dist'
   }
 }) 
