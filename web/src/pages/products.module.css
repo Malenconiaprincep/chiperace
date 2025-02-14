@@ -1,0 +1,232 @@
+.productsContainer {
+  width: 100%;
+  background-color: #fff;
+}
+
+.banner {
+  height: 320px;
+  background: linear-gradient(135deg, #001529 0%, #003366 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.bannerBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: url('/img/banner-grid.png') center/cover; */
+  opacity: 0.1;
+  animation: flow 20s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.bannerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+}
+
+.bannerContent h1 {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.bannerContent p {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.breadcrumb {
+  margin-bottom: 40px;
+  color: #666;
+  font-size: 14px;
+}
+
+.breadcrumb span {
+  position: relative;
+  padding-right: 20px;
+  margin-right: 12px;
+}
+
+.breadcrumb span:not(:last-child)::after {
+  content: '>';
+  position: absolute;
+  right: 0;
+  color: #999;
+}
+
+.productDisplay {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  margin-bottom: 60px;
+}
+
+.productImage {
+  background: #f5f7fa;
+  padding: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productImage img {
+  max-width: 100%;
+  height: auto;
+}
+
+.productInfo h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.description {
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.specs h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: #f7f7f7;
+}
+
+.specs table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specs tr:nth-child(odd) {
+  background: #fafafa;
+}
+
+.specs td {
+  padding: 12px;
+  border: 1px solid #eee;
+  line-height: 1.6;
+}
+
+.specs td:first-child {
+  color: #666;
+  width: 140px;
+  background: #f7f7f7;
+}
+
+.specs td:last-child {
+  color: #333;
+}
+
+/* 新增规格表样式 */
+.specsSection {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.specsSection h3 {
+  font-size: 18px;
+  color: #333;
+  padding: 16px 20px;
+  background: #f5f5f5;
+  margin: 0;
+}
+
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  display: table;
+}
+
+.specsTable tbody {
+  display: table-row-group;
+}
+
+.specsTable tr {
+  display: table-row;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.specsTable td {
+  display: table-cell;
+  padding: 16px 20px;
+  border: none;
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.specsTable td:first-child {
+  color: #666;
+  width: 180px;
+  background: #fafafa;
+}
+
+.specsTable td:last-child {
+  color: #333;
+}
+
+/* 响应式布局 */
+@media (max-width: 1024px) {
+  .productDisplay {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .specsSection {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 240px;
+  }
+
+  .bannerContent {
+    padding: 40px 20px;
+  }
+
+  .bannerContent h1 {
+    font-size: 28px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .specsTable td {
+    padding: 12px 16px;
+  }
+  
+  .specsTable td:first-child {
+    width: 140px;
+  }
+} 

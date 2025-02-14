@@ -11,9 +11,9 @@ const menuItems = [
     label: '产品中心',
     link: '/products',
     subMenu: [
-      { label: '产品介绍', link: '/products/intro' },
+      { label: '产品介绍', link: '/products' },
       { label: '应用案例', link: '/cases' },
-      { label: '文档支持', link: '/docs' }
+      { label: '文档支持', link: '/docs/intro' }
     ]
   },
   {
