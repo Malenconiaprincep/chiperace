@@ -26,9 +26,19 @@ const menuItems = [
   }
 ];
 
+const socialLinks = [
+  {
+    icon: '/img/footer-wx.png',
+    qrCode: '/img/qrcode.jpg',
+    label: '微信',
+    url: '#'
+  }
+];
+
 export default function Navbar() {
   const [isSticky, setIsSticky] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeQRCode, setActiveQRCode] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,6 +93,24 @@ export default function Navbar() {
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className={styles.socialLinks}>
+            {socialLinks.map((social) => (
+              <div
+                key={social.label}
+                className={styles.socialLinkWrapper}
+                onMouseEnter={() => setActiveQRCode(social.qrCode)}
+                onMouseLeave={() => setActiveQRCode(null)}
+              >
+                <div className={`${styles.socialLink} ${activeQRCode === social.qrCode ? styles.active : ''}`} />
+                {activeQRCode === social.qrCode && (
+                  <div className={styles.qrCodePopup}>
+                    <img src={social.qrCode} alt={`${social.label} QR Code`} />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>

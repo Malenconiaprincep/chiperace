@@ -2,30 +2,6 @@ import React, { useState } from 'react';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 
-const socialLinks = [
-  {
-    icon: '/img/footer-wx.png',
-    qrCode: '/img/qrcode.jpg',
-    label: '微信',
-    url: '#'
-  },
-  // {
-  //   icon: '/img/social/weibo.svg',
-  //   label: '微博',
-  //   url: '#'
-  // },
-  // {
-  //   icon: '/img/social/linkedin.svg',
-  //   label: 'LinkedIn',
-  //   url: '#'
-  // },
-  // {
-  //   icon: '/img/social/zhihu.svg',
-  //   label: '知乎',
-  //   url: '#'
-  // }
-];
-
 const footerLinks = [
   {
     label: '用户协议',
@@ -42,8 +18,6 @@ const footerLinks = [
 ];
 
 export default function Footer() {
-  const [activeQRCode, setActiveQRCode] = useState<string | null>(null);
-
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -64,24 +38,6 @@ export default function Footer() {
               >
                 {link.label}
               </Link>
-            ))}
-          </div>
-
-          <div className={styles.socialLinks}>
-            {socialLinks.map((social) => (
-              <div
-                key={social.label}
-                className={styles.socialLinkWrapper}
-                onMouseEnter={() => setActiveQRCode(social.qrCode)}
-                onMouseLeave={() => setActiveQRCode(null)}
-              >
-                <div className={`${styles.socialLink} ${activeQRCode === social.qrCode ? styles.active : ''}`} />
-                {activeQRCode === social.qrCode && (
-                  <div className={styles.qrCodePopup}>
-                    <img src={social.qrCode} alt={`${social.label} QR Code`} />
-                  </div>
-                )}
-              </div>
             ))}
           </div>
         </div>
