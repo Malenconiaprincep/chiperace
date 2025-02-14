@@ -11,11 +11,10 @@ export interface NewsData {
   date?: Date;
 }
 
+// 添加基础URL配置
 const isDev = process.env.NODE_ENV === 'development';
-
-const API_BASE_URL = isDev
-  ? 'http://localhost:4000/api'  // 开发环境
-  : '/api';  // 生产环境
+const BASE_URL = isDev ? 'http://localhost:4000' : '';
+const API_BASE_URL = isDev ? 'http://localhost:4000/api' : '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -24,6 +23,12 @@ const api = axios.create({
     'Content-Type': 'application/json'
   }
 });
+
+// 添加获取完整URL的工具函数
+export const getFullUrl = (path: string) => {
+  if (!path) return '';
+  return path.startsWith('http') ? path : `${BASE_URL}${path}`;
+};
 
 export const newsApi = {
   // 获取新闻列表
@@ -43,6 +48,19 @@ export const newsApi = {
 
   // 批量删除新闻
   batchDeleteNews: (ids: number[]) => api.post('/news/batch-delete', { ids })
+};
+
+export const uploadApi = {
+  // 上传文件
+  uploadFile: (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return api.post<{ url: string }>('/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
 };
 
 export default api; 

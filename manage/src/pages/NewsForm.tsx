@@ -1,10 +1,13 @@
-import { Form, Input, Switch, Button, Card, message } from 'antd';
+import { Form, Input, Switch, Button, Card, message, Upload } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { useState, useEffect } from 'react';
-import { newsApi } from '../services/api';
+import { newsApi, uploadApi, getFullUrl } from '../services/api';
+import type { UploadChangeParam } from 'antd/es/upload';
+import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 // @ts-expect-error
 import type { NewsData } from '../services/api';
 
@@ -26,6 +29,8 @@ const NewsForm = () => {
   const [html, setHtml] = useState('');
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
+  const [uploading, setUploading] = useState(false);
 
   // 加载新闻数据
   useEffect(() => {
@@ -41,10 +46,10 @@ const NewsForm = () => {
           title: news.title,
           source: news.source,
           link: news.link,
-          image: news.image,
           isFeature: news.isFeature
         });
         setHtml(news.content || '');
+        setImageUrl(news.image);
       } catch (error) {
         console.error('获取新闻失败:', error);
         message.error('获取新闻失败');
@@ -90,6 +95,45 @@ const NewsForm = () => {
     }
   };
 
+  const beforeUpload = (file: RcFile) => {
+    const isImage = file.type.startsWith('image/');
+    if (!isImage) {
+      message.error('只能上传图片文件!');
+    }
+    const isLt5M = file.size / 1024 / 1024 < 5;
+    if (!isLt5M) {
+      message.error('图片必须小于5MB!');
+    }
+    return isImage && isLt5M;
+  };
+
+  const handleChange = async (info: UploadChangeParam<UploadFile>) => {
+    if (info.file.status === 'uploading') {
+      setUploading(true);
+      return;
+    }
+
+    if (info.file.status === 'done') {
+      try {
+        const response = await uploadApi.uploadFile(info.file.originFileObj as File);
+        setImageUrl(response.data.url);
+        form.setFieldsValue({ image: response.data.url });
+      } catch (error) {
+        message.error('上传图片失败');
+        console.error('上传图片失败:', error);
+      } finally {
+        setUploading(false);
+      }
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      {uploading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>上传图片</div>
+    </div>
+  );
+
   return (
     <div>
       <Card title={id ? "编辑新闻" : "新建新闻"} style={{ maxWidth: 1000, margin: '0 auto' }}>
@@ -128,9 +172,34 @@ const NewsForm = () => {
           <Form.Item
             name="image"
             label="新闻图片"
-            extra="请输入图片URL地址"
+            extra="支持jpg、png、gif格式，大小不超过5MB"
           >
-            <Input placeholder="请输入图片URL" />
+            <Upload
+              name="file"
+              listType="picture-card"
+              className="avatar-uploader"
+              showUploadList={false}
+              customRequest={async ({ file, onSuccess, onError }) => {
+                try {
+                  const response = await uploadApi.uploadFile(file as File);
+                  onSuccess?.(response.data);
+                } catch (error) {
+                  onError?.(error as Error);
+                }
+              }}
+              beforeUpload={beforeUpload}
+              onChange={handleChange}
+            >
+              {imageUrl ? (
+                <img
+                  src={getFullUrl(imageUrl)}
+                  alt="新闻图片"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                uploadButton
+              )}
+            </Upload>
           </Form.Item>
 
           <Form.Item
