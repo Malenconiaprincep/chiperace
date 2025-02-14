@@ -53,17 +53,18 @@ export default function Footer() {
               <img src="/img/logo.png" alt="Cambricon" />
               <span>芯培森</span>
             </div>
-            <div className={styles.links}>
-              {footerLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.url}
-                  className={styles.footerLink}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+          </div>
+
+          <div className={styles.links}>
+            {footerLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.url}
+                className={styles.footerLink}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
           <div className={styles.socialLinks}>
