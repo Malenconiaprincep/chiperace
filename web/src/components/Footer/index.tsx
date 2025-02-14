@@ -22,11 +22,9 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className="container">
         <div className={styles.footerContent}>
-          <div className={styles.mainContent}>
-            <div className={styles.logo}>
-              <img src="/img/logo.png" alt="Cambricon" />
-              <span>芯培森</span>
-            </div>
+          <div className={styles.logo}>
+            <img src="/img/logo.png" alt="Cambricon" />
+            <span>芯培森</span>
           </div>
 
           <div className={styles.links}>

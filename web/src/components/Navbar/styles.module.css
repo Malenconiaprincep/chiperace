@@ -208,10 +208,10 @@
   width: 128px;
   height: 128px;
   position: absolute;
-  bottom: 100%;
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 12px;
+  margin-top: 12px;
   padding: 8px;
   background: white;
   border-radius: 8px;
@@ -222,12 +222,12 @@
 .qrCodePopup::after {
   content: '';
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   border-width: 8px;
   border-style: solid;
-  border-color: white transparent transparent transparent;
+  border-color: transparent transparent white transparent;
 }
 
 .qrCodePopup img {
@@ -239,7 +239,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translate(-50%, 10px);
+    transform: translate(-50%, -10px);
   }
   to {
     opacity: 1;
