@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import { newsApi, NewsItem } from '../../services/api';
+import Link from '@docusaurus/Link';
 
 export default function NewsSection() {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -40,21 +41,33 @@ export default function NewsSection() {
         <h2>公司新闻</h2>
         <div className={styles.newsGrid}>
           {news.map((item) => (
-            <div key={item.id} className={styles.newsCard}>
-              <div className={styles.newsDate}>
-                <span className={styles.day}>
-                  {new Date(item.date).getDate().toString().padStart(2, '0')}
-                </span>
-                <span className={styles.month}>
-                  {new Date(item.date).toLocaleString('en-US', { month: 'short' })}
-                </span>
+            <Link
+              key={item.id}
+              to={`/news/detail?id=${item.id}`}
+              className={styles.newsLink}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className={styles.newsCard}>
+                <div className={styles.newsDate}>
+                  <span className={styles.day}>
+                    {new Date(item.date).getDate().toString().padStart(2, '0')}
+                  </span>
+                  <span className={styles.month}>
+                    {new Date(item.date).toLocaleString('en-US', { month: 'short' })}
+                  </span>
+                </div>
+                <div className={styles.newsContent}>
+                  <h3>{item.title}</h3>
+                  <span className={styles.tag}>{item.source}</span>
+                </div>
               </div>
-              <div className={styles.newsContent}>
-                <h3>{item.title}</h3>
-                <span className={styles.tag}>{item.source}</span>
-              </div>
-            </div>
+            </Link>
           ))}
+        </div>
+        <div className={styles.moreNews}>
+          <Link to="/news" className={styles.moreNewsLink}>
+            查看更多新闻 →
+          </Link>
         </div>
       </div>
     </section>
