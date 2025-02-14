@@ -1,18 +1,17 @@
 .navbar {
-  background: #fff;
+  background: transparent;
   padding: 1rem 0;
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1000;
-  width: 100%;
-}
-
-.sticky {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+  width: 100%;
+}
+
+.sticky {
+  background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -35,6 +34,12 @@
 .logo img {
   height: 100%;
   width: auto;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+.sticky .logo img {
+  filter: none;
 }
 
 .menuContainer {
@@ -47,15 +52,21 @@
 }
 
 .menuLink {
-  color: #333;
+  color: #fff;
   text-decoration: none;
   font-size: 16px;
   padding: 0.5rem 0;
   transition: color 0.3s ease;
 }
 
+.sticky .menuLink {
+  color: #333;
+}
+
 .menuLink:hover,
-.menuLink.active {
+.menuLink.active,
+.sticky .menuLink:hover,
+.sticky .menuLink.active {
   color: var(--ifm-color-primary);
 }
 
