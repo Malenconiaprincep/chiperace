@@ -5,7 +5,7 @@ import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { useState, useEffect } from 'react';
-import { newsApi, uploadApi, getFullUrl } from '../services/api';
+import { newsApi, uploadApi, getFullUrl, isDev } from '../services/api';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 // @ts-expect-error
@@ -63,7 +63,37 @@ const NewsForm = () => {
 
   const editorConfig: Partial<IEditorConfig> = {
     placeholder: '请输入内容...',
-    MENU_CONF: {}
+    MENU_CONF: {
+      uploadImage: {
+        // 使用 base64 上传图片
+        customUpload(file: File, insertFn: any) {
+          // 校验文件大小
+          const isLt5M = file.size / 1024 / 1024 < 5;
+          if (!isLt5M) {
+            message.error('图片必须小于5MB!');
+            return;
+          }
+
+          // 校验文件类型
+          const isImage = file.type.startsWith('image/');
+          if (!isImage) {
+            message.error('只能上传图片文件!');
+            return;
+          }
+
+          // 转换为 base64
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            const base64Str = reader.result as string;
+            insertFn(base64Str);
+          };
+          reader.onerror = () => {
+            message.error('图片上传失败');
+          };
+        }
+      }
+    }
   };
 
   const toolbarConfig = {

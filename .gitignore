@@ -9,6 +9,7 @@
 /build
 web/build
 manage/build
+api/public/uploads/
 
 # Generated files
 .docusaurus

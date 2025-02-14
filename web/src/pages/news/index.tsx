@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@site/src/components/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
-import { newsApi, type NewsItem } from '../../services/api';
+import { getFullUrl, newsApi, type NewsItem } from '../../services/api';
 
 const NewsPage = (): JSX.Element => {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -64,7 +64,7 @@ const NewsPage = (): JSX.Element => {
               >
                 {item.image && (
                   <div className={styles.newsImage}>
-                    <img src={item.image} alt={item.title} />
+                    <img src={getFullUrl(item.image)} alt={item.title} />
                   </div>
                 )}
                 <div className={styles.newsContent}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@site/src/components/Layout';
 import styles from './styles.module.css';
-import { newsApi, type NewsItem } from '../../services/api';
+import { newsApi, type NewsItem, getFullUrl } from '../../services/api';
 
 const NewsDetailPage = (): JSX.Element => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -68,11 +68,11 @@ const NewsDetailPage = (): JSX.Element => {
               <span>{news.source}</span>
               <span>{new Date(news.date).toLocaleDateString()}</span>
             </div>
-            {news.image && (
+            {/* {news.image && (
               <div className={styles.newsDetailImage}>
-                <img src={news.image} alt={news.title} />
+                <img src={getFullUrl(news.image)} alt={news.title} />
               </div>
-            )}
+            )} */}
             <div
               className={styles.newsDetailContent}
               dangerouslySetInnerHTML={{ __html: news.content }}
