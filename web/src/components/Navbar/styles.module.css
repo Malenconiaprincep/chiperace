@@ -22,6 +22,12 @@
   justify-content: space-between;
 }
 
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .logo {
   height: 40px;
 }
@@ -56,17 +62,11 @@
 .subMenu {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  min-width: 1000px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 100;
+  left: 0;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 200px;
 }
 
 .menuItem:hover .subMenu {
@@ -75,9 +75,24 @@
 }
 
 .subMenuContent {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  padding: 8px 0;
+}
+
+.subMenuColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.subMenuLink {
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+}
+
+.subMenuLink:hover {
+  background-color: #f5f5f5;
 }
 
 .subMenuSection {
@@ -107,7 +122,6 @@
   font-weight: 500;
 }
 
-.subMenuLink,
 .subSubMenuItem {
   color: #666;
   text-decoration: none;
@@ -117,7 +131,6 @@
   padding: 0.5rem 0;
 }
 
-.subMenuLink:hover,
 .subSubMenuItem:hover {
   color: var(--ifm-color-primary);
 }
