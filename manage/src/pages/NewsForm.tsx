@@ -5,7 +5,7 @@ import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { useState, useEffect } from 'react';
-import { newsApi, uploadApi, getFullUrl, isDev } from '../services/api';
+import { newsApi, uploadApi, getFullUrl } from '../services/api';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 // @ts-expect-error
