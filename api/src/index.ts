@@ -184,6 +184,100 @@ router.post('/api/upload', async (ctx) => {
   }
 });
 
+// Banner 接口类型定义
+interface BannerRequestBody {
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  link: string;
+}
+
+// 获取 Banner 列表
+router.get('/api/banners', async (ctx) => {
+  const banners = await prisma.banner.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+  ctx.body = banners;
+});
+
+// 获取单个 Banner
+router.get('/api/banners/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const banner = await prisma.banner.findUnique({
+    where: { id: Number(id) }
+  });
+
+  if (!banner) {
+    ctx.status = 404;
+    ctx.body = { error: 'Banner不存在' };
+    return;
+  }
+
+  ctx.body = banner;
+});
+
+// 创建 Banner
+router.post('/api/banners', async (ctx) => {
+  const data = ctx.request.body as BannerRequestBody;
+
+  try {
+    const banner = await prisma.banner.create({
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        description: data.description,
+        image: data.image,
+        link: data.link
+      }
+    });
+    ctx.body = banner;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '创建Banner失败' };
+  }
+});
+
+// 更新 Banner
+router.put('/api/banners/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const data = ctx.request.body as BannerRequestBody;
+
+  try {
+    const banner = await prisma.banner.update({
+      where: { id: Number(id) },
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        description: data.description,
+        image: data.image,
+        link: data.link
+      }
+    });
+    ctx.body = banner;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '更新Banner失败' };
+  }
+});
+
+// 删除 Banner
+router.delete('/api/banners/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.banner.delete({
+      where: { id: Number(id) }
+    });
+    ctx.body = { success: true };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '删除Banner失败' };
+  }
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 const PORT = process.env.PORT || 4000;

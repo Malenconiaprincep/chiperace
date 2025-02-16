@@ -18,4 +18,15 @@ model News {
   date      DateTime @default(now())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String
+  description String   @db.Text
+  image       String
+  link        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 } 
