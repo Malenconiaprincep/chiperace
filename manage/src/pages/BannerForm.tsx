@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { bannerApi, uploadApi, getFullUrl } from '../services/api';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile } from 'antd/es/upload/interface';
-import type { BannerData } from '../services/api';
 
 const BannerForm = () => {
   const { id } = useParams<{ id: string }>();
