@@ -1,12 +1,11 @@
 .productsContainer {
-  width: 100%;
-  background-color: #fff;
+  min-height: 100vh;
 }
 
 .banner {
-  height: 320px;
-  background: linear-gradient(135deg, #001529 0%, #003366 100%);
   position: relative;
+  height: 300px;
+  color: white;
   overflow: hidden;
 }
 
@@ -16,39 +15,21 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: url('/img/banner-grid.png') center/cover; */
-  opacity: 0.1;
-  animation: flow 20s linear infinite;
-}
-
-@keyframes flow {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
+  background: linear-gradient(135deg, #1a237e 0%, #0277bd 100%);
+  z-index: 1;
 }
 
 .bannerContent {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 80px 20px;
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
+  z-index: 2;
 }
 
 .bannerContent h1 {
-  font-size: 36px;
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-
-.bannerContent p {
-  font-size: 16px;
-  opacity: 0.8;
+  font-size: 2.5em;
+  margin-bottom: 20px;
 }
 
 .content {
@@ -57,176 +38,346 @@
   padding: 40px 20px;
 }
 
-.breadcrumb {
-  margin-bottom: 40px;
-  color: #666;
-  font-size: 14px;
-}
-
-.breadcrumb span {
-  position: relative;
-  padding-right: 20px;
-  margin-right: 12px;
-}
-
-.breadcrumb span:not(:last-child)::after {
-  content: '>';
-  position: absolute;
-  right: 0;
-  color: #999;
-}
-
 .productDisplay {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
   margin-bottom: 60px;
 }
 
-.productImage {
-  background: #f5f7fa;
-  padding: 40px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.productShowcase {
+  max-width: 1000px;
+  margin: 0 auto 40px;
 }
 
-.productImage img {
-  max-width: 100%;
+.mainImage {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.mainImage img {
+  width: 100%;
   height: auto;
+  display: block;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.thumbnails img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.thumbnails img:hover {
+  transform: translateY(-5px);
+}
+
+.productInfo {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .productInfo h2 {
-  font-size: 28px;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-size: 2.2em;
   margin-bottom: 20px;
+  color: #1a237e;
 }
 
-.description {
-  color: #666;
-  line-height: 1.8;
-  margin-bottom: 40px;
+.productInfo h3 {
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  color: #0277bd;
 }
 
-.specs h3 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 20px;
-  padding: 12px;
-  background: #f7f7f7;
-}
-
-.specs table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.specs tr:nth-child(odd) {
-  background: #fafafa;
-}
-
-.specs td {
-  padding: 12px;
-  border: 1px solid #eee;
+.productInfo p {
+  font-size: 1.1em;
   line-height: 1.6;
-}
-
-.specs td:first-child {
-  color: #666;
-  width: 140px;
-  background: #f7f7f7;
-}
-
-.specs td:last-child {
   color: #333;
 }
 
-/* 新增规格表样式 */
 .specsSection {
-  width: 100%;
-  margin: 0 auto;
-  background: #fff;
+  background: #f5f5f5;
+  padding: 40px;
+  border-radius: 8px;
+  margin-bottom: 60px;
 }
 
-.specsSection h3 {
-  font-size: 18px;
-  color: #333;
-  padding: 16px 20px;
-  background: #f5f5f5;
-  margin: 0;
+.specsContent {
+  margin-top: 20px;
+}
+
+.specsContent p {
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .specsTable {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
-  display: table;
-}
-
-.specsTable tbody {
-  display: table-row-group;
-}
-
-.specsTable tr {
-  display: table-row;
-  border-bottom: 1px solid #f0f0f0;
+  display: inline-table;
 }
 
 .specsTable td {
-  display: table-cell;
-  padding: 16px 20px;
-  border: none;
-  line-height: 1.6;
-  vertical-align: top;
+  padding: 15px;
+  border: 1px solid #ddd;
 }
 
-.specsTable td:first-child {
+.specsTable tr td:first-child {
+  width: 200px;
+  background: #f9f9f9;
+  font-weight: 500;
+}
+
+.advantagesSection {
+  text-align: center;
+}
+
+.advantages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.advantageItem {
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.advantageItem h4 {
+  color: #1a237e;
+  margin-bottom: 15px;
+}
+
+.applicationSection {
+  margin-top: 60px;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.applicationSection h3 {
+  text-align: center;
+  font-size: 2em;
+  color: #1a237e;
+  margin-bottom: 40px;
+}
+
+.applications {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.applicationItem {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.applicationItem:hover {
+  transform: translateY(-5px);
+}
+
+.applicationImages {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.applicationImages img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.applicationContent {
+  padding: 20px;
+  background: white;
+  flex: 1;
+}
+
+.applicationContent h4 {
+  font-size: 1.3em;
+  color: #1a237e;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.applicationContent p {
   color: #666;
-  width: 180px;
-  background: #fafafa;
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.5;
 }
 
-.specsTable td:last-child {
-  color: #333;
+.productImages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
 }
 
-/* 响应式布局 */
-@media (max-width: 1024px) {
-  .productDisplay {
+.productImages img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.productImages img:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 768px) {
+  .thumbnails {
     grid-template-columns: 1fr;
-    gap: 40px;
   }
+  
+  .thumbnails img {
+    height: 180px;
+  }
+  
+  .productInfo h2 {
+    font-size: 1.8em;
+  }
+  
+  .productInfo h3 {
+    font-size: 1.4em;
+  }
+  
+  .advantages {
+    grid-template-columns: 1fr;
+  }
+  
+  .applications {
+    grid-template-columns: 1fr;
+  }
+  
+  .productImages {
+    grid-template-columns: 1fr;
+  }
+  
+  .productImages img {
+    height: 250px;
+  }
+  
+  .applicationImages {
+    height: 200px;
+  }
+  
+  .applicationContent h4 {
+    font-size: 1.2em;
+  }
+}
 
-  .specsSection {
-    max-width: 100%;
+@media (max-width: 1024px) {
+  .applications {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .applicationImages {
+    height: 250px;
+  }
+}
+
+.customersSection {
+  margin-top: 60px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.customersSection h3 {
+  text-align: center;
+  font-size: 2em;
+  color: #1a237e;
+  margin-bottom: 40px;
+}
+
+.customerLogos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logoItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.logoItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.logoItem img {
+  max-width: 100%;
+  height: auto;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.logoItem:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 1200px) {
+  .customerLogos {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .banner {
-    height: 240px;
-  }
-
-  .bannerContent {
-    padding: 40px 20px;
-  }
-
-  .bannerContent h1 {
-    font-size: 28px;
-  }
-
-  .content {
-    padding: 20px;
-  }
-
-  .specsTable td {
-    padding: 12px 16px;
+  .customerLogos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
   
-  .specsTable td:first-child {
-    width: 140px;
+  .logoItem {
+    padding: 15px;
+  }
+  
+  .logoItem img {
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customerLogos {
+    grid-template-columns: repeat(1, 1fr);
   }
 } 

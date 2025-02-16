@@ -10,83 +10,175 @@ const ProductsPage = (): JSX.Element => {
           <div className={styles.bannerBg}></div>
           <div className={styles.bannerContent}>
             <h1>产品技术</h1>
-            <p>专业的人工智能芯片和智能计算解决方案</p>
+            <p>专业的高性能计算解决方案</p>
           </div>
         </div>
 
         <div className={styles.content}>
-          <div className={styles.breadcrumb}>
-            <span>产品技术</span>
-            <span>智能加速卡</span>
-            <span>MLU290-M5</span>
-          </div>
-
           <div className={styles.productDisplay}>
-            <div className={styles.productImage}>
-              <img src="/img/products/mlu290.png" alt="MLU290-M5智能加速卡" />
+            <div className={styles.productImages}>
+              <img src="/img/products/apu-1.jpg" alt="APU-Server v1.0 正面" />
+              <img src="/img/products/apu-2.jpg" alt="APU-Server v1.0 侧面" />
+              <img src="/img/products/apu-3.jpg" alt="APU-Server v1.0 前面板" />
             </div>
             <div className={styles.productInfo}>
-              <h2>MLU290-M5</h2>
-              <p className={styles.description}>
-                MLU290-M5智能加速卡采用寒武纪自研芯片方案,采用7nm先进制程工艺,采用MLUv02指令集架构,MLU290-M5智能加速卡主要用于加速深度学习SKOM设计,具备5个MLU Core,1.2TB/s内存带宽及全面支持MLU-Link互联技术,同时支持虚拟化八卡均分,多机多卡机器联合,全面支持AI训练,推理场景和智能计算任务的处理。
-              </p>
+              <h2>原子级高性能计算服务器APU-Server v1.0</h2>
+              <h3>高速高精度分子动力学计算</h3>
+              <p>采用非冯·诺依曼架构技术，实现分子动力学高速推理</p>
             </div>
           </div>
 
           <div className={styles.specsSection}>
             <h3>产品规格</h3>
-            <table className={styles.specsTable}>
-              <tbody>
-                <tr>
-                  <td>产品名称</td>
-                  <td>MLU290-M5</td>
-                </tr>
-                <tr>
-                  <td>核心架构</td>
-                  <td>Cambricon MLUv02 Extended</td>
-                </tr>
-                <tr>
-                  <td>制程工艺</td>
-                  <td>7nm</td>
-                </tr>
-                <tr>
-                  <td>自适应精度可调算力</td>
-                  <td>
-                    512 TOPS (INT8)<br />
-                    256 TOPS (INT16)<br />
-                    64 TOPS (CINT32)
-                  </td>
-                </tr>
-                <tr>
-                  <td>DirectCN™视频解码</td>
-                  <td>128 Streams 全高清视频</td>
-                </tr>
-                <tr>
-                  <td>DirectCN™图片解码</td>
-                  <td>3200 Frames/s 全高清图片</td>
-                </tr>
-                <tr>
-                  <td>内存类型</td>
-                  <td>HBM2高带宽内存</td>
-                </tr>
-                <tr>
-                  <td>内存容量</td>
-                  <td>32GB</td>
-                </tr>
-                <tr>
-                  <td>内存位宽</td>
-                  <td>4096 bit</td>
-                </tr>
-                <tr>
-                  <td>内存带宽</td>
-                  <td>1228 GB/s</td>
-                </tr>
-                <tr>
-                  <td>系统接口</td>
-                  <td>×16 PCIe 4.0</td>
-                </tr>
-              </tbody>
-            </table>
+            <div className={styles.specsContent}>
+              <p>原子级高性能计算服务器APU-Server v1.0，基于FPGA，同等功耗和精度下，单节点（台式机大小，200-300W）计算速度等同于≈1000个Intel Xeon CPU 核并行速度；或≈10 张"对华禁运"的 NVIDIA A100 GPU 卡（约 2-3 kW）并行速度，产品和服务已应用于九院、国防科大、华为等30多家单位。</p>
+
+              <table className={styles.specsTable}>
+                <tbody>
+                  <tr>
+                    <td>计算架构</td>
+                    <td>非冯·诺依曼架构</td>
+                  </tr>
+                  <tr>
+                    <td>计算性能</td>
+                    <td>相当于1000个Intel Xeon CPU核心</td>
+                  </tr>
+                  <tr>
+                    <td>功率消耗</td>
+                    <td>200-300W</td>
+                  </tr>
+                  <tr>
+                    <td>性能对比</td>
+                    <td>等同于10张NVIDIA A100 GPU卡(2-3kW)</td>
+                  </tr>
+                  <tr>
+                    <td>核心技术</td>
+                    <td>基于FPGA</td>
+                  </tr>
+                  <tr>
+                    <td>应用场景</td>
+                    <td>分子动力学计算、高性能科学计算</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className={styles.advantagesSection}>
+            <h3>产品优势</h3>
+            <div className={styles.advantages}>
+              <div className={styles.advantageItem}>
+                <h4>超高性能</h4>
+                <p>单机性能相当于1000个CPU核心</p>
+              </div>
+              <div className={styles.advantageItem}>
+                <h4>低功耗设计</h4>
+                <p>仅需200-300W功率消耗</p>
+              </div>
+              <div className={styles.advantageItem}>
+                <h4>广泛应用</h4>
+                <p>已服务30多家科研院所和企业</p>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.applicationSection}>
+            <h3>应用领域</h3>
+            <div className={styles.applications}>
+              <div className={styles.applicationItem}>
+                <div className={styles.applicationImages}>
+                  <img src="/img/products/app-radiation.jpg" alt="抗辐照示意图" />
+                </div>
+                <div className={styles.applicationContent}>
+                  <h4>抗辐照（Au冲击）</h4>
+                  <p>基于分子动力学模拟金离子辐照效应</p>
+                </div>
+              </div>
+
+              <div className={styles.applicationItem}>
+                <div className={styles.applicationImages}>
+                  <img src="/img/products/app-memory.jpg" alt="相变存储器芯片" />
+                </div>
+                <div className={styles.applicationContent}>
+                  <h4>相变存储器（GeTe相变）</h4>
+                  <p>模拟GeTe材料相变过程及性能</p>
+                </div>
+              </div>
+
+              <div className={styles.applicationItem}>
+                <div className={styles.applicationImages}>
+                  <img src="/img/products/app-battery.jpg" alt="锂电池示意图" />
+                </div>
+                <div className={styles.applicationContent}>
+                  <h4>锂电池电解质（LiGePS扩散）</h4>
+                  <p>研究锂离子在固态电解质中的扩散行为</p>
+                </div>
+              </div>
+
+              <div className={styles.applicationItem}>
+                <div className={styles.applicationImages}>
+                  <img src="/img/products/app-bonding.jpg" alt="混合键合结构" />
+                </div>
+                <div className={styles.applicationContent}>
+                  <h4>混合键合（Cu键合）</h4>
+                  <p>研究铜键合界面的形成机理</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.customersSection}>
+            <h3>产品与服务用户</h3>
+            <div className={styles.customerLogos}>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/huawei.png" alt="华为" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/aist.png" alt="北京量子智能研究院" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/nudt.png" alt="国防科技大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/jilin.png" alt="吉林大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/dp.png" alt="深势科技" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/ustb.png" alt="北京科技大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/xmu.png" alt="厦门大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/zzu.png" alt="郑州大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/pku.png" alt="北京大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/hbnu.png" alt="湖北第二师范学院" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/scut.png" alt="华南理工大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/whu.png" alt="武汉大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/cityu.png" alt="香港城市大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/nwpu.png" alt="西北工业大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/kunming.png" alt="昆明理工大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/hku.png" alt="香港大学" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
