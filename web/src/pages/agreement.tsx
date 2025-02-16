@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from '@site/src/components/Layout';
-import styles from './styles.module.css';
+import styles from './about.module.css';
 
-const LegalPage = (): JSX.Element => {
+const AgreementPage = (): JSX.Element => {
   return (
     <Layout>
-      <div className={styles.container}>
+      <div className={styles.aboutContainer}>
         <div className={styles.banner}>
           <h1>用户协议</h1>
         </div>
@@ -47,4 +47,4 @@ const LegalPage = (): JSX.Element => {
   );
 };
 
-export default LegalPage; 
+export default AgreementPage; 

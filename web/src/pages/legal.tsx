@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from '@site/src/components/Layout';
-import styles from './styles.module.css';
+import styles from './about.module.css';
 
 const LegalPage = (): JSX.Element => {
   return (
     <Layout>
-      <div className={styles.container}>
+      <div className={styles.aboutContainer}>
         <div className={styles.banner}>
           <h1>法律声明</h1>
         </div>
