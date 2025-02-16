@@ -11,6 +11,15 @@ export interface NewsData {
   date?: Date;
 }
 
+export interface BannerData {
+  id?: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  link: string;
+}
+
 // 添加基础URL配置
 const isDev = process.env.NODE_ENV === 'development';
 const BASE_URL = isDev ? 'http://localhost:4000' : '';
@@ -61,6 +70,23 @@ export const uploadApi = {
       },
     });
   },
+};
+
+export const bannerApi = {
+  // 获取 banner 列表
+  getBannerList: () => api.get<BannerData[]>('/banners'),
+
+  // 获取单个 banner
+  getBannerById: (id: number) => api.get<BannerData>(`/banners/${id}`),
+
+  // 创建 banner
+  createBanner: (data: BannerData) => api.post<BannerData>('/banners', data),
+
+  // 更新 banner
+  updateBanner: (id: number, data: BannerData) => api.put<BannerData>(`/banners/${id}`, data),
+
+  // 删除 banner
+  deleteBanner: (id: number) => api.delete(`/banners/${id}`),
 };
 
 export default api; 

@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import NewsList from './pages/NewsList';
 import NewsForm from './pages/NewsForm';
 import PrivateRoute from './components/PrivateRoute';
+import BannerList from './pages/BannerList';
+import BannerForm from './pages/BannerForm';
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
             <Route path="news" element={<NewsList />} />
             <Route path="news/new" element={<NewsForm />} />
             <Route path="news/edit/:id" element={<NewsForm />} />
+            <Route path="banners" element={<BannerList />} />
+            <Route path="banners/new" element={<BannerForm />} />
+            <Route path="banners/edit/:id" element={<BannerForm />} />
           </Route>
         </Routes>
       </Router>

@@ -1,6 +1,6 @@
 import { Layout, Menu } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { DashboardOutlined, FileTextOutlined } from '@ant-design/icons';
+import { DashboardOutlined, FileTextOutlined, PictureOutlined } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
 
@@ -17,6 +17,11 @@ const MainLayout = () => {
       key: 'news',
       icon: <FileTextOutlined />,
       label: '新闻管理',
+    },
+    {
+      key: 'banners',
+      icon: <PictureOutlined />,
+      label: 'Banner管理',
     },
   ];
 
