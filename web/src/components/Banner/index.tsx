@@ -10,7 +10,6 @@ import 'slick-carousel/slick/slick-theme.css';
 
 export default function MainProduct() {
   const [bannerData, setBannerData] = useState<BannerItem[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBannerData = async () => {
@@ -19,8 +18,6 @@ export default function MainProduct() {
         setBannerData(data);
       } catch (error) {
         console.error('获取 banner 数据失败:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -38,10 +35,6 @@ export default function MainProduct() {
     arrows: true,
     fade: true
   };
-
-  if (loading) {
-    return <div className={styles.loading}>加载中...</div>;
-  }
 
   return (
     <section className={styles.mainProduct}>
