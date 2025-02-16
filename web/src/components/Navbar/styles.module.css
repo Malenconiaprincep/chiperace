@@ -205,6 +205,11 @@
   background-position: 50% 100%;
   opacity: 0.7;
   transition: opacity 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+
+.sticky .socialLink {
+  filter: none
 }
 
 .active {
