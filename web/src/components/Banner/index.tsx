@@ -1,37 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
 import Slider from 'react-slick';
 import styles from './styles.module.css';
+import { bannerApi, getFullUrl, type BannerItem } from '../../services/api';
 
 // 引入 slick 的样式
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const bannerData = [
-  {
-    title: 'MLU290-M5云端AI训练卡',
-    subtitle: '面向人工智能训练',
-    description: '采用MLU架构云端芯片技术，自适应高效训练方案',
-    image: '/img/banner.jpg',
-    link: '/products/mlu290'
-  },
-  {
-    title: 'MLU370-S4云端AI加速卡',
-    subtitle: '性能全面升级',
-    description: '先进Chiplet技术，超强MLU Uarch3.0架构，AI性能全面升级',
-    image: '/img/banner.jpg',
-    link: '/products/mlu370'
-  },
-  {
-    title: 'MLU220-M.2边缘AI加速卡',
-    subtitle: '边缘智能解决方案',
-    description: '新一代边缘计算核心动力，为智能边缘赋能',
-    image: '/img/banner.jpg',
-    link: '/products/mlu220'
-  }
-];
-
 export default function MainProduct() {
+  const [bannerData, setBannerData] = useState<BannerItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBannerData = async () => {
+      try {
+        const { data } = await bannerApi.getBannerList();
+        setBannerData(data);
+      } catch (error) {
+        console.error('获取 banner 数据失败:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBannerData();
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -44,6 +39,10 @@ export default function MainProduct() {
     fade: true
   };
 
+  if (loading) {
+    return <div className={styles.loading}>加载中...</div>;
+  }
+
   return (
     <section className={styles.mainProduct}>
       <Slider {...settings} className={styles.slider}>
@@ -51,7 +50,7 @@ export default function MainProduct() {
           <div key={index}>
             <div
               className={styles.slide}
-              style={{ backgroundImage: `url(${banner.image})` }}
+              style={{ backgroundImage: `url(${getFullUrl(banner.image)})` }}
             >
               <div className={styles.overlay}>
                 <div className="container">
