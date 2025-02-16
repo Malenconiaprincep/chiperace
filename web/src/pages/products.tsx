@@ -178,6 +178,30 @@ const ProductsPage = (): JSX.Element => {
               <div className={styles.logoItem}>
                 <img src="/img/customers/hku.png" alt="香港大学" />
               </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/inner-mongolia.png" alt="内蒙古师范大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/physics-cas.png" alt="中国科学院物理研究所" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/bit.png" alt="北京理工大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/tsinghua.png" alt="清华大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/chongqing.png" alt="重庆大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/caep.png" alt="中国工程物理研究院" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/huazhong.png" alt="华中科技大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/hunan.png" alt="湖南大学" />
+              </div>
             </div>
           </div>
         </div>
