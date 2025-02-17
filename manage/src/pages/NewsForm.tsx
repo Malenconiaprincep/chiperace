@@ -194,7 +194,7 @@ const NewsForm = () => {
           <Form.Item
             name="link"
             label="新闻链接"
-            rules={[{ required: true, message: '请输入新闻链接' }]}
+            rules={[{ message: '请输入新闻链接' }]}
           >
             <Input placeholder="请输入新闻链接" />
           </Form.Item>

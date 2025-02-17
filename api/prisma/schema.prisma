@@ -12,7 +12,7 @@ model News {
   title     String
   content   String?  @db.Text    // 使用Text类型存储长文本
   source    String
-  link      String
+  link      String?  // 修改为可选字段
   image     String?
   isFeature Boolean  @default(false)
   date      DateTime @default(now())
