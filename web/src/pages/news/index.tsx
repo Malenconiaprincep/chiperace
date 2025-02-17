@@ -58,7 +58,7 @@ const NewsPage = (): JSX.Element => {
             {news.map((item) => (
               <Link
                 key={item.id}
-                to={`/news/detail?id=${item.id}`}
+                to={item.link ? item.link : `/news/detail?id=${item.id}`}
                 className={`${styles.newsItem} ${item.isFeature ? styles.featureNews : ''}`}
                 style={{ textDecoration: 'none' }}
               >

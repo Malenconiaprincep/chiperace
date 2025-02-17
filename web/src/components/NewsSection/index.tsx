@@ -43,7 +43,7 @@ export default function NewsSection() {
           {news.map((item) => (
             <Link
               key={item.id}
-              to={`/news/detail?id=${item.id}`}
+              to={item.link ? item.link : `/news/detail?id=${item.id}`}
               className={styles.newsLink}
               style={{ textDecoration: 'none' }}
             >
