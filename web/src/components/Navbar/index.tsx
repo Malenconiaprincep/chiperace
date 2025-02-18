@@ -107,6 +107,7 @@ export default function Navbar() {
                 {activeQRCode === social.qrCode && (
                   <div className={styles.qrCodePopup}>
                     <img src={social.qrCode} alt={`${social.label} QR Code`} />
+                    <div className={styles.qrCodeText}>微信公众号</div>
                   </div>
                 )}
               </div>
