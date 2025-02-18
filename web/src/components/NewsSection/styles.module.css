@@ -4,39 +4,72 @@
 
 .newsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
 }
 
 .newsCard {
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  border: 1px solid #eee;
-  border-radius: 4px;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.newsCard:hover {
+  transform: translateY(-5px);
+}
+
+.newsImage {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.newsImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.newsContent {
+  padding: 16px;
+  flex: 1;
+}
+
+.newsInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .newsDate {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  min-width: 60px;
-}
-
-.day {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1e88e5;
-}
-
-.month {
-  font-size: 0.9rem;
+  gap: 4px;
   color: #666;
+  font-size: 0.9em;
 }
 
-.newsContent {
-  flex: 1;
+.month, .day {
+  font-weight: 500;
+}
+
+.newsTitle {
+  margin: 4px 0 8px;
+  font-size: 1.1em;
+  line-height: 1.4;
+  color: #333;
+}
+
+.newsSource {
+  color: #666;
+  font-size: 0.9em;
+  margin: 0;
 }
 
 .tag {
