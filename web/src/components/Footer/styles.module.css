@@ -21,7 +21,7 @@
 }
 
 .logo img {
-  height: 24px;
+  /* height: 24px; */
   width: auto;
 }
 
@@ -33,7 +33,7 @@
 .logoImage {
   filter: brightness(0) invert(1); /* 将图片转换为白色 */
   width: auto;
-  height: 24px; /* 你可以根据需要调整这个值 */
+  height: 32px; /* 从24px调整到32px */
 }
 
 .links {
