@@ -189,7 +189,7 @@ const ProductForm = () => {
         <Form.Item
           name="link"
           label="产品链接"
-          rules={[{ required: true, message: '请输入产品链接' }]}
+          rules={[{  message: '请输入产品链接' }]}
         >
           <Input placeholder="请输入产品链接" />
         </Form.Item>
