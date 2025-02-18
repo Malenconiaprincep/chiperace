@@ -3,6 +3,7 @@ import Layout from '@site/src/components/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 import { getFullUrl, newsApi, type NewsItem } from '../../services/api';
+import bannerStyles from '../../styles/banner.module.css';
 
 const NewsPage = (): JSX.Element => {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -27,8 +28,10 @@ const NewsPage = (): JSX.Element => {
     return (
       <Layout>
         <div className={styles.newsContainer}>
-          <div className={styles.banner}>
-            <h1>新闻中心</h1>
+          <div className={bannerStyles.banner}>
+            <div className={bannerStyles.bannerContent}>
+              <h1>新闻中心</h1>
+            </div>
           </div>
           <div className={styles.newsContent}>
             加载中...
@@ -41,8 +44,10 @@ const NewsPage = (): JSX.Element => {
   return (
     <Layout>
       <div className={styles.newsContainer}>
-        <div className={styles.banner}>
-          <h1>新闻中心</h1>
+        <div className={bannerStyles.banner}>
+          <div className={bannerStyles.bannerContent}>
+            <h1>新闻中心</h1>
+          </div>
         </div>
 
         <div className={styles.newsContent}>
