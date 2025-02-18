@@ -46,12 +46,22 @@ export interface Advantage {
 }
 
 export interface ProductDetail extends ProductItem {
-  images?: ProductImage[];
-  specifications?: {
-    summary: string;
-    details: SpecificationDetail[];
+  content?: string;          // 详细内容
+  images?: {                 // 产品图片列表
+    url: string;
+    alt?: string;
+  }[];
+  specifications?: {         // 产品规格
+    summary: string;         // 规格概述
+    details: {               // 规格详情列表
+      label: string;         // 规格名称
+      value: string;         // 规格值
+    }[];
   };
-  advantages?: Advantage[];
+  advantages?: {             // 产品优势
+    title: string;           // 优势标题
+    description: string;     // 优势描述
+  }[];
 }
 
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';

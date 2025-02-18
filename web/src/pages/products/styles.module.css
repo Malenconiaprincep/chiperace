@@ -1,0 +1,262 @@
+.productsContainer {
+  width: 100%;
+}
+
+.banner {
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.bannerBg {
+  /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
+  background-color: #8B3DAF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.bannerContent {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 2rem;
+}
+
+.bannerContent h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.bannerContent p {
+  margin: 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* 产品详情页样式 */
+.productDisplay {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productImages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.productImages img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.productInfo {
+  color: #333;
+}
+
+.productInfo h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #8B3DAF;
+}
+
+.productInfo h3 {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.productInfo p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* 规格部分样式 */
+.specsSection {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.specsSection h3 {
+  color: #8B3DAF;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.specsContent p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specsTable tr {
+  border-bottom: 1px solid #eee;
+}
+
+.specsTable td {
+  padding: 1rem;
+  color: #444;
+}
+
+.specsTable td:first-child {
+  font-weight: bold;
+  width: 200px;
+  color: #666;
+}
+
+/* 产品优势部分样式 */
+.advantagesSection {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.advantagesSection h3 {
+  color: #8B3DAF;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.advantages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.advantageItem {
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.advantageItem:hover {
+  transform: translateY(-5px);
+}
+
+.advantageItem h4 {
+  color: #8B3DAF;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.advantageItem p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 客户展示部分样式 */
+.customersSection {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.customersSection h3 {
+  color: #8B3DAF;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.customerLogos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.logoItem {
+  text-align: center;
+}
+
+.logoItem img {
+  max-width: 120px;
+  height: auto;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.logoItem:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .bannerContent h1 {
+    font-size: 2rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .productDisplay,
+  .specsSection,
+  .advantagesSection {
+    padding: 1.5rem;
+  }
+
+  .productImages {
+    grid-template-columns: 1fr;
+  }
+
+  .specsTable td {
+    padding: 0.8rem;
+  }
+
+  .specsTable td:first-child {
+    width: 150px;
+  }
+
+  .customerLogos {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* 无产品状态样式 */
+.noProduct {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.noProduct p {
+  font-size: 1.2rem;
+  color: #666;
+} 

@@ -48,16 +48,13 @@ export default function ProductGrid() {
                 <h3 className={styles.productTitle}>{product.title}</h3>
                 <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
                 <p className={styles.productDescription}>{product.description}</p>
-                {(product.link || product.id) && (
-                  <Link
-                    className={styles.learnMore}
-                    to={product.link || `/products?id=${product.id}`}
-                    {...(product.link?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  >
-                    了解更多
-                    <span className={styles.arrow}>→</span>
-                  </Link>
-                )}
+                <Link
+                  className={styles.learnMore}
+                  to={`/products/detail?id=${product.id}`}
+                >
+                  了解更多
+                  <span className={styles.arrow}>→</span>
+                </Link>
               </div>
             </div>
           ))}
