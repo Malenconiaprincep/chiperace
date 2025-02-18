@@ -1,46 +1,28 @@
 .aboutContainer {
   width: 100%;
-  background-color: #f5f7fa;
 }
 
 .banner {
-  height: 320px;
-  background: linear-gradient(135deg, #1e3799, #0c2461);
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
+  background-color: #8B3DAF;
   color: white;
+  padding: 4rem 2rem;
+  text-align: center;
   position: relative;
-  overflow: hidden;
-}
-
-.banner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-              linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
-  background-size: 60px 60px;
-  opacity: 0.1;
 }
 
 .banner h1 {
-  font-size: 42px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
   position: relative;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 .content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 2rem;
 }
 
 .section {
@@ -48,13 +30,13 @@
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  margin-bottom: 40px;
+  margin-bottom: 3rem;
 }
 
 .section h2 {
+  color: #8B3DAF;  /* 使用相同的紫色作为标题颜色 */
   font-size: 28px;
-  color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
   position: relative;
   padding-left: 15px;
 }
