@@ -160,7 +160,7 @@ const NewsPage = (): JSX.Element => {
           </div>
 
           <div className={styles.pagination}>
-            <span>{total}条</span>
+
             <button
               onClick={() => setPage(page - 1)}
               disabled={page === 1}
@@ -188,6 +188,7 @@ const NewsPage = (): JSX.Element => {
             >
               下一页
             </button>
+            <span>共{total}条</span>
           </div>
         </div>
       </div>
