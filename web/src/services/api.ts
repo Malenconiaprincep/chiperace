@@ -64,6 +64,18 @@ export interface ProductDetail extends ProductItem {
   }[];
 }
 
+export interface NewsListParams {
+  year?: number | null;
+  month?: number | null;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface NewsListResponse {
+  data: NewsItem[];
+  total: number;
+}
+
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';
 const API_BASE_URL = location.host.indexOf('localhost') !== -1
   ? 'http://localhost:4000/api'  // 开发环境
@@ -79,7 +91,9 @@ const api = axios.create({
 
 export const newsApi = {
   // 获取新闻列表
-  getNewsList: () => api.get<NewsItem[]>('/news'),
+  getNewsList: (params?: NewsListParams) => {
+    return api.get<NewsListResponse>('/news', { params }).then(res => res.data);
+  },
 
   // 获取新闻详情
   getNewsById: (id: string) => api.get<NewsItem>(`/news/${id}`)

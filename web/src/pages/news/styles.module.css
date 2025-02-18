@@ -373,4 +373,41 @@
     flex-direction: column;
     gap: 8px;
   }
+}
+
+.filterSelect {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.filterSelect:hover {
+  border-color: #ccc;
+}
+
+.pageButton {
+  padding: 4px 12px;
+  margin: 0 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.pageButton:hover {
+  background-color: #f5f5f5;
+}
+
+.pageButton.active {
+  background-color: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
+
+.pageButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 } 

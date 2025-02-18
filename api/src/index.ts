@@ -34,12 +34,51 @@ app.use(mount('/uploads', serve(path.join(__dirname, '../public/uploads'))));
 
 // 获取新闻列表
 router.get('/api/news', async (ctx) => {
-  const news = await prisma.news.findMany({
-    orderBy: {
-      date: 'desc'
+  const { year, month, page = 1, pageSize = 10 } = ctx.query;
+
+  try {
+    let whereClause = {};
+    if (year) {
+      whereClause = {
+        ...whereClause,
+        date: {
+          gte: new Date(Number(year), 0, 1),
+          lt: new Date(Number(year) + 1, 0, 1)
+        }
+      };
     }
-  });
-  ctx.body = news;
+
+    if (month) {
+      whereClause = {
+        ...whereClause,
+        date: {
+          gte: new Date(Number(year), Number(month) - 1, 1),
+          lt: new Date(Number(year), Number(month), 1)
+        }
+      };
+    }
+
+    const [total, items] = await Promise.all([
+      prisma.news.count({ where: whereClause }),
+      prisma.news.findMany({
+        where: whereClause,
+        skip: (Number(page) - 1) * Number(pageSize),
+        take: Number(pageSize),
+        orderBy: {
+          date: 'desc'
+        }
+      })
+    ]);
+
+    ctx.body = {
+      data: items,
+      total
+    };
+  } catch (error) {
+    console.error('获取新闻列表失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取新闻列表失败' };
+  }
 });
 
 // 获取单个新闻
