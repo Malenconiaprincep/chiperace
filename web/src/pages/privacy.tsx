@@ -1,14 +1,17 @@
 import React from 'react';
 import Layout from '@site/src/components/Layout';
 import styles from './about.module.css';
+import bannerStyles from '../styles/banner.module.css';
 
 const PrivacyPage = (): JSX.Element => {
   return (
     <Layout>
-      <div className={styles.aboutContainer}>
-        <div className={styles.banner}>
+      <div className={bannerStyles.banner}>
+        <div className={bannerStyles.bannerContent}>
           <h1>隐私政策</h1>
         </div>
+      </div>
+      <div className={styles.aboutContainer}>
         <div className={styles.content}>
           <div className={styles.section}>
             <h2>1. 总则</h2>

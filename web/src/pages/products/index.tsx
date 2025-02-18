@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import { productApi, getFullUrl } from '../../services/api';
 import type { ProductItem } from '../../services/api';
 import styles from './products.module.css';
+import bannerStyles from '../../styles/banner.module.css';
 
 const ProductsPage = (): JSX.Element => {
   const [products, setProducts] = useState<ProductItem[]>([]);
@@ -27,9 +28,8 @@ const ProductsPage = (): JSX.Element => {
   return (
     <Layout>
       <div className={styles.productsContainer}>
-        <div className={styles.banner}>
-          <div className={styles.bannerBg}></div>
-          <div className={styles.bannerContent}>
+        <div className={bannerStyles.banner}>
+          <div className={bannerStyles.bannerContent}>
             <h1>产品方案</h1>
             <p>专业的高性能计算解决方案</p>
           </div>

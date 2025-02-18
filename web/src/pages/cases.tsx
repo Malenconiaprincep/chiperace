@@ -1,14 +1,14 @@
 import React from 'react';
 import Layout from '@site/src/components/Layout';
 import styles from './cases.module.css';
+import bannerStyles from '../styles/banner.module.css';
 
 const CasePage = (): JSX.Element => {
   return (
     <Layout>
       <div className={styles.caseContainer}>
-        <div className={styles.banner}>
-          <div className={styles.bannerBg}></div>
-          <div className={styles.bannerContent}>
+        <div className={bannerStyles.banner}>
+          <div className={bannerStyles.bannerContent}>
             <h1>应用案例</h1>
             <p>高性能计算的实际应用场景</p>
           </div>

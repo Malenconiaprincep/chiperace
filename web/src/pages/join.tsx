@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './join.module.css';
 import Layout from '@site/src/components/Layout';
+import bannerStyles from '../styles/banner.module.css';
 
 interface JobPosition {
   title: string;
@@ -43,8 +44,10 @@ const positions: JobPosition[] = [
 const JoinPage: React.FC = () => {
   return (
     <Layout>
-      <div className={styles.banner}>
-        <h1>加入我们</h1>
+      <div className={bannerStyles.banner}>
+        <div className={bannerStyles.bannerContent}>
+          <h1>加入我们</h1>
+        </div>
       </div>
 
       <div className={styles.content}>

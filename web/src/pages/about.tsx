@@ -1,13 +1,16 @@
 import React from 'react';
 import Layout from '@site/src/components/Layout';
 import styles from './about.module.css';
+import bannerStyles from '../styles/banner.module.css';
 
 const AboutPage = (): JSX.Element => {
   return (
     <Layout>
       <div className={styles.aboutContainer}>
-        <div className={styles.banner}>
-          <h1>关于我们</h1>
+        <div className={bannerStyles.banner}>
+          <div className={bannerStyles.bannerContent}>
+            <h1>关于我们</h1>
+          </div>
         </div>
 
         <div className={styles.content}>
