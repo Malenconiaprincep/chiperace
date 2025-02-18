@@ -17,6 +17,23 @@ const menuItems = [
     ]
   },
   {
+    label: '购买渠道',
+    subMenu: [
+      {
+        label: '线下购买',
+        link: '/purchase/offline',
+      },
+      {
+        label: '线上购买',
+        link: 'https://www.baidu.com', // 替换为实际的线上购买链接
+      },
+      {
+        label: '云上服务',
+        link: 'http://nvnmd.picp.vip/', // 替换为实际的云服务链接
+      },
+    ],
+  },
+  {
     label: '公司新闻',
     link: '/news'
   },
@@ -34,6 +51,8 @@ const socialLinks = [
     url: '#'
   }
 ];
+
+
 
 export default function Navbar() {
   const [isSticky, setIsSticky] = useState(false);
