@@ -278,6 +278,103 @@ router.delete('/api/banners/:id', async (ctx) => {
   }
 });
 
+// 产品接口类型定义
+interface ProductRequestBody {
+  title: string;
+  subtitle: string;
+  description: string;
+  details?: string;
+  image: string;
+  link?: string;
+}
+
+// 获取产品列表
+router.get('/api/products', async (ctx) => {
+  const products = await prisma.product.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+  ctx.body = products;
+});
+
+// 获取单个产品
+router.get('/api/products/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const product = await prisma.product.findUnique({
+    where: { id: Number(id) }
+  });
+
+  if (!product) {
+    ctx.status = 404;
+    ctx.body = { error: '产品不存在' };
+    return;
+  }
+
+  ctx.body = product;
+});
+
+// 创建产品
+router.post('/api/products', async (ctx) => {
+  const data = ctx.request.body as ProductRequestBody;
+
+  try {
+    const product = await prisma.product.create({
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        description: data.description,
+        details: data.details,
+        image: data.image,
+        link: data.link
+      }
+    });
+    ctx.body = product;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '创建产品失败' };
+  }
+});
+
+// 更新产品
+router.put('/api/products/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const data = ctx.request.body as ProductRequestBody;
+
+  try {
+    const product = await prisma.product.update({
+      where: { id: Number(id) },
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        description: data.description,
+        details: data.details,
+        image: data.image,
+        link: data.link
+      }
+    });
+    ctx.body = product;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '更新产品失败' };
+  }
+});
+
+// 删除产品
+router.delete('/api/products/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.product.delete({
+      where: { id: Number(id) }
+    });
+    ctx.body = { success: true };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '删除产品失败' };
+  }
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 const PORT = process.env.PORT || 4000;
