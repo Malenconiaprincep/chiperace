@@ -1,6 +1,6 @@
-import { Form, Input, Button, Card, message, Upload, Space } from 'antd';
+import { Form, Input, Button, Card, message, Upload } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
-import { LoadingOutlined, PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
@@ -189,7 +189,7 @@ const ProductForm = () => {
         <Form.Item
           name="link"
           label="产品链接"
-          rules={[{  message: '请输入产品链接' }]}
+          rules={[{ message: '请输入产品链接' }]}
         >
           <Input placeholder="请输入产品链接" />
         </Form.Item>
