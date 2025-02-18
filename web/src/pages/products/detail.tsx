@@ -4,6 +4,7 @@ import { useLocation } from '@docusaurus/router';
 import { productApi, getFullUrl } from '../../services/api';
 import type { ProductDetail } from '../../services/api';
 import styles from './styles.module.css';
+import bannerStyles from '../../styles/banner.module.css';
 
 const ProductDetailPage = (): JSX.Element => {
   const location = useLocation();
@@ -32,10 +33,11 @@ const ProductDetailPage = (): JSX.Element => {
   return (
     <Layout>
       <div className={styles.productsContainer}>
-        <div className={styles.banner}>
-          <div className={styles.bannerBg}></div>
-          <div className={styles.bannerContent}>
+        <div className={bannerStyles.banner}>
+          <div className={bannerStyles.bannerContent}>
             <h1>{product?.title || '产品详情'}</h1>
+            {/* {product?.subtitle && <p>{product.subtitle}
+            </p>} */}
           </div>
         </div>
 
@@ -59,10 +61,10 @@ const ProductDetailPage = (): JSX.Element => {
                   <h2>{product.title}</h2>
                   {product.subtitle && <h3>{product.subtitle}</h3>}
                   {product.description && <p>{product.description}</p>}
-                  {product.content && (
+                  {product.details && (
                     <div
                       className={styles.productContent}
-                      dangerouslySetInnerHTML={{ __html: product.content }}
+                      dangerouslySetInnerHTML={{ __html: product.details }}
                     />
                   )}
                 </div>
