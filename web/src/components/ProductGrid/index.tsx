@@ -23,9 +23,9 @@ export default function ProductGrid() {
     fetchProducts();
   }, []);
 
-  if (loading) {
-    return <div>加载中...</div>;
-  }
+  // if (loading) {
+  //   return <div>加载中...</div>;
+  // }
 
   return (
     <section className={styles.section}>
