@@ -30,6 +30,12 @@
   font-weight: 500;
 }
 
+.logoImage {
+  filter: brightness(0) invert(1); /* 将图片转换为白色 */
+  width: auto;
+  height: 24px; /* 你可以根据需要调整这个值 */
+}
+
 .links {
   display: flex;
   gap: 2rem;
