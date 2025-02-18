@@ -20,6 +20,16 @@ export interface BannerData {
   link: string;
 }
 
+export interface ProductData {
+  id?: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  link: string;
+  details?: string;
+}
+
 // 添加基础URL配置
 const isDev = process.env.NODE_ENV === 'development';
 const BASE_URL = isDev ? 'http://localhost:4000' : '';
@@ -87,6 +97,23 @@ export const bannerApi = {
 
   // 删除 banner
   deleteBanner: (id: number) => api.delete(`/banners/${id}`),
+};
+
+export const productApi = {
+  // 获取产品列表
+  getProductList: () => api.get<ProductData[]>('/products'),
+
+  // 获取单个产品
+  getProductById: (id: number) => api.get<ProductData>(`/products/${id}`),
+
+  // 创建产品
+  createProduct: (data: ProductData) => api.post<ProductData>('/products', data),
+
+  // 更新产品
+  updateProduct: (id: number, data: ProductData) => api.put<ProductData>(`/products/${id}`, data),
+
+  // 删除产品
+  deleteProduct: (id: number) => api.delete(`/products/${id}`),
 };
 
 export default api; 

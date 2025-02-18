@@ -9,6 +9,8 @@ import NewsForm from './pages/NewsForm';
 import PrivateRoute from './components/PrivateRoute';
 import BannerList from './pages/BannerList';
 import BannerForm from './pages/BannerForm';
+import ProductList from './pages/ProductList';
+import ProductForm from './pages/ProductForm';
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
             <Route path="banners" element={<BannerList />} />
             <Route path="banners/new" element={<BannerForm />} />
             <Route path="banners/edit/:id" element={<BannerForm />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="products/new" element={<ProductForm />} />
+            <Route path="products/edit/:id" element={<ProductForm />} />
           </Route>
         </Routes>
       </Router>
