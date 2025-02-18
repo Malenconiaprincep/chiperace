@@ -38,25 +38,38 @@ router.get('/api/news', async (ctx) => {
 
   try {
     let whereClause = {};
-    if (year) {
-      whereClause = {
-        ...whereClause,
-        date: {
-          gte: new Date(Number(year), 0, 1),
-          lt: new Date(Number(year) + 1, 0, 1)
-        }
-      };
+
+    // 确保 year 和 month 是有效的数字
+    const numYear = year ? Number(year) : null;
+    const numMonth = month ? Number(month) : null;
+
+    if (numYear && !isNaN(numYear)) {
+      if (numMonth && !isNaN(numMonth) && numMonth >= 1 && numMonth <= 12) {
+        // 如果同时有年份和月份
+        const startDate = new Date(Date.UTC(numYear, numMonth - 1, 1, 0, 0, 0, 0));
+        const endDate = new Date(Date.UTC(numYear, numMonth, 0, 23, 59, 59, 999));
+
+        whereClause = {
+          date: {
+            gte: startDate,
+            lte: endDate
+          }
+        };
+      } else {
+        // 只有年份
+        const startDate = new Date(Date.UTC(numYear, 0, 1, 0, 0, 0, 0));
+        const endDate = new Date(Date.UTC(numYear, 11, 31, 23, 59, 59, 999));
+
+        whereClause = {
+          date: {
+            gte: startDate,
+            lte: endDate
+          }
+        };
+      }
     }
 
-    if (month) {
-      whereClause = {
-        ...whereClause,
-        date: {
-          gte: new Date(Number(year), Number(month) - 1, 1),
-          lt: new Date(Number(year), Number(month), 1)
-        }
-      };
-    }
+    console.log('查询条件:', whereClause); // 添加日志以便调试
 
     const [total, items] = await Promise.all([
       prisma.news.count({ where: whereClause }),
