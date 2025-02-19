@@ -38,8 +38,8 @@ export interface PurchaseFormData {
   phone: string;
   email: string;
   requirements: string;
-  submitTime: string;
   status: 'pending' | 'processing' | 'completed';
+  submitTime: string;
 }
 
 // 添加基础URL配置
@@ -134,8 +134,10 @@ export const purchaseApi = {
   getPurchaseList: () => api.get<PurchaseFormData[]>('/purchases'),
 
   // 更新采购申请状态
-  updatePurchaseStatus: (id: string, status: string) =>
-    api.put(`/purchases/${id}/status`, { status }),
+  updatePurchaseStatus: (id: string, status: string) => api.put<PurchaseFormData>(`/purchases/${id}/status`, { status }),
+
+  // 搜索采购申请
+  searchPurchases: (params: { query?: string; status?: string }) => api.get<PurchaseFormData[]>('/purchases/search', { params }),
 };
 
 export default api; 

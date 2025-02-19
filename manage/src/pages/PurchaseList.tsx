@@ -1,7 +1,6 @@
 import { Table, Space, Button, Modal, message, Tag, Input, Select } from 'antd';
 import { useState, useEffect } from 'react';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import type { PurchaseFormData } from '../services/api';
+import { purchaseApi, type PurchaseFormData } from '../services/api';
 
 const { Search } = Input;
 const { Option } = Select;
@@ -15,21 +14,16 @@ const PurchaseList = () => {
   const fetchPurchases = async () => {
     try {
       setLoading(true);
-      // TODO: 替换为实际的 API 调用
-      const mockData = [
-        {
-          id: '001',
-          company: '示例科技有限公司',
-          contact: '张三',
-          phone: '13800138000',
-          email: 'zhangsan@example.com',
-          requirements: '需要采购5台高性能计算服务器',
-          submitTime: '2024-01-15 14:30',
-          status: 'pending'
-        },
-        // ... 其他模拟数据
-      ];
-      setPurchases(mockData);
+      if (searchText || statusFilter !== 'all') {
+        const response = await purchaseApi.searchPurchases({
+          query: searchText || undefined,
+          status: statusFilter === 'all' ? undefined : statusFilter
+        });
+        setPurchases(response.data);
+      } else {
+        const response = await purchaseApi.getPurchaseList();
+        setPurchases(response.data);
+      }
     } catch (error) {
       message.error('获取采购申请列表失败');
     } finally {
@@ -39,11 +33,11 @@ const PurchaseList = () => {
 
   useEffect(() => {
     fetchPurchases();
-  }, []);
+  }, [searchText, statusFilter]);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     try {
-      // TODO: 调用 API 更新状态
+      await purchaseApi.updatePurchaseStatus(id, newStatus);
       message.success('状态更新成功');
       fetchPurchases();
     } catch (error) {
@@ -88,7 +82,7 @@ const PurchaseList = () => {
     {
       title: '联系方式',
       key: 'contact',
-      render: (_, record: PurchaseFormData) => (
+      render: (_: any, record: PurchaseFormData) => (
         <>
           <div>{record.phone}</div>
           <div style={{ color: '#666', fontSize: '12px' }}>{record.email}</div>
@@ -103,7 +97,7 @@ const PurchaseList = () => {
     {
       title: '状态',
       key: 'status',
-      render: (_, record: PurchaseFormData) => (
+      render: (_: any, record: PurchaseFormData) => (
         <Select
           value={record.status}
           style={{ width: 120 }}
@@ -118,7 +112,7 @@ const PurchaseList = () => {
     {
       title: '操作',
       key: 'action',
-      render: (_, record: PurchaseFormData) => (
+      render: (_: any, record: PurchaseFormData) => (
         <Button type="link" onClick={() => showDetails(record)}>
           查看详情
         </Button>
