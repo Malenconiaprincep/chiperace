@@ -1,4 +1,4 @@
-import { Table, Space, Button, Modal, message, Tag, Input, Select } from 'antd';
+import { Table, Button, Modal, message, Input, Select } from 'antd';
 import { useState, useEffect } from 'react';
 import { purchaseApi, type PurchaseFormData } from '../services/api';
 
