@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #8B3DAF;  /* PANTONE 2593C 紫色 */
+  background-color: #6A1E8C;  /* PANTONE 2593C 紫色 */
 }
 
 .banner::before {
@@ -17,12 +17,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     rgba(139, 61, 175, 0.95) 0%,
     rgba(123, 39, 204, 0.85) 50%,
     rgba(139, 61, 175, 0.95) 100%
-  );
+  ); */
+  background-color: #6A1E8C;
   z-index: 1;
 }
 
