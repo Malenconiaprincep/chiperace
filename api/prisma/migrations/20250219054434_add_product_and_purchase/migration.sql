@@ -12,4 +12,4 @@ CREATE TABLE "PurchaseForm" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "PurchaseForm_pkey" PRIMARY KEY ("id")
-); 
+);

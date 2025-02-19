@@ -553,6 +553,7 @@ router.get('/api/purchases/search', async (ctx) => {
 
     ctx.body = purchases;
   } catch (error) {
+    console.log(error)
     ctx.status = 500;
     ctx.body = { error: '搜索采购申请失败' };
   }

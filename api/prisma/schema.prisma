@@ -44,14 +44,14 @@ model Product {
 }
 
 model PurchaseForm {
-  id          Int      @id @default(autoincrement())
-  company     String
-  contact     String
-  phone       String
-  email       String
-  requirements String  @db.Text
-  status      String  @default("pending")
-  submitTime  DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  company      String
+  contact      String
+  phone        String
+  email        String
+  requirements String   @db.Text
+  status       String   @default("pending")
+  submitTime   DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 } 
