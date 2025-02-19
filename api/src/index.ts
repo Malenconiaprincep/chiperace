@@ -34,12 +34,64 @@ app.use(mount('/uploads', serve(path.join(__dirname, '../public/uploads'))));
 
 // 获取新闻列表
 router.get('/api/news', async (ctx) => {
-  const news = await prisma.news.findMany({
-    orderBy: {
-      date: 'desc'
+  const { year, month, page = 1, pageSize = 10 } = ctx.query;
+
+  try {
+    let whereClause = {};
+
+    // 确保 year 和 month 是有效的数字
+    const numYear = year ? Number(year) : null;
+    const numMonth = month ? Number(month) : null;
+
+    if (numYear && !isNaN(numYear)) {
+      if (numMonth && !isNaN(numMonth) && numMonth >= 1 && numMonth <= 12) {
+        // 如果同时有年份和月份
+        const startDate = new Date(Date.UTC(numYear, numMonth - 1, 1, 0, 0, 0, 0));
+        const endDate = new Date(Date.UTC(numYear, numMonth, 0, 23, 59, 59, 999));
+
+        whereClause = {
+          date: {
+            gte: startDate,
+            lte: endDate
+          }
+        };
+      } else {
+        // 只有年份
+        const startDate = new Date(Date.UTC(numYear, 0, 1, 0, 0, 0, 0));
+        const endDate = new Date(Date.UTC(numYear, 11, 31, 23, 59, 59, 999));
+
+        whereClause = {
+          date: {
+            gte: startDate,
+            lte: endDate
+          }
+        };
+      }
     }
-  });
-  ctx.body = news;
+
+    console.log('查询条件:', whereClause); // 添加日志以便调试
+
+    const [total, items] = await Promise.all([
+      prisma.news.count({ where: whereClause }),
+      prisma.news.findMany({
+        where: whereClause,
+        skip: (Number(page) - 1) * Number(pageSize),
+        take: Number(pageSize),
+        orderBy: {
+          date: 'desc'
+        }
+      })
+    ]);
+
+    ctx.body = {
+      data: items,
+      total
+    };
+  } catch (error) {
+    console.error('获取新闻列表失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取新闻列表失败' };
+  }
 });
 
 // 获取单个新闻
@@ -277,6 +329,237 @@ router.delete('/api/banners/:id', async (ctx) => {
     ctx.body = { error: '删除Banner失败' };
   }
 });
+
+// 产品接口类型定义
+interface ProductRequestBody {
+  title: string;
+  subtitle: string;
+  description: string;
+  details?: string;
+  image: string;
+  link?: string;
+}
+
+// 获取产品列表
+router.get('/api/products', async (ctx) => {
+  const products = await prisma.product.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
+  ctx.body = products;
+});
+
+// 获取单个产品
+router.get('/api/products/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const product = await prisma.product.findUnique({
+    where: { id: Number(id) }
+  });
+
+  if (!product) {
+    ctx.status = 404;
+    ctx.body = { error: '产品不存在' };
+    return;
+  }
+
+  ctx.body = product;
+});
+
+// 创建产品
+router.post('/api/products', async (ctx) => {
+  const data = ctx.request.body as ProductRequestBody;
+
+  try {
+    const product = await prisma.product.create({
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        description: data.description,
+        details: data.details,
+        image: data.image,
+        link: data.link
+      }
+    });
+    ctx.body = product;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '创建产品失败' };
+  }
+});
+
+// 更新产品
+router.put('/api/products/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const data = ctx.request.body as ProductRequestBody;
+
+  try {
+    const product = await prisma.product.update({
+      where: { id: Number(id) },
+      data: {
+        title: data.title,
+        subtitle: data.subtitle,
+        description: data.description,
+        details: data.details,
+        image: data.image,
+        link: data.link
+      }
+    });
+    ctx.body = product;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '更新产品失败' };
+  }
+});
+
+// 删除产品
+router.delete('/api/products/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.product.delete({
+      where: { id: Number(id) }
+    });
+    ctx.body = { success: true };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '删除产品失败' };
+  }
+});
+
+// 采购申请接口类型定义
+interface PurchaseFormRequestBody {
+  company: string;
+  contact: string;
+  phone: string;
+  email: string;
+  requirements: string;
+}
+
+// 获取采购申请列表
+router.get('/api/purchases', async (ctx) => {
+  try {
+    const purchases = await prisma.purchaseForm.findMany({
+      orderBy: {
+        submitTime: 'desc'
+      }
+    });
+    ctx.body = purchases;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: '获取采购申请列表失败' };
+  }
+});
+
+// 创建采购申请
+router.post('/api/purchases', async (ctx) => {
+  const data = ctx.request.body as PurchaseFormRequestBody;
+
+  try {
+    const purchase = await prisma.purchaseForm.create({
+      data: {
+        company: data.company,
+        contact: data.contact,
+        phone: data.phone,
+        email: data.email,
+        requirements: data.requirements,
+      }
+    });
+    ctx.body = purchase;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '创建采购申请失败' };
+  }
+});
+
+// 更新采购申请状态
+router.put('/api/purchases/:id/status', async (ctx) => {
+  const { id } = ctx.params;
+  const { status } = ctx.request.body;
+
+  try {
+    const purchase = await prisma.purchaseForm.update({
+      where: { id: Number(id) },
+      data: { status }
+    });
+    ctx.body = purchase;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '更新状态失败' };
+  }
+});
+
+// 搜索采购申请
+router.get('/api/purchases/search', async (ctx) => {
+  const { query, status } = ctx.query;
+
+  try {
+    const whereClause: any = {};
+
+    if (query) {
+      whereClause.OR = [
+        { company: { contains: query as string, mode: 'insensitive' } },
+        { contact: { contains: query as string, mode: 'insensitive' } }
+      ];
+    }
+
+    if (status && status !== 'all') {
+      whereClause.status = status;
+    }
+
+    const purchases = await prisma.purchaseForm.findMany({
+      where: whereClause,
+      orderBy: {
+        submitTime: 'desc'
+      }
+    });
+
+    ctx.body = purchases;
+  } catch (error) {
+    console.log(error)
+    ctx.status = 500;
+    ctx.body = { error: '搜索采购申请失败' };
+  }
+});
+
+// 获取单个采购申请
+router.get('/api/purchases/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    const purchase = await prisma.purchaseForm.findUnique({
+      where: { id: Number(id) }
+    });
+
+    if (!purchase) {
+      ctx.status = 404;
+      ctx.body = { error: '采购申请不存在' };
+      return;
+    }
+
+    ctx.body = purchase;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: '获取采购申请失败' };
+  }
+});
+
+// 删除采购申请
+router.delete('/api/purchases/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.purchaseForm.delete({
+      where: { id: Number(id) }
+    });
+    ctx.body = { success: true };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '删除采购申请失败' };
+  }
+});
+
+
 
 app.use(router.routes()).use(router.allowedMethods());
 

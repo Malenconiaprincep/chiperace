@@ -23,8 +23,7 @@ export default function Footer() {
       <div className="container">
         <div className={styles.footerContent}>
           <div className={styles.logo}>
-            <img src="/img/logo.png" alt="Cambricon" />
-            <span>芯培森</span>
+            <img src="/img/logo.png" alt="Chiperce" className={styles.logoImage} />
           </div>
 
           <div className={styles.links}>
@@ -41,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.copyright}>
-          <p>版权所有 © 2016-2025 Cambricon.com</p>
+          <p>版权所有 © 2016-2025 Chiperce.com</p>
           <p>备案/许可证号: 京ICP备17003415号-1</p>
         </div>
       </div>

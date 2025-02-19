@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './styles.module.css';
-import { newsApi, NewsItem } from '../../services/api';
+import { newsApi, NewsItem, getFullUrl } from '../../services/api';
 import Link from '@docusaurus/Link';
 
 export default function NewsSection() {
@@ -48,17 +48,24 @@ export default function NewsSection() {
               style={{ textDecoration: 'none' }}
             >
               <div className={styles.newsCard}>
-                <div className={styles.newsDate}>
-                  <span className={styles.day}>
-                    {new Date(item.date).getDate().toString().padStart(2, '0')}
-                  </span>
-                  <span className={styles.month}>
-                    {new Date(item.date).toLocaleString('en-US', { month: 'short' })}
-                  </span>
-                </div>
+                {item.image && (
+                  <div className={styles.newsImage}>
+                    <img src={getFullUrl(item.image)} alt={item.title} />
+                  </div>
+                )}
                 <div className={styles.newsContent}>
-                  <h3>{item.title}</h3>
-                  <span className={styles.tag}>{item.source}</span>
+                  <div className={styles.newsInfo}>
+                    <div className={styles.newsDate}>
+                      <span className={styles.month}>
+                        {(new Date(item.date).getMonth() + 1).toString().padStart(2, '0')}月
+                      </span>
+                      <span className={styles.day}>
+                        {new Date(item.date).getDate().toString().padStart(2, '0')}日
+                      </span>
+                    </div>
+                    <h3 className={styles.newsTitle}>{item.title}</h3>
+                    <p className={styles.newsSource}>{item.source}</p>
+                  </div>
                 </div>
               </div>
             </Link>

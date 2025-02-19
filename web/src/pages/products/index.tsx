@@ -1,86 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@site/src/components/Layout';
+import Link from '@docusaurus/Link';
+import { productApi, getFullUrl } from '../../services/api';
+import type { ProductItem } from '../../services/api';
 import styles from './products.module.css';
+import bannerStyles from '../../styles/banner.module.css';
 
 const ProductsPage = (): JSX.Element => {
+  const [products, setProducts] = useState<ProductItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await productApi.getProductList();
+        setProducts(response.data);
+      } catch (error) {
+        console.error('获取产品列表失败:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <Layout>
       <div className={styles.productsContainer}>
-        <div className={styles.banner}>
-          <div className={styles.bannerBg}></div>
-          <div className={styles.bannerContent}>
-            <h1>产品技术</h1>
+        <div className={bannerStyles.banner}>
+          <div className={bannerStyles.bannerContent}>
+            <h1>产品方案</h1>
             <p>专业的高性能计算解决方案</p>
           </div>
         </div>
 
         <div className={styles.content}>
-          <div className={styles.productDisplay}>
-            <div className={styles.productImages}>
-              <img src="/img/products/apu-1.jpg" alt="APU-Server v1.0 正面" />
-              <img src="/img/products/apu-2.jpg" alt="APU-Server v1.0 侧面" />
-              <img src="/img/products/apu-3.jpg" alt="APU-Server v1.0 前面板" />
-            </div>
-            <div className={styles.productInfo}>
-              <h2>原子级高性能计算服务器APU-Server v1.0</h2>
-              <h3>高速高精度分子动力学计算</h3>
-              <p>采用非冯·诺依曼架构技术，实现分子动力学高速推理</p>
-            </div>
-          </div>
-
-          <div className={styles.specsSection}>
-            <h3>产品规格</h3>
-            <div className={styles.specsContent}>
-              <p>原子级高性能计算服务器APU-Server v1.0，基于FPGA，同等功耗和精度下，单节点（台式机大小，200-300W）计算速度等同于≈1000个Intel Xeon CPU 核并行速度；或≈10 张"对华禁运"的 NVIDIA A100 GPU 卡（约 2-3 kW）并行速度，产品和服务已应用于九院、国防科大、华为等30多家单位。</p>
-
-              <table className={styles.specsTable}>
-                <tbody>
-                  <tr>
-                    <td>计算架构</td>
-                    <td>非冯·诺依曼架构</td>
-                  </tr>
-                  <tr>
-                    <td>计算性能</td>
-                    <td>相当于1000个Intel Xeon CPU核心</td>
-                  </tr>
-                  <tr>
-                    <td>功率消耗</td>
-                    <td>200-300W</td>
-                  </tr>
-                  <tr>
-                    <td>性能对比</td>
-                    <td>等同于10张NVIDIA A100 GPU卡(2-3kW)</td>
-                  </tr>
-                  <tr>
-                    <td>核心技术</td>
-                    <td>基于FPGA</td>
-                  </tr>
-                  <tr>
-                    <td>应用场景</td>
-                    <td>分子动力学计算、高性能科学计算</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className={styles.advantagesSection}>
-            <h3>产品优势</h3>
-            <div className={styles.advantages}>
-              <div className={styles.advantageItem}>
-                <h4>超高性能</h4>
-                <p>单机性能相当于1000个CPU核心</p>
+          <section className={styles.section}>
+            <div className="container">
+              <div className={styles.sectionHeader}>
+                <h2>产品方案</h2>
               </div>
-              <div className={styles.advantageItem}>
-                <h4>低功耗设计</h4>
-                <p>仅需200-300W功率消耗</p>
-              </div>
-              <div className={styles.advantageItem}>
-                <h4>广泛应用</h4>
-                <p>已服务30多家科研院所和企业</p>
-              </div>
+
+              {loading ? (
+                <div className={styles.loading}>加载中...</div>
+              ) : (
+                <div className={styles.productsGrid}>
+                  {products.map((product) => (
+                    <div key={product.id} className={styles.productCard}>
+                      <div className={styles.productImageWrapper}>
+                        <img
+                          src={getFullUrl(product.image)}
+                          alt={product.title}
+                          className={styles.productImage}
+                        />
+                      </div>
+                      <div className={styles.productContent}>
+                        <h3 className={styles.productTitle}>{product.title}</h3>
+                        <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
+                        <p className={styles.productDescription}>{product.description}</p>
+                        <Link
+                          className={styles.learnMore}
+                          to={`/products/detail?id=${product.id}`}
+                        >
+                          了解更多
+                          <span className={styles.arrow}>→</span>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          </section>
 
           <div className={styles.customersSection}>
             <h3>产品与服务用户</h3>

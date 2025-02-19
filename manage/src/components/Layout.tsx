@@ -1,6 +1,6 @@
 import { Layout, Menu } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { DashboardOutlined, FileTextOutlined, PictureOutlined } from '@ant-design/icons';
+import { DashboardOutlined, FileTextOutlined, PictureOutlined, ShoppingOutlined, FormOutlined } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
 
@@ -22,6 +22,16 @@ const MainLayout = () => {
       key: 'banners',
       icon: <PictureOutlined />,
       label: 'Banner管理',
+    },
+    {
+      key: 'products',
+      icon: <ShoppingOutlined />,
+      label: '产品管理',
+    },
+    {
+      key: 'purchases',
+      icon: <FormOutlined />,
+      label: '采购申请',
     },
   ];
 
