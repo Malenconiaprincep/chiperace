@@ -76,6 +76,17 @@ export interface NewsListResponse {
   total: number;
 }
 
+export interface PurchaseFormData {
+  id?: number;
+  company: string;
+  contact: string;
+  phone: string;
+  email: string;
+  requirements: string;
+  status?: 'pending' | 'processing' | 'completed';
+  submitTime?: string;
+}
+
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';
 const API_BASE_URL = location.host.indexOf('localhost') !== -1
   ? 'http://localhost:4000/api'  // 开发环境
@@ -117,6 +128,28 @@ export const productApi = {
   getProductDetail: (id: string) => {
     return api.get<ProductDetail>(`/products/${id}`);
   },
+};
+
+export const purchaseApi = {
+  // 提交采购申请
+  submitPurchase: (data: PurchaseFormData) =>
+    api.post<PurchaseFormData>('/purchases', data),
+
+  // 获取采购申请列表
+  getPurchaseList: () =>
+    api.get<PurchaseFormData[]>('/purchases'),
+
+  // 获取单个采购申请
+  getPurchaseById: (id: number) =>
+    api.get<PurchaseFormData>(`/purchases/${id}`),
+
+  // 更新采购申请状态
+  updatePurchaseStatus: (id: number, status: string) =>
+    api.put<PurchaseFormData>(`/purchases/${id}/status`, { status }),
+
+  // 搜索采购申请
+  searchPurchases: (params: { query?: string; status?: string }) =>
+    api.get<PurchaseFormData[]>('/purchases/search', { params }),
 };
 
 export const getFullUrl = (path: string) => {

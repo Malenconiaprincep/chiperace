@@ -30,6 +30,18 @@ export interface ProductData {
   details?: string;
 }
 
+// 添加新的接口类型
+export interface PurchaseFormData {
+  id: string;
+  company: string;
+  contact: string;
+  phone: string;
+  email: string;
+  requirements: string;
+  submitTime: string;
+  status: 'pending' | 'processing' | 'completed';
+}
+
 // 添加基础URL配置
 const isDev = process.env.NODE_ENV === 'development';
 const BASE_URL = isDev ? 'http://localhost:4000' : '';
@@ -114,6 +126,16 @@ export const productApi = {
 
   // 删除产品
   deleteProduct: (id: number) => api.delete(`/products/${id}`),
+};
+
+// 添加新的 API 方法
+export const purchaseApi = {
+  // 获取采购申请列表
+  getPurchaseList: () => api.get<PurchaseFormData[]>('/purchases'),
+
+  // 更新采购申请状态
+  updatePurchaseStatus: (id: string, status: string) =>
+    api.put(`/purchases/${id}/status`, { status }),
 };
 
 export default api; 

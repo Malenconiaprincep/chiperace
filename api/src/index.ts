@@ -427,6 +427,137 @@ router.delete('/api/products/:id', async (ctx) => {
   }
 });
 
+// 采购申请接口类型定义
+interface PurchaseFormRequestBody {
+  company: string;
+  contact: string;
+  phone: string;
+  email: string;
+  requirements: string;
+}
+
+// 获取采购申请列表
+router.get('/api/purchases', async (ctx) => {
+  try {
+    const purchases = await prisma.purchaseForm.findMany({
+      orderBy: {
+        submitTime: 'desc'
+      }
+    });
+    ctx.body = purchases;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: '获取采购申请列表失败' };
+  }
+});
+
+// 创建采购申请
+router.post('/api/purchases', async (ctx) => {
+  const data = ctx.request.body as PurchaseFormRequestBody;
+
+  try {
+    const purchase = await prisma.purchaseForm.create({
+      data: {
+        company: data.company,
+        contact: data.contact,
+        phone: data.phone,
+        email: data.email,
+        requirements: data.requirements,
+      }
+    });
+    ctx.body = purchase;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '创建采购申请失败' };
+  }
+});
+
+// 更新采购申请状态
+router.put('/api/purchases/:id/status', async (ctx) => {
+  const { id } = ctx.params;
+  const { status } = ctx.request.body;
+
+  try {
+    const purchase = await prisma.purchaseForm.update({
+      where: { id: Number(id) },
+      data: { status }
+    });
+    ctx.body = purchase;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '更新状态失败' };
+  }
+});
+
+// 获取单个采购申请
+router.get('/api/purchases/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    const purchase = await prisma.purchaseForm.findUnique({
+      where: { id: Number(id) }
+    });
+
+    if (!purchase) {
+      ctx.status = 404;
+      ctx.body = { error: '采购申请不存在' };
+      return;
+    }
+
+    ctx.body = purchase;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: '获取采购申请失败' };
+  }
+});
+
+// 删除采购申请
+router.delete('/api/purchases/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.purchaseForm.delete({
+      where: { id: Number(id) }
+    });
+    ctx.body = { success: true };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '删除采购申请失败' };
+  }
+});
+
+// 搜索采购申请
+router.get('/api/purchases/search', async (ctx) => {
+  const { query, status } = ctx.query;
+
+  try {
+    const whereClause: any = {};
+
+    if (query) {
+      whereClause.OR = [
+        { company: { contains: query as string, mode: 'insensitive' } },
+        { contact: { contains: query as string, mode: 'insensitive' } }
+      ];
+    }
+
+    if (status && status !== 'all') {
+      whereClause.status = status;
+    }
+
+    const purchases = await prisma.purchaseForm.findMany({
+      where: whereClause,
+      orderBy: {
+        submitTime: 'desc'
+      }
+    });
+
+    ctx.body = purchases;
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { error: '搜索采购申请失败' };
+  }
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 const PORT = process.env.PORT || 4000;
