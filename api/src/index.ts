@@ -489,6 +489,39 @@ router.put('/api/purchases/:id/status', async (ctx) => {
   }
 });
 
+// 搜索采购申请
+router.get('/api/purchases/search', async (ctx) => {
+  const { query, status } = ctx.query;
+
+  try {
+    const whereClause: any = {};
+
+    if (query) {
+      whereClause.OR = [
+        { company: { contains: query as string, mode: 'insensitive' } },
+        { contact: { contains: query as string, mode: 'insensitive' } }
+      ];
+    }
+
+    if (status && status !== 'all') {
+      whereClause.status = status;
+    }
+
+    const purchases = await prisma.purchaseForm.findMany({
+      where: whereClause,
+      orderBy: {
+        submitTime: 'desc'
+      }
+    });
+
+    ctx.body = purchases;
+  } catch (error) {
+    console.log(error)
+    ctx.status = 500;
+    ctx.body = { error: '搜索采购申请失败' };
+  }
+});
+
 // 获取单个采购申请
 router.get('/api/purchases/:id', async (ctx) => {
   const { id } = ctx.params;
@@ -526,38 +559,7 @@ router.delete('/api/purchases/:id', async (ctx) => {
   }
 });
 
-// 搜索采购申请
-router.get('/api/purchases/search', async (ctx) => {
-  const { query, status } = ctx.query;
 
-  try {
-    const whereClause: any = {};
-
-    if (query) {
-      whereClause.OR = [
-        { company: { contains: query as string, mode: 'insensitive' } },
-        { contact: { contains: query as string, mode: 'insensitive' } }
-      ];
-    }
-
-    if (status && status !== 'all') {
-      whereClause.status = status;
-    }
-
-    const purchases = await prisma.purchaseForm.findMany({
-      where: whereClause,
-      orderBy: {
-        submitTime: 'desc'
-      }
-    });
-
-    ctx.body = purchases;
-  } catch (error) {
-    console.log(error)
-    ctx.status = 500;
-    ctx.body = { error: '搜索采购申请失败' };
-  }
-});
 
 app.use(router.routes()).use(router.allowedMethods());
 
