@@ -25,8 +25,9 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: '使用手册',
       items: [
-        'tutorial-basics/APU 高性能计算服务器使用手册.md',
-        'tutorial-basics/APU 高性能加速卡使用手册.md'
+        'tutorial-basics/APU 高性能计算服务器使用手册',
+        'tutorial-basics/APU高性能计算服务器对比测试报告V1.0',
+        'tutorial-basics/APU高性能计算服务器产品应用案例'
       ],
     },
   ],

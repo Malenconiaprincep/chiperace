@@ -220,8 +220,9 @@ dp train-apu train_qnn.json -s s2 --skip-neighbor-stat
 
 3. QNN输入脚本（`train_qnn.json`）中运行步数（`stop_batch`）设置为1步即可
 
-![alt text](./img/image.png)
+<!-- ![alt text](./img/image.png) -->
 <!-- <center><img src="./img/image.png" alt="alt text"></center> -->
+<img src="./img/image.png" alt="alt text" class="image-center">
 
 ## 2. 运行
 
@@ -298,8 +299,9 @@ sudo load_pcie.sh i
 ```
 
 输入密码后完成对加速卡的配置。
-![alt text](./img/image1.png)
-<!-- <center><img src="./img/image1.png" alt="alt text"></center> -->
+<!-- ![alt text](./img/image1.png) -->
+
+<img src="./img/image1.png" alt="alt text" class="image-center">
 
 ### B. 训练
 

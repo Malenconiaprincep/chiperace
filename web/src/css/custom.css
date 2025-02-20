@@ -32,3 +32,11 @@
   display: block;
   margin: 0 auto;
 }
+.custom-figure {
+  text-align: center;
+  margin: 1.5em 0; /* 可选：添加一些上下边距 */
+}
+
+.custom-figure figcaption {
+  margin-bottom: 0.5em; /* 可选：添加图注和图片之间的间距 */
+}
