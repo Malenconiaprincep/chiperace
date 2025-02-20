@@ -17,7 +17,6 @@ Au被用作抗辐照损伤的特种材料，可以通过分子动力学仿真进
 
 <figure style="text-align: center;">
     <figcaption>图 1 Au体系冲击测试：（a）冲击示意图，（b）压强 - 温度状态方程，（c）压强 - 密度状态方程</figcaption>
-    <!-- 此处需替换为实际图片路径 ![alt text](image-11.png)-->
     <img src="./img/image-11.png" alt="Au体系冲击测试">
 </figure>
 
@@ -37,7 +36,6 @@ Au被用作抗辐照损伤的特种材料，可以通过分子动力学仿真进
 
 <figure style="text-align: center;">
     <figcaption>图 2  Cu体系的拉伸测试：（a）拉伸示意图，（b）应力应变曲线</figcaption>
-    <!-- 此处需替换为实际图片路径 -->
     <img src="./img/image-12.png" alt="Cu体系的拉伸测试">
 </figure>
 
@@ -99,6 +97,7 @@ GeTe是一种相变材料，通过晶态的“SET”和不定形态的“RESET�
 
 1. 平衡态仿真：读取初始构型之后，使用设定温度来初始化速度，之后进行4 ps的NVT仿真，时间步长2 fs，目标温度为设定温度。
 2. 采样仿真：在设定温度下，进行1 ns的NVT仿真，时间步长2 fs，并每100步导出1帧体系结构，从而得到运行轨迹。通过分析原子的轨迹，能够计算锂离子随时间变化的偏移量r，即其均方位移（mean square displacement, MSD）。使用MSD和时间的关系可以计算得到锂离子的扩散系数。
+$$D = (\frac{1}{6t})\langle |\mathbf{r}(t)-\mathbf{r}(0)|^2\rangle$$
 
 在Li₁₀GeP₂S₁₂的扩散系数测试中，使用300K、400K、500K以及666K这4个温度条件进行仿真。由于不同温度会导致构型的热膨胀程度不一致，因此不同温度下的计算使用不同的构型。每个温度下使用不同的随机种子跑3个轨迹得到统计值，结果如图 6所示。
 
