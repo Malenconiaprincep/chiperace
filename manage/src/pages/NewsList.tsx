@@ -14,8 +14,8 @@ const NewsList = () => {
   const fetchNews = async () => {
     try {
       setLoading(true);
-      const response = await newsApi.getNewsList();
-      setNews(response.data);
+      const response = await newsApi.getNewsList() as any;
+      setNews(response.data?.data);
     } catch (error) {
       console.error('获取新闻列表失败:', error);
       message.error('获取新闻列表失败');
