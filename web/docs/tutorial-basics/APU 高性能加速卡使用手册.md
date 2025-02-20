@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Create a Document
+# APU 高性能加速卡使用手册
 
 Documents are **groups of pages** connected through:
 

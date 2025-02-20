@@ -2,20 +2,17 @@
 sidebar_position: 1
 ---
 
-# 广东芯培森技术有限公司
-
-# **APU 高性能计算服务器使用手册（V1.0）**
+# APU 高性能计算服务器使用手册(V1.0)
 
 **目录：**
 
-- [**广东芯培森技术有限公司**](#广东芯培森技术有限公司)
-- [**APU 高性能计算服务器使用手册（V1.0）**](#apu-高性能计算服务器使用手册v10)
+- [APU 高性能计算服务器使用手册(V1.0)](#apu-高性能计算服务器使用手册v10)
   - [1. 模型训练](#1-模型训练)
     - [A. 训练文件参数介绍](#a-训练文件参数介绍)
-      - [a) apu参数](#a-apu参数)
+      - [a） apu参数](#a-apu参数)
       - [b) learning\_rate参数](#b-learning_rate参数)
-      - [c) loss参数](#c-loss参数)
-      - [d) training参数](#d-training参数)
+      - [c） loss参数](#c-loss参数)
+      - [d） training参数](#d-training参数)
     - [B. 配置训练文件](#b-配置训练文件)
     - [C. 训练并测试](#c-训练并测试)
     - [D. 训练注意事项](#d-训练注意事项)
@@ -59,7 +56,7 @@ cp -r $dataset data
 
 接下来将分别介绍各部分参数。
 
-#### a) apu参数
+#### a） apu参数
 
 ```json
 {
@@ -100,7 +97,7 @@ cp -r $dataset data
 |stop_lr|训练结束时学习率|合适的值|
 |decay_steps|每decay_steps步学习率衰减|合适的值|
 
-#### c) loss参数
+#### c） loss参数
 
 ```json
 {
@@ -122,7 +119,7 @@ cp -r $dataset data
 |start_pref_v|训练开始时维里的损失因子|0或合适的值|
 |limit_pref_v|训练结束时维里的损失因子|0或合适的值|
 
-#### d) training参数
+#### d） training参数
 
 ```json
 {
@@ -222,7 +219,9 @@ dp train-apu train_qnn.json -s s2 --skip-neighbor-stat
 ```
 
 3. QNN输入脚本（`train_qnn.json`）中运行步数（`stop_batch`）设置为1步即可
+
 ![alt text](./img/image.png)
+<!-- <center><img src="./img/image.png" alt="alt text"></center> -->
 
 ## 2. 运行
 
@@ -267,7 +266,7 @@ pair_coeff * *
 
 ### C. 运行分子动力学
 
-使用mpi多核运行分子动力学(Molecular Dynamics, MD）
+使用mpi多核运行分子动力学(Molecular Dynamics, MD)
 
 ```bash
 sudo mpirun -n $num_cores $lmp_path -i lammps.in
@@ -300,6 +299,7 @@ sudo load_pcie.sh i
 
 输入密码后完成对加速卡的配置。
 ![alt text](./img/image1.png)
+<!-- <center><img src="./img/image1.png" alt="alt text"></center> -->
 
 ### B. 训练
 
@@ -307,6 +307,7 @@ sudo load_pcie.sh i
 
 使用`cd`指令进入训练文件夹，该目录下`data/`为GeTe算例的训练数据集，`train_cnn.json`和`train_qnn.json`分别为CNN和QNN模型的训练脚本，脚本中的参数在第一节中有详细的介绍。
 ![alt text](./img/image2.png)
+<!-- <center><img src="./img/image2.png" alt="alt text"></center> -->
 
 键入如下指令激活APU环境
 
@@ -316,16 +317,23 @@ conda activate apu
 
 将conda环境由`base`切换为`apu`，输入CNN训练指令
 ![alt text](./img/image-1.png)
+<!-- <center><img src="./img/image-1.png" alt="alt text"></center> -->
+
 CNN训练完成后继续训练QNN
 ![alt text](./img/image-2.png)
+<!-- <center><img src="./img/image-2.png" alt="alt text"></center> -->
 训练结束后，训练目录中文件如下，`train_cnn`与`train_qnn`分别包含CNN和QNN的训练过程文件和结果文件。
 ![alt text](./img/image-3.png)
+<!-- <center><img src="./img/image-3.png" alt="alt text"></center> -->
 
 ### C. 测试
 
 进入`~/Desktop/example/GeTe_APU/`测试目录下，将上述`train_qnn/`目录下QNN训练最终得到的模型`model.pb`拷贝到`GeTe_APU/`，该目录下包含lammps输入文件、GeTe坐标文件、APU模型文件。
 ![alt text](./img/image-4.png)
+<!-- <center><img src="./img/image-4.png" alt="alt text"></center> -->
 使用mpi多核运行分子动力学
 ![alt text](./img/image-5.png)
+<!-- <center><img src="./img/image-5.png" alt="alt text"></center> -->
 执行完毕后可在`log.lammps`中查看输出信息。
 ![alt text](./img/image-6.png)
+<!-- <center><img src="./img/image-6.png" alt="alt text"></center> -->
