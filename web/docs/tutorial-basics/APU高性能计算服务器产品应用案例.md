@@ -100,7 +100,7 @@ GeTe是一种相变材料，通过晶态的“SET”和不定形态的“RESET�
 $$D = (\frac{1}{6t})\langle |\mathbf{r}(t)-\mathbf{r}(0)|^2\rangle$$
 
 在Li₁₀GeP₂S₁₂的扩散系数测试中，使用300K、400K、500K以及666K这4个温度条件进行仿真。由于不同温度会导致构型的热膨胀程度不一致，因此不同温度下的计算使用不同的构型。每个温度下使用不同的随机种子跑3个轨迹得到统计值，结果如图 6所示。
-
+ 
 <figure style="text-align: center;">
     <figcaption>图 6  Li₁₀GeP₂S₁₂的扩散系数测试</figcaption>
     <img src="./img/image-16.png" alt="Li₁₀GeP₂S₁₂的扩散系数测试">
