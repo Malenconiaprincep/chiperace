@@ -42,6 +42,13 @@ export interface PurchaseFormData {
   submitTime: string;
 }
 
+export interface CustomDocData {
+  id?: number;
+  type: string;
+  content: string;
+  updatedAt?: Date;
+}
+
 // 添加基础URL配置
 const isDev = process.env.NODE_ENV === 'development';
 const BASE_URL = isDev ? 'http://localhost:4000' : '';
@@ -138,6 +145,14 @@ export const purchaseApi = {
 
   // 搜索采购申请
   searchPurchases: (params: { query?: string; status?: string }) => api.get<PurchaseFormData[]>('/purchases/search', { params }),
+};
+
+export const customDocApi = {
+  getDocs: () => api.get<CustomDocData[]>('/custom-docs'),
+  getDocById: (id: number) => api.get<CustomDocData>(`/custom-docs/${id}`),
+  createDoc: (data: Partial<CustomDocData>) => api.post<CustomDocData>('/custom-docs', data),
+  updateDoc: (id: number, data: Partial<CustomDocData>) => api.put<CustomDocData>(`/custom-docs/${id}`, data),
+  deleteDoc: (id: number) => api.delete(`/custom-docs/${id}`),
 };
 
 export default api; 
