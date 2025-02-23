@@ -43,7 +43,7 @@ export default function MainProduct() {
           <div key={index}>
             <div
               className={styles.slide}
-              style={{ backgroundImage: `url(${getFullUrl(banner.image)})` }}
+            // style={{ backgroundImage: `url(@assets/banner.png)` }}
             >
               <div className={styles.overlay}>
                 <div className="container">
