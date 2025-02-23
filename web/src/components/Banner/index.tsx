@@ -41,12 +41,9 @@ export default function MainProduct() {
       <Slider {...settings} className={styles.slider}>
         {bannerData.map((banner, index) => (
           <div key={index}>
-            <div
-              className={styles.slide}
-            // style={{ backgroundImage: `url(@assets/banner.png)` }}
-            >
+            <div className={styles.slide}>
               <div className={styles.overlay}>
-                <div className="container">
+                <div className={styles.container}>
                   <div className={styles.content}>
                     <h2>{banner.title}</h2>
                     <p className={styles.subtitle}>{banner.subtitle}</p>
@@ -54,6 +51,9 @@ export default function MainProduct() {
                     <Link className="button button--primary" to={banner.link}>
                       了解更多
                     </Link>
+                  </div>
+                  <div className={styles.productImage}>
+                    <img src={getFullUrl(banner.image)} alt={banner.title} />
                   </div>
                 </div>
               </div>
