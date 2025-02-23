@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '@site/src/components/Layout';
 import styles from './about.module.css';
 import bannerStyles from '../styles/banner.module.css';
+import { EnvironmentOutlined } from '@ant-design/icons';
 
 const AboutPage = (): JSX.Element => {
   return (
@@ -16,7 +17,7 @@ const AboutPage = (): JSX.Element => {
         <div className={styles.content}>
           <div className={styles.section}>
             <h2>公司简介</h2>
-            <p>广东芯培森技术有限公司由湖南大学集成电路学院刘杰教授团队于2024年11月创办，主要从事面向原子级科学计算的算力芯片（APU）的研发和销售。该团队于2022年研发出面向原子级科学计算的第一代“非冯·诺依曼”专用芯片架构技术，并于2023年自主研制出基于第一代技术的服务器产品，经多家第三方用户实测，该产品在运行专用原子级科学计算时，同等精度和功耗下，相较“对华禁运”的高端GPU速度提升约1个数量级。目前，基于第一代技术的产品和服务已销售至国内外30多家企业、高校、科研院所。</p>
+            <p>广东芯培森技术有限公司由湖南大学集成电路学院刘杰教授团队于2024年11月创办，主要从事面向原子级科学计算的算力芯片（APU）的研发和销售。该团队于2022年研发出面向原子级科学计算的第一代"非冯·诺依曼"专用芯片架构技术，并于2023年自主研制出基于第一代技术的服务器产品，经多家第三方用户实测，该产品在运行专用原子级科学计算时，同等精度和功耗下，相较"对华禁运"的高端GPU速度提升约1个数量级。目前，基于第一代技术的产品和服务已销售至国内外30多家企业、高校、科研院所。</p>
           </div>
 
           {/* <div className={styles.section}>
@@ -61,18 +62,22 @@ const AboutPage = (): JSX.Element => {
 
           <div className={styles.section}>
             <h2>公司地址</h2>
-            <div className={styles.contactInfo}>
-              <div className={styles.contactItem}>
-                <h3>总部地址</h3>
-                <p>北京市海淀区科技园区</p>
+            <div className={styles.addressGrid}>
+              <div className={styles.addressCard}>
+                <div className={styles.addressHeader}>
+                  <EnvironmentOutlined className={styles.locationIcon} />
+                  <span>广州</span>
+                </div>
+                <p className={styles.addressDetail}>⼴州市⻩埔区⾹雪⼋路98号F栋1705-1</p>
               </div>
-              <div className={styles.contactItem}>
-                <h3>联系电话</h3>
-                <p>400-888-8888</p>
-              </div>
-              <div className={styles.contactItem}>
-                <h3>电子邮箱</h3>
-                <p>contact@chipforce.com</p>
+              <div className={styles.addressCard}>
+                <div className={styles.addressHeader}>
+                  <EnvironmentOutlined className={styles.locationIcon} />
+                  <span>长沙</span>
+                </div>
+                <div className={styles.addressDetail}>
+                  <p>湖南省长沙市岳麓区长沙市半导体技术与应用创新研究院2楼</p>
+                </div>
               </div>
             </div>
           </div>

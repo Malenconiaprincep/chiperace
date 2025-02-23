@@ -18,6 +18,7 @@
     "backend:start": "cd backend && npm run start"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.6.1",
     "@docusaurus/core": "latest",
     "@docusaurus/preset-classic": "latest",
     "@mdx-js/react": "^3.0.0",
