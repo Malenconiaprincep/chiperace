@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from '@docusaurus/Link';
+import { Button } from 'antd';
+import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import styles from './styles.module.css';
 
 const menuItems = [
@@ -121,7 +123,9 @@ export default function Navbar() {
                 className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ''}`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
-              />
+              >
+                {isMobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
+              </button>
             )}
 
             <div className={`${styles.menuContainer} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>

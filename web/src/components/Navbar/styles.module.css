@@ -208,6 +208,18 @@
     margin-right: 15px;
     order: 3; /* 确保在最右侧 */
     z-index: 1001;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .hamburger:focus {
+    outline: none;
   }
 
   /* 调整菜单容器样式 */
@@ -526,4 +538,12 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.hamburger.active::before {
+  color: #333 !important;
+}
+
+.sticky .hamburger {
+  color: #333;
 } 
