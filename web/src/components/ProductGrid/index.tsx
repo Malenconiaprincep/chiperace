@@ -31,7 +31,7 @@ export default function ProductGrid() {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.sectionHeader}>
-          <h2>产品方案</h2>
+          <h2>产品与解决方案</h2>
         </div>
 
         <div className={styles.productsGrid}>

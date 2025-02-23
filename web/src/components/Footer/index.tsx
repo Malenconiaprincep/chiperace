@@ -23,7 +23,7 @@ export default function Footer() {
       <div className="container">
         <div className={styles.footerContent}>
           <div className={styles.logo}>
-            <img src="/img/logo.png" alt="Chiperce" className={styles.logoImage} />
+            <img src="/img/logo.png" alt="Chipierce" className={styles.logoImage} />
           </div>
 
           <div className={styles.links}>
@@ -40,8 +40,8 @@ export default function Footer() {
         </div>
 
         <div className={styles.copyright}>
-          <p>版权所有 © 2016-2025 Chiperce.com</p>
-          <p>备案/许可证号: 京ICP备17003415号-1</p>
+          <p>版权所有 © 2016-2025 Chipierce.com</p>
+          <p>备案/许可证号: 粤ICP备2025373852号</p>
         </div>
       </div>
     </footer>
