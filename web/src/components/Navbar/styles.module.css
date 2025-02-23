@@ -78,11 +78,17 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
-.menuItem:hover .subMenu {
-  opacity: 1;
-  visibility: visible;
+/* PC 端悬停时显示子菜单 */
+@media (min-width: 769px) {
+  .menuItem:hover .subMenu {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .subMenuContent {
@@ -180,9 +186,229 @@
 }
 
 @media (max-width: 768px) {
-  .menuContainer {
+  .navContent {
+    position: relative;
+    justify-content: space-between;
+  }
+
+  .leftSection {
+    flex: 1;
+    justify-content: flex-start;
+  }
+
+  /* 隐藏移动端的社交链接 */
+  .socialLinks {
     display: none;
   }
+
+  /* 将汉堡菜单移到右侧 */
+  .hamburger {
+    display: block;
+    margin-left: auto; /* 改为 auto 使其靠右 */
+    margin-right: 15px;
+    order: 3; /* 确保在最右侧 */
+    z-index: 1001;
+  }
+
+  /* 调整菜单容器样式 */
+  .menuContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    padding: 80px 20px 20px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .mobileMenuOpen {
+    display: block;
+  }
+
+  .hamburger::before {
+    content: '☰';
+    font-size: 24px;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+
+  .sticky .hamburger::before {
+    color: #333;
+  }
+
+  .hamburger.active::before {
+    content: '✕';
+  }
+
+  .hamburger span {
+    display: none;
+  }
+
+  .sticky .hamburger span {
+    background: #333;
+  }
+
+  .menuItem {
+    display: block;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .menuLink {
+    color: #333;
+    font-size: 18px;
+    display: block;
+    padding: 10px 0;
+  }
+
+  .subMenu {
+    position: static;
+    width: 100%;
+    min-width: auto;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    display: none;
+    padding-left: 20px;
+    background: transparent;
+    margin: 0;
+  }
+
+  .subMenuContent {
+    padding: 0;
+  }
+
+  .subMenuColumn {
+    padding-left: 20px;
+  }
+
+  .subMenuLink {
+    padding: 10px 0;
+    color: #666;
+    font-size: 16px;
+  }
+
+  .expandIcon {
+    display: block;
+  }
+
+  .menuItemWrapper {
+    padding-right: 10px;
+  }
+
+  .menuLink {
+    flex: 1;
+  }
+
+  /* 修改现有的移动端样式 */
+  .menuItem {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .menuItemWrapper {
+    padding: 15px 0;
+  }
+
+  .subMenu {
+    position: static;
+    width: 100%;
+    min-width: auto;
+    box-shadow: none;
+    margin: 0;
+    padding: 0 0 15px 20px;
+    background: transparent;
+    display: none;
+  }
+
+  /* 显示子菜单时的样式 */
+  .menuItem .subMenu {
+    display: block;
+    animation: slideDown 0.3s ease;
+  }
+
+  .menuItem {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .menuItemWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    cursor: pointer;
+  }
+
+  .menuLink {
+    color: #333;
+    font-size: 16px;
+    flex: 1;
+    pointer-events: none; /* 在移动端时，有子菜单的链接不可点击 */
+  }
+
+  .menuItem:not(.active) .menuLink {
+    pointer-events: auto; /* 没有子菜单的链接可以点击 */
+  }
+
+  .expandIcon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+    color: #666;
+    transition: transform 0.3s ease;
+  }
+
+  .expanded {
+    transform: rotate(180deg);
+  }
+
+  .subMenu {
+    display: none;
+    padding-left: 20px;
+    background: transparent;
+    position: static;
+    box-shadow: none;
+    min-width: auto;
+  }
+
+  .subMenuActive {
+    display: block !important;
+    animation: slideDown 0.3s ease;
+  }
+
+  .subMenuLink {
+    padding: 12px 0;
+    color: #666;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .subMenuLink:last-child {
+    border-bottom: none;
+  }
+}
+
+/* 添加动画效果 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobileMenuOpen {
+  animation: slideIn 0.3s ease;
 }
 
 .socialLinks {
@@ -268,5 +494,36 @@
   to {
     opacity: 1;
     transform: translate(-50%, 0);
+  }
+}
+
+/* 添加新样式 */
+.menuItemWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.expandIcon {
+  display: none;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+  color: #666;
+}
+
+.expandIcon.expanded {
+  transform: rotate(180deg);
+}
+
+/* 添加子菜单展开动画 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 } 
