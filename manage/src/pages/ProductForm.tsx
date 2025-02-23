@@ -104,6 +104,7 @@ const ProductForm = () => {
       };
 
       if (id) {
+        formData.order = Number(values.order);
         await productApi.updateProduct(Number(id), formData);
       } else {
         formData.order = Number(values.order);
