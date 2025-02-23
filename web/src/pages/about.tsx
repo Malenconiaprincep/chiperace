@@ -16,10 +16,10 @@ const AboutPage = (): JSX.Element => {
         <div className={styles.content}>
           <div className={styles.section}>
             <h2>公司简介</h2>
-            <p>芯培森是一家专注于人工智能芯片和智能计算解决方案的高科技企业。我们致力于为客户提供领先的AI计算产品和服务，助力各行业实现智能化转型。</p>
+            <p>广东芯培森技术有限公司由湖南大学集成电路学院刘杰教授团队于2024年11月创办，主要从事面向原子级科学计算的算力芯片（APU）的研发和销售。该团队于2022年研发出面向原子级科学计算的第一代“非冯·诺依曼”专用芯片架构技术，并于2023年自主研制出基于第一代技术的服务器产品，经多家第三方用户实测，该产品在运行专用原子级科学计算时，同等精度和功耗下，相较“对华禁运”的高端GPU速度提升约1个数量级。目前，基于第一代技术的产品和服务已销售至国内外30多家企业、高校、科研院所。</p>
           </div>
 
-          <div className={styles.section}>
+          {/* <div className={styles.section}>
             <h2>发展历程</h2>
             <div className={styles.timeline}>
               <div className={styles.timelineItem}>
@@ -39,7 +39,7 @@ const AboutPage = (): JSX.Element => {
                 <div className={styles.event}>全球化布局</div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className={styles.section}>
             <h2>企业文化</h2>
@@ -60,7 +60,7 @@ const AboutPage = (): JSX.Element => {
           </div>
 
           <div className={styles.section}>
-            <h2>联系我们</h2>
+            <h2>公司地址</h2>
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
                 <h3>总部地址</h3>
