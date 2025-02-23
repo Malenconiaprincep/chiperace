@@ -11,7 +11,7 @@ const CustomDocList = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await customDocApi.getDocs();
+      const response: any = await customDocApi.getDocs();
       setData(response.data);
     } catch (error) {
       console.error('获取文档列表失败:', error);

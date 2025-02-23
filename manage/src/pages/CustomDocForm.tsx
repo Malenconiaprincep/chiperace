@@ -1,4 +1,4 @@
-import { Form, Input, Button, Card, message, Select } from 'antd';
+import { Form, Button, Card, message, Select } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
@@ -6,10 +6,7 @@ import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { useState, useEffect } from 'react';
 import { customDocApi } from '../services/api';
 
-interface CustomDocFormData {
-  type: string;
-  content: string;
-}
+
 
 const docTypes = [
   { value: 'user-agreement', label: '用户协议' },
