@@ -87,6 +87,13 @@ export interface PurchaseFormData {
   submitTime?: string;
 }
 
+export interface CustomDoc {
+  id: number;
+  type: string;
+  content: string;
+  updatedAt: string;
+}
+
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';
 const API_BASE_URL = location.host.indexOf('localhost') !== -1
   ? 'http://localhost:4000/api'  // 开发环境
@@ -150,6 +157,18 @@ export const purchaseApi = {
   // 搜索采购申请
   searchPurchases: (params: { query?: string; status?: string }) =>
     api.get<PurchaseFormData[]>('/purchases/search', { params }),
+};
+
+export const customDocApi = {
+  // 获取所有文档
+  getDocs: () => api.get<CustomDoc[]>('/custom-docs'),
+
+  // 根据类型获取文档
+  getDocByType: async (type: string) => {
+    const response = await api.get<CustomDoc[]>('/custom-docs');
+    const docs = response.data;
+    return docs.find(doc => doc.type === type);
+  }
 };
 
 export const getFullUrl = (path: string) => {
