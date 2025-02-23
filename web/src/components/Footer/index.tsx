@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.copyright}>
-          <p>版权所有 © 2016-2025 Chipierce.com</p>
+          <p>版权所有 © 2024-2025 Chipierce.com</p>
           <p>备案/许可证号: 粤ICP备2025373852号</p>
         </div>
       </div>
