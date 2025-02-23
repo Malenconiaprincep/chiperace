@@ -54,4 +54,13 @@ model PurchaseForm {
   submitTime   DateTime @default(now())
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model CustomDoc {
+  id        Int      @id @default(autoincrement())
+  type      String   // 文档类型：user-agreement, legal-notice, privacy-policy
+  content   String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("custom_docs")
 } 

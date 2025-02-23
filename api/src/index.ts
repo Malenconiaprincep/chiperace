@@ -559,7 +559,129 @@ router.delete('/api/purchases/:id', async (ctx) => {
   }
 });
 
+// 自定义文档路由
 
+// 获取所有文档
+router.get('/api/custom-docs', async (ctx) => {
+  try {
+    const docs = await prisma.customDoc.findMany({
+      orderBy: {
+        updatedAt: 'desc'
+      }
+    });
+    ctx.body = docs;
+  } catch (error) {
+    console.error('获取文档列表失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取文档列表失败' };
+  }
+});
+
+// 获取单个文档
+router.get('/api/custom-docs/:id', async (ctx) => {
+  const { id } = ctx.params;
+  try {
+    const doc = await prisma.customDoc.findUnique({
+      where: { id: Number(id) }
+    });
+
+    if (!doc) {
+      ctx.status = 404;
+      ctx.body = { error: '文档不存在' };
+      return;
+    }
+
+    ctx.body = doc;
+  } catch (error) {
+    console.error('获取文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取文档失败' };
+  }
+});
+
+// 创建文档
+router.post('/api/custom-docs', async (ctx) => {
+  const { type, content } = ctx.request.body;
+
+  try {
+    // 检查是否已存在同类型的文档
+    const existingDoc = await prisma.customDoc.findFirst({
+      where: { type }
+    });
+
+    if (existingDoc) {
+      ctx.status = 400;
+      ctx.body = { error: '该类型的文档已存在' };
+      return;
+    }
+
+    const doc = await prisma.customDoc.create({
+      data: {
+        type,
+        content
+      }
+    });
+
+    ctx.status = 201;
+    ctx.body = doc;
+  } catch (error) {
+    console.error('创建文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '创建文档失败' };
+  }
+});
+
+// 更新文档
+router.put('/api/custom-docs/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const { type, content } = ctx.request.body;
+
+  try {
+    // 检查是否存在其他同类型的文档
+    const existingDoc = await prisma.customDoc.findFirst({
+      where: {
+        type,
+        NOT: { id: Number(id) }
+      }
+    });
+
+    if (existingDoc) {
+      ctx.status = 400;
+      ctx.body = { error: '该类型的文档已存在' };
+      return;
+    }
+
+    const doc = await prisma.customDoc.update({
+      where: { id: Number(id) },
+      data: {
+        type,
+        content
+      }
+    });
+
+    ctx.body = doc;
+  } catch (error) {
+    console.error('更新文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '更新文档失败' };
+  }
+});
+
+// 删除文档
+router.delete('/api/custom-docs/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.customDoc.delete({
+      where: { id: Number(id) }
+    });
+    ctx.status = 204;
+  } catch (error) {
+    console.error('删除文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '删除文档失败' };
+  }
+});
 
 app.use(router.routes()).use(router.allowedMethods());
 
