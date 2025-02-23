@@ -127,12 +127,51 @@ const NewsPage = (): JSX.Element => {
             </div>
           </div>
 
-          <div className={styles.newsList}>
-            {news.map((item) => (
+          <div className={styles.featureNewsSection}>
+            {news.filter(item => item.isFeature).map((item) => (
               <Link
                 key={item.id}
                 to={item.link ? item.link : `/news/detail?id=${item.id}`}
-                className={`${styles.newsItem} ${item.isFeature ? styles.featureNews : ''}`}
+                className={`${styles.newsItem} ${styles.featureNews}`}
+                style={{ textDecoration: 'none' }}
+              >
+                {item.image && (
+                  <div className={styles.newsImage}>
+                    <img src={getFullUrl(item.image)} alt={item.title} />
+                  </div>
+                )}
+                <div className={styles.newsContent}>
+                  <div className={styles.newsDate}>
+                    <div className={styles.dateBox}>
+                      <span className={styles.day}>
+                        {new Date(item.date).getDate().toString().padStart(2, '0')}
+                      </span>
+                      <span className={styles.yearMonth}>
+                        {new Date(item.date).getFullYear()}.
+                        {(new Date(item.date).getMonth() + 1).toString().padStart(2, '0')}
+                      </span>
+                    </div>
+                  </div>
+                  <div className={styles.newsInfo}>
+                    <h2>{item.title}</h2>
+                    {item.source === '本地' && (
+                      <span className={styles.localTag}>
+                        <i className="fas fa-location-dot"></i>
+                        本地
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className={styles.newsList}>
+            {news.filter(item => !item.isFeature).map((item) => (
+              <Link
+                key={item.id}
+                to={item.link ? item.link : `/news/detail?id=${item.id}`}
+                className={styles.newsItem}
                 style={{ textDecoration: 'none' }}
               >
                 {item.image && (
@@ -167,7 +206,6 @@ const NewsPage = (): JSX.Element => {
           </div>
 
           <div className={styles.pagination}>
-
             <button
               onClick={() => setPage(page - 1)}
               disabled={page === 1}
