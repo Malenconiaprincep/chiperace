@@ -60,6 +60,17 @@ export default function OfflinePurchase(): JSX.Element {
 
       <div className={styles.content}>
         <div className={styles.section} style={{ width: '800px' }}>
+          <div className={styles.companyInfo}>
+            <h3>公司联系方式</h3>
+            <p>
+              <strong>公司电话：</strong> 400-123-4567
+            </p>
+            <p>
+              <strong>公司邮箱：</strong> ****@chipierce.com
+            </p>
+            <div className={styles.divider}></div>
+          </div>
+
           <h2>填写采购信息</h2>
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit}>

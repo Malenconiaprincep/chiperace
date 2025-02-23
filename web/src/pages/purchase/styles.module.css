@@ -67,3 +67,27 @@
 .submitButton:hover {
   background-color: #2F6B49;
 }
+
+.companyInfo {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.companyInfo h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.companyInfo p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 20px 0;
+}
