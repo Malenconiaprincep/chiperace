@@ -10,6 +10,17 @@ import 'slick-carousel/slick/slick-theme.css';
 
 export default function MainProduct() {
   const [bannerData, setBannerData] = useState<BannerItem[]>([]);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchBannerData = async () => {
@@ -32,7 +43,7 @@ export default function MainProduct() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
-    arrows: true,
+    arrows: !isMobileView, // 移动端不显示箭头
     fade: true
   };
 
@@ -47,14 +58,22 @@ export default function MainProduct() {
                   <div className={styles.content}>
                     <h2>{banner.title}</h2>
                     <p className={styles.subtitle}>{banner.subtitle}</p>
-                    <p className={styles.description}>{banner.description}</p>
-                    <Link className="button button--primary" to={banner.link}>
-                      了解更多
-                    </Link>
+                    {/* 只在非移动端显示描述和按钮 */}
+                    {!isMobileView && (
+                      <>
+                        <p className={styles.description}>{banner.description}</p>
+                        <Link className="button button--primary" to={banner.link}>
+                          了解更多
+                        </Link>
+                      </>
+                    )}
                   </div>
-                  <div className={styles.productImage}>
-                    <img src={getFullUrl(banner.image)} alt={banner.title} />
-                  </div>
+                  {/* 只在非移动端显示产品图片 */}
+                  {!isMobileView && (
+                    <div className={styles.productImage}>
+                      <img src={getFullUrl(banner.image)} alt={banner.title} />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

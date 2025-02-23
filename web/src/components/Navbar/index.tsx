@@ -115,11 +115,14 @@ export default function Navbar() {
               <img src="/img/logo.png" alt="Logo" />
             </Link>
 
-            <button
-              className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ''}`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
-            />
+
+            {isMobileView && (
+              <button
+                className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ''}`}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
+              />
+            )}
 
             <div className={`${styles.menuContainer} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
               {menuItems.map((item) => (

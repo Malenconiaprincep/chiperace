@@ -107,8 +107,12 @@
 
 /* 响应式样式 */
 @media (max-width: 768px) {
+  .mainProduct {
+    height: 300px;
+  }
+
   .slide {
-    height: 400px;
+    height: 300px;
   }
 
   .overlay {
@@ -122,17 +126,37 @@
 
   .container {
     flex-direction: column;
+    justify-content: center;
     padding: 0 var(--ifm-spacing-horizontal);
   }
 
   .content {
     max-width: 100%;
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 1rem;
   }
 
   .content h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 0;
+    opacity: 0.8;
+  }
+
+  .slider :global(.slick-dots) {
+    bottom: 10px;
+  }
+
+  .slider :global(.slick-dots li) {
+    margin: 0 2px;
+  }
+
+  .slider :global(.slick-dots li button:before) {
+    font-size: 8px;
   }
 
   .productImage {
@@ -147,5 +171,24 @@
 
   .slider :global(.slick-next) {
     right: 10px;
+  }
+}
+
+/* 小屏幕额外适配 */
+@media (max-width: 480px) {
+  .mainProduct {
+    height: 250px;
+  }
+
+  .slide {
+    height: 250px;
+  }
+
+  .content h2 {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
   }
 } 
