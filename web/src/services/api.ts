@@ -114,7 +114,9 @@ export const newsApi = {
   },
 
   // 获取新闻详情
-  getNewsById: (id: string) => api.get<NewsItem>(`/news/${id}`)
+  getNewsById: (id: string) => api.get<NewsItem>(`/news/${id}`),
+
+  getFeatureNews: () => api.get<NewsItem[]>('/news/feature').then(res => res.data),
 };
 
 export const bannerApi = {

@@ -37,7 +37,7 @@ router.get('/api/news', async (ctx) => {
   const { year, month, page = 1, pageSize = 10 } = ctx.query;
 
   try {
-    let whereClause = {};
+    let whereClause: any = {};
 
     // 确保 year 和 month 是有效的数字
     const numYear = year ? Number(year) : null;
@@ -71,6 +71,8 @@ router.get('/api/news', async (ctx) => {
 
     console.log('查询条件:', whereClause); // 添加日志以便调试
 
+    whereClause.isFeature = false
+
     const [total, items] = await Promise.all([
       prisma.news.count({ where: whereClause }),
       prisma.news.findMany({
@@ -91,6 +93,26 @@ router.get('/api/news', async (ctx) => {
     console.error('获取新闻列表失败:', error);
     ctx.status = 500;
     ctx.body = { error: '获取新闻列表失败' };
+  }
+});
+
+router.get('/api/news/feature', async (ctx) => {
+  try {
+    const featureNews = await prisma.news.findMany({
+      where: {
+        isFeature: true,
+      },
+      orderBy: {
+        date: 'desc'
+      },
+      take: 3 // 限制返回的特色新闻数量
+    });
+
+    ctx.body = featureNews;
+  } catch (error) {
+    console.error('获取特色新闻失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取特色新闻失败' };
   }
 });
 
@@ -686,6 +708,8 @@ router.delete('/api/custom-docs/:id', async (ctx) => {
     ctx.body = { error: '删除文档失败' };
   }
 });
+
+
 
 app.use(router.routes()).use(router.allowedMethods());
 

@@ -7,6 +7,7 @@ import bannerStyles from '../../styles/banner.module.css';
 
 const NewsPage = (): JSX.Element => {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [featureNews, setFeatureNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
@@ -24,27 +25,32 @@ const NewsPage = (): JSX.Element => {
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchAllNews = async () => {
       try {
         setLoading(true);
-        const { data, total } = await newsApi.getNewsList({
-          year: selectedYear,
-          month: selectedMonth,
-          page,
-          pageSize,
-        });
-        setNews(data);
-        setTotal(total);
+        const [regularNewsResponse, featureNewsResponse] = await Promise.all([
+          newsApi.getNewsList({
+            year: selectedYear,
+            month: selectedMonth,
+            page,
+            pageSize,
+          }),
+          newsApi.getFeatureNews()
+        ]);
+
+        setNews(regularNewsResponse.data);
+        setFeatureNews(featureNewsResponse);
+        setTotal(regularNewsResponse.total);
         setError(null);
       } catch (error) {
-        console.error('获取新闻列表失败:', error);
+        console.error('获取新闻失败:', error);
         setError('获取新闻列表失败，请稍后重试');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchNews();
+    fetchAllNews();
   }, [selectedYear, selectedMonth, page]);
 
   const handleYearChange = (year: number | null) => {
@@ -127,47 +133,49 @@ const NewsPage = (): JSX.Element => {
             </div>
           </div>
 
-          <div className={styles.featureNewsSection}>
-            {news.filter(item => item.isFeature).map((item) => (
-              <Link
-                key={item.id}
-                to={item.link ? item.link : `/news/detail?id=${item.id}`}
-                className={`${styles.newsItem} ${styles.featureNews}`}
-                style={{ textDecoration: 'none' }}
-              >
-                {item.image && (
-                  <div className={styles.newsImage}>
-                    <img src={getFullUrl(item.image)} alt={item.title} />
-                  </div>
-                )}
-                <div className={styles.newsContent}>
-                  <div className={styles.newsDate}>
-                    <div className={styles.dateBox}>
-                      <span className={styles.day}>
-                        {new Date(item.date).getDate().toString().padStart(2, '0')}
-                      </span>
-                      <span className={styles.yearMonth}>
-                        {new Date(item.date).getFullYear()}.
-                        {(new Date(item.date).getMonth() + 1).toString().padStart(2, '0')}
-                      </span>
+          {featureNews.length > 0 && (
+            <div className={styles.featureNewsSection}>
+              {featureNews.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.link ? item.link : `/news/detail?id=${item.id}`}
+                  className={`${styles.newsItem} ${styles.featureNews}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  {item.image && (
+                    <div className={styles.newsImage}>
+                      <img src={getFullUrl(item.image)} alt={item.title} />
+                    </div>
+                  )}
+                  <div className={styles.newsContent}>
+                    <div className={styles.newsDate}>
+                      <div className={styles.dateBox}>
+                        <span className={styles.day}>
+                          {new Date(item.date).getDate().toString().padStart(2, '0')}
+                        </span>
+                        <span className={styles.yearMonth}>
+                          {new Date(item.date).getFullYear()}.
+                          {(new Date(item.date).getMonth() + 1).toString().padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
+                    <div className={styles.newsInfo}>
+                      <h2>{item.title}</h2>
+                      {item.source === '本地' && (
+                        <span className={styles.localTag}>
+                          <i className="fas fa-location-dot"></i>
+                          本地
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <div className={styles.newsInfo}>
-                    <h2>{item.title}</h2>
-                    {item.source === '本地' && (
-                      <span className={styles.localTag}>
-                        <i className="fas fa-location-dot"></i>
-                        本地
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                </Link>
+              ))}
+            </div>
+          )}
 
           <div className={styles.newsList}>
-            {news.filter(item => !item.isFeature).map((item) => (
+            {news.map((item) => (
               <Link
                 key={item.id}
                 to={item.link ? item.link : `/news/detail?id=${item.id}`}
