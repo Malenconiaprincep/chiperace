@@ -11,34 +11,34 @@ interface JobPosition {
 }
 
 const positions: JobPosition[] = [
-  {
-    title: '软件工程师',
-    department: '研发部',
-    requirements: [
-      '计算机相关专业本科及以上学历',
-      '熟练掌握 JavaScript/TypeScript, React 等前端技术',
-      '良好的团队协作能力和沟通能力',
-    ],
-    responsibilities: [
-      '负责公司产品的前端开发工作',
-      '参与产品需求分析和技术方案设计',
-      '持续优化前端性能和用户体验',
-    ],
-  },
-  {
-    title: '产品经理',
-    department: '产品部',
-    requirements: [
-      '3年以上产品经理经验',
-      '优秀的产品思维和市场洞察力',
-      '出色的项目管理能力',
-    ],
-    responsibilities: [
-      '负责产品规划和需求分析',
-      '协调各部门推进产品落地',
-      '持续跟踪和优化产品体验',
-    ],
-  },
+  // {
+  //   title: '软件工程师',
+  //   department: '研发部',
+  //   requirements: [
+  //     '计算机相关专业本科及以上学历',
+  //     '熟练掌握 JavaScript/TypeScript, React 等前端技术',
+  //     '良好的团队协作能力和沟通能力',
+  //   ],
+  //   responsibilities: [
+  //     '负责公司产品的前端开发工作',
+  //     '参与产品需求分析和技术方案设计',
+  //     '持续优化前端性能和用户体验',
+  //   ],
+  // },
+  // {
+  //   title: '产品经理',
+  //   department: '产品部',
+  //   requirements: [
+  //     '3年以上产品经理经验',
+  //     '优秀的产品思维和市场洞察力',
+  //     '出色的项目管理能力',
+  //   ],
+  //   responsibilities: [
+  //     '负责产品规划和需求分析',
+  //     '协调各部门推进产品落地',
+  //     '持续跟踪和优化产品体验',
+  //   ],
+  // },
 ];
 
 const JoinPage: React.FC = () => {
@@ -60,37 +60,41 @@ const JoinPage: React.FC = () => {
           </p>
         </div>
 
-        <div className={styles.section}>
-          <h2>开放职位</h2>
-          <div className={styles.positionList}>
-            {positions.map((position, index) => (
-              <div key={index} className={styles.positionCard}>
-                <h3>{position.title}</h3>
-                <p className={styles.department}>{position.department}</p>
+        {
+          positions.length > 0 && (
+            <div className={styles.section}>
+              <h2>开放职位</h2>
+              <div className={styles.positionList}>
+                {positions.map((position, index) => (
+                  <div key={index} className={styles.positionCard}>
+                    <h3>{position.title}</h3>
+                    <p className={styles.department}>{position.department}</p>
 
-                <div className={styles.details}>
-                  <h4>岗位要求：</h4>
-                  <ul>
-                    {position.requirements.map((req, idx) => (
-                      <li key={idx}>{req}</li>
-                    ))}
-                  </ul>
+                    <div className={styles.details}>
+                      <h4>岗位要求：</h4>
+                      <ul>
+                        {position.requirements.map((req, idx) => (
+                          <li key={idx}>{req}</li>
+                        ))}
+                      </ul>
 
-                  <h4>工作职责：</h4>
-                  <ul>
-                    {position.responsibilities.map((resp, idx) => (
-                      <li key={idx}>{resp}</li>
-                    ))}
-                  </ul>
-                </div>
+                      <h4>工作职责：</h4>
+                      <ul>
+                        {position.responsibilities.map((resp, idx) => (
+                          <li key={idx}>{resp}</li>
+                        ))}
+                      </ul>
+                    </div>
 
-                <button className={styles.applyButton}>
-                  申请职位
-                </button>
+                    <button className={styles.applyButton}>
+                      申请职位
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          )
+        }
 
         <div className={styles.section}>
           <h2>联系我们</h2>
