@@ -142,17 +142,24 @@ const NewsPage = (): JSX.Element => {
                 )}
                 <div className={styles.newsContent}>
                   <div className={styles.newsDate}>
-                    <span className={styles.day}>
-                      {new Date(item.date).getDate().toString().padStart(2, '0')}
-                    </span>
-                    <span className={styles.yearMonth}>
-                      {new Date(item.date).getFullYear()}.
-                      {(new Date(item.date).getMonth() + 1).toString().padStart(2, '0')}
-                    </span>
+                    <div className={styles.dateBox}>
+                      <span className={styles.day}>
+                        {new Date(item.date).getDate().toString().padStart(2, '0')}
+                      </span>
+                      <span className={styles.yearMonth}>
+                        {new Date(item.date).getFullYear()}.
+                        {(new Date(item.date).getMonth() + 1).toString().padStart(2, '0')}
+                      </span>
+                    </div>
                   </div>
                   <div className={styles.newsInfo}>
-                    <h3>{item.title}</h3>
-                    <p>{item.source}</p>
+                    <h2>{item.title}</h2>
+                    {item.source === '本地' && (
+                      <span className={styles.localTag}>
+                        <i className="fas fa-location-dot"></i>
+                        本地
+                      </span>
+                    )}
                   </div>
                 </div>
               </Link>
