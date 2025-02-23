@@ -33,6 +33,7 @@ model Banner {
 
 model Product {
   id          Int      @id @default(autoincrement())
+  order       Int      @default(0)  // 添加序号字段
   title       String
   subtitle    String
   description String   @db.Text

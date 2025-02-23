@@ -34,6 +34,7 @@ const ProductForm = () => {
           subtitle: product.subtitle,
           description: product.description,
           link: product.link,
+          order: product.order,
         });
         setHtml(product.details || '');
         setImageUrl(product.image);
@@ -105,6 +106,7 @@ const ProductForm = () => {
       if (id) {
         await productApi.updateProduct(Number(id), formData);
       } else {
+        formData.order = Number(values.order);
         await productApi.createProduct(formData);
       }
 
@@ -162,6 +164,14 @@ const ProductForm = () => {
         layout="vertical"
         onFinish={onFinish}
       >
+        <Form.Item
+          name="order"
+          label="序号"
+          rules={[{ required: true, message: '请输入序号' }]}
+        >
+          <Input type="number" placeholder="请输入序号" />
+        </Form.Item>
+
         <Form.Item
           name="title"
           label="产品名称"

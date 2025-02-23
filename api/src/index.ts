@@ -330,7 +330,7 @@ router.delete('/api/banners/:id', async (ctx) => {
   }
 });
 
-// 产品接口类型定义
+// 修改产品接口类型定义
 interface ProductRequestBody {
   title: string;
   subtitle: string;
@@ -338,14 +338,16 @@ interface ProductRequestBody {
   details?: string;
   image: string;
   link?: string;
+  order: number;  // 添加序号字段
 }
 
-// 获取产品列表
+// 修改获取产品列表接口，按序号排序
 router.get('/api/products', async (ctx) => {
   const products = await prisma.product.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
+    orderBy: [
+      { order: 'asc' },  // 首先按序号排序
+      { createdAt: 'desc' }  // 其次按创建时间排序
+    ]
   });
   ctx.body = products;
 });
@@ -366,7 +368,7 @@ router.get('/api/products/:id', async (ctx) => {
   ctx.body = product;
 });
 
-// 创建产品
+// 修改创建产品接口
 router.post('/api/products', async (ctx) => {
   const data = ctx.request.body as ProductRequestBody;
 
@@ -378,7 +380,8 @@ router.post('/api/products', async (ctx) => {
         description: data.description,
         details: data.details,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加序号字段
       }
     });
     ctx.body = product;
@@ -388,7 +391,7 @@ router.post('/api/products', async (ctx) => {
   }
 });
 
-// 更新产品
+// 修改更新产品接口
 router.put('/api/products/:id', async (ctx) => {
   const { id } = ctx.params;
   const data = ctx.request.body as ProductRequestBody;
@@ -402,7 +405,8 @@ router.put('/api/products/:id', async (ctx) => {
         description: data.description,
         details: data.details,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加序号字段
       }
     });
     ctx.body = product;

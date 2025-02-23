@@ -22,6 +22,7 @@ export interface BannerData {
 
 export interface ProductData {
   id?: number;
+  order: number;
   title: string;
   subtitle: string;
   description: string;
