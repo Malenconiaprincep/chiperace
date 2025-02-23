@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
-import Slider from 'react-slick';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import styles from './styles.module.css';
 import { bannerApi, getFullUrl, type BannerItem } from '../../services/api';
 
-// 引入 slick 的样式
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// 引入 Swiper 样式
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 export default function MainProduct() {
   const [bannerData, setBannerData] = useState<BannerItem[]>([]);
@@ -35,30 +37,35 @@ export default function MainProduct() {
     fetchBannerData();
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: !isMobileView, // 移动端不显示箭头
-    fade: true
-  };
-
   return (
     <section className={styles.mainProduct}>
-      <Slider {...settings} className={styles.slider}>
+      <Swiper
+        modules={[Autoplay, Pagination, Navigation]}
+        spaceBetween={0}
+        slidesPerView={1}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={!isMobileView}
+        className={styles.slider}
+      >
         {bannerData.map((banner, index) => (
-          <div key={index}>
-            <div className={styles.slide}>
+          <SwiperSlide key={index}>
+            <div
+              className={styles.slide}
+            // style={{
+            //   backgroundImage: 'url(/img/banner.jpg)'
+            // }}
+            >
               <div className={styles.overlay}>
                 <div className={styles.container}>
                   <div className={styles.content}>
                     <h2>{banner.title}</h2>
                     <p className={styles.subtitle}>{banner.subtitle}</p>
-                    {/* 只在非移动端显示描述和按钮 */}
                     {!isMobileView && (
                       <>
                         <p className={styles.description}>{banner.description}</p>
@@ -68,7 +75,6 @@ export default function MainProduct() {
                       </>
                     )}
                   </div>
-                  {/* 只在非移动端显示产品图片 */}
                   {!isMobileView && (
                     <div className={styles.productImage}>
                       <img src={getFullUrl(banner.image)} alt={banner.title} />
@@ -77,9 +83,9 @@ export default function MainProduct() {
                 </div>
               </div>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </section>
   );
 } 
