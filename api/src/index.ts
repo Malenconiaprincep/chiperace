@@ -34,7 +34,7 @@ app.use(mount('/uploads', serve(path.join(__dirname, '../public/uploads'))));
 
 // 获取新闻列表
 router.get('/api/news', async (ctx) => {
-  const { year, month, page = 1, pageSize = 10 } = ctx.query;
+  const { year, month, page = 1, pageSize = 10, isNormal = false } = ctx.query;
 
   try {
     let whereClause: any = {};
@@ -71,7 +71,9 @@ router.get('/api/news', async (ctx) => {
 
     console.log('查询条件:', whereClause); // 添加日志以便调试
 
-    whereClause.isFeature = false
+    if (isNormal) {
+      whereClause.isFeature = false
+    }
 
     const [total, items] = await Promise.all([
       prisma.news.count({ where: whereClause }),

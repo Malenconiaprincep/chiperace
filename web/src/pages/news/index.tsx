@@ -34,6 +34,7 @@ const NewsPage = (): JSX.Element => {
             month: selectedMonth,
             page,
             pageSize,
+            isNormal: true
           }),
           newsApi.getFeatureNews()
         ]);

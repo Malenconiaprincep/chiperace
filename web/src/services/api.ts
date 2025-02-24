@@ -69,6 +69,7 @@ export interface NewsListParams {
   month?: number | null;
   page?: number;
   pageSize?: number;
+  isNormal?: boolean;
 }
 
 export interface NewsListResponse {
