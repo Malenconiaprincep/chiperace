@@ -224,7 +224,7 @@
 
   /* 调整菜单容器样式 */
   .menuContainer {
-    display: block;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
