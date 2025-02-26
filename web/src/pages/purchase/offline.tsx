@@ -61,7 +61,7 @@ export default function OfflinePurchase(): JSX.Element {
       <div className={styles.content}>
         <div className={styles.section}>
           <div className={styles.companyInfo}>
-            <h3>公司联系方式</h3>
+            <h2>公司联系方式</h2>
             <div className={styles.contactGrid}>
               <div className={styles.contactItem}>
                 <strong>公司电话：</strong>
@@ -75,7 +75,7 @@ export default function OfflinePurchase(): JSX.Element {
             <div className={styles.divider}></div>
           </div>
 
-          <h3>填写采购信息</h3>
+          <h2>填写采购信息</h2>
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit}>
               <div className={styles.formGrid}>

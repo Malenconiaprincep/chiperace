@@ -32,7 +32,6 @@
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   margin-bottom: 3rem;
-  text-align: center;
 }
 
 .section h2 {
@@ -40,7 +39,13 @@
   font-size: 28px;
   margin-bottom: 1.5rem;
   position: relative;
+  text-align: center;
+
   /* padding-left: 15px; */
+}
+
+.section p {
+  text-align: justify
 }
 
 /* .section h2::before {

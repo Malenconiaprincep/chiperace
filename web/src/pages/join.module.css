@@ -157,6 +157,10 @@
   text-align: center;
 }
 
+.section p {
+  text-align: justify;
+}
+
 .section h2 {
   color: #8B3DAF;  /* 使用相同的紫色作为标题颜色 */
   font-size: 28px;

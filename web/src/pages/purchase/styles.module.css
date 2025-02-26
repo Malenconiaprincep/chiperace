@@ -15,6 +15,7 @@
   font-size: 28px;
   margin-bottom: 30px;
   text-align: center;
+  color: #8B3DAF;
 }
 
 .section h3 {
@@ -25,6 +26,11 @@
 
 .companyInfo {
   margin-bottom: 2rem;
+}
+
+.companyInfo h2 {
+  color: #8B3DAF;
+  text-align: center
 }
 
 .companyInfo h3 {
