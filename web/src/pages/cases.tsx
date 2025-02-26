@@ -16,7 +16,7 @@ const CasePage = (): JSX.Element => {
 
         <div className={styles.content}>
           <div className={styles.applicationSection}>
-            <h3>应用领域</h3>
+            <h2>应用领域</h2>
             <div className={styles.applications}>
               <div className={styles.applicationItem}>
                 <div className={styles.applicationImages}>
