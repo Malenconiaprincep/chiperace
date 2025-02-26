@@ -30,8 +30,8 @@ const ProductsPage = (): JSX.Element => {
       <div className={styles.productsContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>产品方案</h1>
-            <p>专业的高性能计算解决方案</p>
+            <h1>产品与解决方案</h1>
+            <p>原子级高性能计算解决方案</p>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ const ProductsPage = (): JSX.Element => {
           <section className={styles.section}>
             <div className="container">
               <div className={styles.sectionHeader}>
-                <h2>产品方案</h2>
+                <h2>产品与解决方案</h2>
               </div>
 
               {loading ? (

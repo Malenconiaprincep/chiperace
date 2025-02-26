@@ -4,11 +4,12 @@
 
 .banner {
   /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
-  background-color: #772a8a;
+  /* background-color: #772a8a; */
   color: white;
   padding: 4rem 2rem;
   text-align: center;
   position: relative;
+  background-image: url('/img/banner.jpg');
 }
 
 .banner h1 {
@@ -31,6 +32,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   margin-bottom: 3rem;
+  text-align: center;
 }
 
 .section h2 {
@@ -41,7 +43,7 @@
   padding-left: 15px;
 }
 
-.section h2::before {
+/* .section h2::before {
   content: '';
   position: absolute;
   left: 0;
@@ -51,7 +53,7 @@
   height: 20px;
   background: #1890ff;
   border-radius: 2px;
-}
+} */
 
 .timeline {
   display: flex;

@@ -125,7 +125,7 @@
 
 .banner {
   /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
-  background-color: #772a8a;
+  background-image: url('/img/banner.jpg');
   color: white;
   padding: 4rem 2rem;
   text-align: center;
