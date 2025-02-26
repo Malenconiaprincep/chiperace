@@ -75,7 +75,7 @@ export default function OfflinePurchase(): JSX.Element {
             <div className={styles.divider}></div>
           </div>
 
-          <h2>填写采购信息</h2>
+          <h3>填写采购信息</h3>
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit}>
               <div className={styles.formGrid}>
