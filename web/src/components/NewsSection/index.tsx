@@ -28,7 +28,7 @@ export default function NewsSection() {
     return (
       <section className={styles.newsSection}>
         <div className="container">
-          <h3>公司新闻</h3>
+          <h2>公司新闻</h2>
           <div>加载中...</div>
         </div>
       </section>
@@ -38,7 +38,7 @@ export default function NewsSection() {
   return (
     <section className={styles.newsSection}>
       <div className="container">
-        <h3>公司新闻</h3>
+        <h2>公司新闻</h2>
         <div className={styles.newsGrid}>
           {news.map((item) => (
             <Link

@@ -60,10 +60,17 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  /* max-width: var(--ifm-container-width); */
-  max-width: 1320px;
+  max-width: var(--ifm-container-width);
+  /* max-width: 1320px; */
   margin: 0 auto;
-  padding: 0 var(--ifm-spacing-horizontal);
+  /* padding: 0 var(--ifm-spacing-horizontal); */
+  padding: 0 5px;
+}
+
+@media (min-width: 1440px) {
+    .container {
+      max-width: var(--ifm-container-width-xl);
+    }
 }
 
 .content {

@@ -2,6 +2,11 @@
   padding: 4rem 0;
 }
 
+.newsSection h2 {
+  text-align: center;
+  color: var(--ifm-heading2-color);
+}
+
 .newsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
