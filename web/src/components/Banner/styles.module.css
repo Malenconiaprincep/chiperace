@@ -105,6 +105,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+  transition: all 0.3s ease;
 }
 
 .productImage img {
@@ -113,6 +115,18 @@
   width: auto;
   height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+  border-radius: 20px;
+
+}
+
+.productImage:hover {
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+}
+
+.productImage:hover img {
+  transform: translateY(-2px);
 }
 
 /* 响应式样式 */
@@ -174,6 +188,7 @@
     width: 300px;
     height: 300px;
     margin-top: 1rem;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15));
   }
 
   .slider :global(.slick-prev) {
