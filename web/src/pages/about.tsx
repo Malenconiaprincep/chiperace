@@ -76,7 +76,7 @@ const AboutPage = (): JSX.Element => {
                   <span>长沙</span>
                 </div>
                 <div className={styles.addressDetail}>
-                  <p>湖南省长沙市岳麓区长沙市半导体技术与应用创新研究院2楼</p>
+                  <p>长沙市岳麓区湖大路中建智慧谷E13-1栋2楼</p>
                 </div>
               </div>
             </div>
