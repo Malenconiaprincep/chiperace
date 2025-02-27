@@ -30,7 +30,7 @@ const ProductsPage = (): JSX.Element => {
       <div className={styles.productsContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>产品与解决方案</h1>
+            <h1>产品技术</h1>
             <p>原子级高性能计算解决方案</p>
           </div>
         </div>

@@ -42,7 +42,7 @@ const AboutPage = (): JSX.Element => {
             </div>
           </div> */}
 
-          <div className={styles.section}>
+          {/* <div className={styles.section}>
             <h2>企业文化</h2>
             <div className={styles.cultureGrid}>
               <div className={styles.cultureItem}>
@@ -58,7 +58,7 @@ const AboutPage = (): JSX.Element => {
                 <p>创新、专注、协作、共赢</p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className={styles.section}>
             <h2>公司地址</h2>

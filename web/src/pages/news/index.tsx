@@ -70,7 +70,7 @@ const NewsPage = (): JSX.Element => {
         <div className={styles.newsContainer}>
           <div className={bannerStyles.banner}>
             <div className={bannerStyles.bannerContent}>
-              <h1>新闻中心</h1>
+              <h1>公司新闻</h1>
             </div>
           </div>
           <div className={styles.newsContent}>
@@ -87,7 +87,7 @@ const NewsPage = (): JSX.Element => {
         <div className={styles.newsContainer}>
           <div className={bannerStyles.banner}>
             <div className={bannerStyles.bannerContent}>
-              <h1>新闻中心</h1>
+              <h1>公司新闻</h1>
             </div>
           </div>
           <div className={styles.newsContent}>
@@ -103,7 +103,7 @@ const NewsPage = (): JSX.Element => {
       <div className={styles.newsContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>新闻中心</h1>
+            <h1>公司新闻</h1>
           </div>
         </div>
 

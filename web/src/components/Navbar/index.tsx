@@ -10,7 +10,7 @@ const menuItems = [
     link: '/about'
   },
   {
-    label: '产品中心',
+    label: '产品技术',
     link: '/products',
     subMenu: [
       { label: '产品介绍', link: '/products' },
