@@ -18,7 +18,7 @@ const CasePage = (): JSX.Element => {
           <div className={styles.applicationSection}>
             <h2>应用领域</h2>
             <div className={styles.applications}>
-              <div className={styles.applicationItem}>
+              {/* <div className={styles.applicationItem}>
                 <div className={styles.applicationImages}>
                   <img src="/img/products/app-radiation.jpg" alt="抗辐照示意图" />
                 </div>
@@ -26,7 +26,7 @@ const CasePage = (): JSX.Element => {
                   <h4>抗辐照（Au冲击）</h4>
                   <p>基于分子动力学模拟金离子辐照效应</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className={styles.applicationItem}>
                 <div className={styles.applicationImages}>

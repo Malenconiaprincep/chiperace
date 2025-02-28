@@ -85,9 +85,9 @@ const ProductsPage = (): JSX.Element => {
               <div className={styles.logoItem}>
                 <img src="/img/customers/aist.png" alt="北京量子智能研究院" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/nudt.png" alt="国防科技大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/jilin.png" alt="吉林大学" />
               </div>
