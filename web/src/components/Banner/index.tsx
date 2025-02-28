@@ -62,15 +62,15 @@ export default function MainProduct() {
                   <div className={styles.container}>
                     <div className={styles.content}>
                       <h2>{banner.title}</h2>
-                      <p className={styles.subtitle}>{banner.subtitle}</p>
-                      {!isMobileView && (
+                      {isMobileView && <p className={styles.subtitle}>{banner.subtitle}</p>}
+                      {/* {!isMobileView && (
                         <>
                           <p className={styles.description}>{banner.description}</p>
                           <span className="button button--primary">
                             了解更多
                           </span>
                         </>
-                      )}
+                      )} */}
                     </div>
                     {!isMobileView && (
                       <div className={styles.productImage}>

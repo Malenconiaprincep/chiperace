@@ -61,14 +61,13 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: var(--ifm-container-width);
-  /* max-width: 1320px; */
   margin: 0 auto;
-  /* padding: 0 var(--ifm-spacing-horizontal); */
-  padding: 0 5px;
+  padding: 20px 5px;
 }
 
 @media (min-width: 1440px) {
@@ -78,8 +77,10 @@
 }
 
 .content {
-  max-width: 50%;
-  padding: 2rem 0;
+  max-width: 80%;
+  /* padding: 1rem 0; */
+  text-align: center;
+  margin-top: 3rem;
 }
 
 .content h2 {
@@ -102,8 +103,9 @@
 }
 
 .productImage {
-  width: 600px;
-  height: 300px;
+  width: 800px;
+  height: 350px;
+  margin-top: 1rem;
   position: relative;
   z-index: 1;
   display: flex;
