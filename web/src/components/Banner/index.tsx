@@ -43,6 +43,7 @@ export default function MainProduct() {
         modules={[Autoplay, Pagination, Navigation]}
         spaceBetween={0}
         slidesPerView={1}
+        loop={true}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
