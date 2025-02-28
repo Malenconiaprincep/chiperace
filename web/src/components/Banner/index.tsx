@@ -55,34 +55,31 @@ export default function MainProduct() {
       >
         {bannerData.map((banner, index) => (
           <SwiperSlide key={index}>
-            <div
-              className={styles.slide}
-            // style={{
-            //   backgroundImage: 'url(/img/banner.jpg)'
-            // }}
-            >
-              <div className={styles.overlay}>
-                <div className={styles.container}>
-                  <div className={styles.content}>
-                    <h2>{banner.title}</h2>
-                    <p className={styles.subtitle}>{banner.subtitle}</p>
+            <Link to={banner.link} className={styles.slideLink}>
+              <div className={styles.slide}>
+                <div className={styles.overlay}>
+                  <div className={styles.container}>
+                    <div className={styles.content}>
+                      <h2>{banner.title}</h2>
+                      <p className={styles.subtitle}>{banner.subtitle}</p>
+                      {!isMobileView && (
+                        <>
+                          <p className={styles.description}>{banner.description}</p>
+                          <span className="button button--primary">
+                            了解更多
+                          </span>
+                        </>
+                      )}
+                    </div>
                     {!isMobileView && (
-                      <>
-                        <p className={styles.description}>{banner.description}</p>
-                        <Link className="button button--primary" to={banner.link}>
-                          了解更多
-                        </Link>
-                      </>
+                      <div className={styles.productImage}>
+                        <img src={getFullUrl(banner.image)} alt={banner.title} />
+                      </div>
                     )}
                   </div>
-                  {!isMobileView && (
-                    <div className={styles.productImage}>
-                      <img src={getFullUrl(banner.image)} alt={banner.title} />
-                    </div>
-                  )}
                 </div>
               </div>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

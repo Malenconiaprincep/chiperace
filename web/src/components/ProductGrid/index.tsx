@@ -36,7 +36,11 @@ export default function ProductGrid() {
 
         <div className={styles.productsGrid}>
           {products.map((product) => (
-            <div key={product.id} className={styles.productCard}>
+            <Link
+              key={product.id}
+              to={`/products/detail?id=${product.id}`}
+              className={styles.productCard}
+            >
               <div className={styles.productImageWrapper}>
                 <img
                   src={getFullUrl(product.image)}
@@ -48,15 +52,12 @@ export default function ProductGrid() {
                 <h3 className={styles.productTitle}>{product.title}</h3>
                 <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
                 <p className={styles.productDescription}>{product.description}</p>
-                <Link
-                  className={styles.learnMore}
-                  to={`/products/detail?id=${product.id}`}
-                >
+                {/* <div className={styles.learnMore}>
                   了解更多
                   <span className={styles.arrow}>→</span>
-                </Link>
+                </div> */}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

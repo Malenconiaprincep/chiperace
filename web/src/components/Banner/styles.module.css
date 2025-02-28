@@ -261,4 +261,17 @@
 .slider :global(.swiper-button-prev),
 .slider :global(.swiper-button-next) {
   color: white;
-} 
+}
+
+.slideLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.slideLink:hover {
+  text-decoration: none;
+  color: inherit;
+}

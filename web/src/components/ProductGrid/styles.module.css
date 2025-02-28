@@ -33,11 +33,17 @@
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  text-decoration: none;
+  display: block;
+}
+.productCard:hover {
+  text-decoration: none;
 }
 
 .productCard:hover {
   transform: translateY(-5px);
 }
+
 
 .productImageWrapper {
   width: 100%;
@@ -84,14 +90,12 @@
   display: inline-flex;
   align-items: center;
   color: #0066cc;
-  text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.learnMore:hover {
+.productCard:hover .learnMore {
   color: #004999;
-  text-decoration: none;
 }
 
 .arrow {
