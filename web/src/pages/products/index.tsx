@@ -47,27 +47,29 @@ const ProductsPage = (): JSX.Element => {
               ) : (
                 <div className={styles.productsGrid}>
                   {products.map((product) => (
-                    <div key={product.id} className={styles.productCard}>
-                      <div className={styles.productImageWrapper}>
-                        <img
-                          src={getFullUrl(product.image)}
-                          alt={product.title}
-                          className={styles.productImage}
-                        />
-                      </div>
-                      <div className={styles.productContent}>
-                        <h3 className={styles.productTitle}>{product.title}</h3>
-                        <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
-                        <p className={styles.productDescription}>{product.description}</p>
-                        <Link
+                    <Link key={product.id} to={`/products/detail?id=${product.id}`}>
+                      <div key={product.id} className={styles.productCard}>
+                        <div className={styles.productImageWrapper}>
+                          <img
+                            src={getFullUrl(product.image)}
+                            alt={product.title}
+                            className={styles.productImage}
+                          />
+                        </div>
+                        <div className={styles.productContent}>
+                          <h3 className={styles.productTitle}>{product.title}</h3>
+                          <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
+                          <p className={styles.productDescription}>{product.description}</p>
+                          {/* <Link
                           className={styles.learnMore}
                           to={`/products/detail?id=${product.id}`}
                         >
                           了解更多
                           <span className={styles.arrow}>→</span>
-                        </Link>
+                        </Link> */}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}

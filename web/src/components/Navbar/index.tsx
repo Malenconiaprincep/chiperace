@@ -20,6 +20,7 @@ const menuItems = [
   },
   {
     label: '购买渠道',
+    link: '/purchase',
     subMenu: [
       {
         label: '线下购买',

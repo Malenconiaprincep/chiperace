@@ -1,5 +1,47 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px - 200px); /* 减去导航栏和页脚的高度 */
+  padding: 2rem;
+}
+
 .content {
-  padding: 2rem var(--ifm-spacing-horizontal);
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--ifm-color-primary);
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.button {
+  min-width: 200px;
+  height: 50px;
+  font-size: 1.2rem;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .button {
+    min-width: 180px;
+  }
 }
 
 .section {
@@ -167,5 +209,114 @@
 
   .companyInfo h3 {
     font-size: 1.1rem;
+  }
+}
+
+.purchaseContainer {
+  min-height: calc(100vh - 60px);
+}
+
+.content {
+  padding: 4rem var(--ifm-spacing-horizontal);
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section h2 {
+  font-size: var(--ifm-h2-font-size);
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--ifm-heading2-color);
+}
+
+.description {
+  text-align: center;
+  color: var(--ifm-color-gray-700);
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.purchaseOption {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.purchaseOption:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.purchaseOption h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading2-color);
+}
+
+.purchaseOption p {
+  color: var(--ifm-color-gray-700);
+  margin-bottom: 2rem;
+  min-height: 48px;
+}
+
+.button {
+  min-width: 160px;
+  height: 45px;
+  font-size: 1.1rem;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 996px) {
+  .buttonGroup {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 2rem var(--ifm-spacing-horizontal);
+  }
+
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .section h2 {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .buttonGroup {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .purchaseOption {
+    padding: 1.5rem;
+  }
+
+  .button {
+    min-width: 140px;
+    height: 40px;
+    font-size: 1rem;
   }
 }

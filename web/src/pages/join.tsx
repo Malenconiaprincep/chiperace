@@ -52,7 +52,7 @@ const JoinPage: React.FC = () => {
 
       <div className={styles.content}>
         <div className={styles.section}>
-          <h2>关于我们</h2>
+          <h2>联系我们</h2>
           <p>
             芯培森是一家专注于人工智能芯片和智能计算解决方案的高科技企业。
             在这里，你将有机会参与具有挑战性的项目，与优秀的团队共同成长。

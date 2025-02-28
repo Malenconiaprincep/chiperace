@@ -398,6 +398,10 @@
   margin-top: 2rem;
 }
 
+.productsGrid a {
+  text-decoration: none;
+}
+
 .productCard {
   background: white;
   border-radius: 12px;
