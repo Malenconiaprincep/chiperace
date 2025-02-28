@@ -58,6 +58,10 @@ const JoinPage: React.FC = () => {
             在这里，你将有机会参与具有挑战性的项目，与优秀的团队共同成长。
             我们提供具有竞争力的薪资待遇、灵活的工作时间以及良好的职业发展空间。
           </p>
+          <p>
+            如果您对我们的职位感兴趣，请将简历发送至：
+            <a href="mailto:hr@chipforce.com">hr@chipforce.com</a>
+          </p>
         </div>
 
         {
@@ -96,13 +100,10 @@ const JoinPage: React.FC = () => {
           )
         }
 
-        <div className={styles.section}>
+        {/* <div className={styles.section}>
           <h2>联系我们</h2>
-          <p>
-            如果您对我们的职位感兴趣，请将简历发送至：
-            <a href="mailto:hr@chipforce.com">hr@chipforce.com</a>
-          </p>
-        </div>
+          
+        </div> */}
       </div>
     </Layout>
   );
