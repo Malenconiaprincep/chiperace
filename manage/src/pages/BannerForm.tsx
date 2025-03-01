@@ -126,7 +126,7 @@ const BannerForm = () => {
         <Form.Item
           name="subtitle"
           label="副标题"
-          rules={[{ required: true, message: '请输入副标题' }]}
+          rules={[{ message: '请输入副标题' }]}
         >
           <Input placeholder="请输入副标题" />
         </Form.Item>
@@ -134,7 +134,7 @@ const BannerForm = () => {
         <Form.Item
           name="description"
           label="描述"
-          rules={[{ required: true, message: '请输入描述' }]}
+          rules={[{ message: '请输入描述' }]}
         >
           <Input.TextArea rows={4} placeholder="请输入描述" />
         </Form.Item>
