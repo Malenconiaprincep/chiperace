@@ -23,7 +23,9 @@ export default function Footer() {
       <div className="container">
         <div className={styles.footerContent}>
           <div className={styles.logo}>
-            <img src="/img/logo.png" alt="Chipierce" className={styles.logoImage} />
+            <Link to="/">
+              <img src="/img/logo.png" alt="Chipierce" className={styles.logoImage} />
+            </Link>
           </div>
 
           <div className={styles.links}>
