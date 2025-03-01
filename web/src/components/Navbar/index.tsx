@@ -139,15 +139,15 @@ export default function Navbar() {
                 >
                   <div
                     className={styles.menuItemWrapper}
-                    onClick={() => handleMenuClick(item)}
+                  // onClick={() => handleMenuClick(item)}
                   >
                     <Link
                       to={item.link}
                       className={styles.menuLink}
                       onClick={(e) => {
-                        if (isMobileMenuOpen && item.subMenu) {
-                          e.preventDefault();
-                        }
+                        // if (isMobileMenuOpen && item.subMenu) {
+                        //   e.preventDefault();
+                        // }
                       }}
                     >
                       {item.label}
