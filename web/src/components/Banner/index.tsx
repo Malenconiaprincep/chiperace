@@ -56,14 +56,15 @@ export default function MainProduct() {
       >
         {bannerData.map((banner, index) => (
           <SwiperSlide key={index}>
-            <Link to={banner.link} className={styles.slideLink}>
-              <div className={styles.slide}>
-                <div className={styles.overlay}>
-                  <div className={styles.container}>
-                    <div className={styles.content}>
-                      <h2>{banner.title}</h2>
-                      {isMobileView && <p className={styles.subtitle}>{banner.subtitle}</p>}
-                      {/* {!isMobileView && (
+            <div className={styles.slide}>
+              <div className={styles.overlay}>
+                <div className={styles.container}>
+                  <Link to={banner.link} className={styles.slideLink}>
+                    <div className={styles.contentContainer}>
+                      <div className={styles.content}>
+                        <h2>{banner.title}</h2>
+                        {isMobileView && <p className={styles.subtitle}>{banner.subtitle}</p>}
+                        {/* {!isMobileView && (
                         <>
                           <p className={styles.description}>{banner.description}</p>
                           <span className="button button--primary">
@@ -71,16 +72,17 @@ export default function MainProduct() {
                           </span>
                         </>
                       )} */}
-                    </div>
-                    {!isMobileView && (
-                      <div className={styles.productImage}>
-                        <img src={getFullUrl(banner.image)} alt={banner.title} />
                       </div>
-                    )}
-                  </div>
+                      {!isMobileView && (
+                        <div className={styles.productImage}>
+                          <img src={getFullUrl(banner.image)} alt={banner.title} />
+                        </div>
+                      )}
+                    </div>
+                  </Link>
                 </div>
               </div>
-            </Link>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
