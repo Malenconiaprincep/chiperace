@@ -18,6 +18,7 @@ export interface BannerData {
   description: string;
   image: string;
   link: string;
+  order: number;
 }
 
 export interface ProductData {
