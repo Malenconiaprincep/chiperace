@@ -1,4 +1,4 @@
-import { Form, Input, Button, Card, message, Upload } from 'antd';
+import { Form, Input, Button, Card, message, Upload, InputNumber } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useState, useEffect } from 'react';
@@ -29,6 +29,7 @@ const BannerForm = () => {
           subtitle: banner.subtitle,
           description: banner.description,
           link: banner.link,
+          order: banner.order,
         });
         setImageUrl(banner.image);
       } catch (error) {
@@ -115,6 +116,14 @@ const BannerForm = () => {
         layout="vertical"
         onFinish={onFinish}
       >
+        <Form.Item
+          name="order"
+          label="序号"
+          rules={[{ required: true, message: '请输入序号' }]}
+        >
+          <InputNumber placeholder="请输入序号" style={{ width: '100%' }} />
+        </Form.Item>
+
         <Form.Item
           name="title"
           label="标题"

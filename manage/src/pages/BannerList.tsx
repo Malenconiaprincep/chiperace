@@ -54,6 +54,11 @@ const BannerList = () => {
 
   const columns = [
     {
+      title: '序号',
+      dataIndex: 'order',
+      sorter: (a: BannerData, b: BannerData) => (a.order || 0) - (b.order || 0),
+    },
+    {
       title: '标题',
       dataIndex: 'title',
     },

@@ -260,21 +260,23 @@ router.post('/api/upload', async (ctx) => {
   }
 });
 
-// Banner 接口类型定义
+// 更新 Banner 接口类型定义
 interface BannerRequestBody {
   title: string;
   subtitle: string;
   description: string;
   image: string;
   link: string;
+  order: number;  // 添加order字段
 }
 
-// 获取 Banner 列表
+// 修改获取 Banner 列表接口，按order排序
 router.get('/api/banners', async (ctx) => {
   const banners = await prisma.banner.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
+    orderBy: [
+      { order: 'asc' },  // 首先按order排序
+      { createdAt: 'desc' }  // 其次按创建时间排序
+    ]
   });
   ctx.body = banners;
 });
@@ -295,7 +297,7 @@ router.get('/api/banners/:id', async (ctx) => {
   ctx.body = banner;
 });
 
-// 创建 Banner
+// 修改创建 Banner 接口
 router.post('/api/banners', async (ctx) => {
   const data = ctx.request.body as BannerRequestBody;
 
@@ -306,7 +308,8 @@ router.post('/api/banners', async (ctx) => {
         subtitle: data.subtitle,
         description: data.description,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加order字段
       }
     });
     ctx.body = banner;
@@ -316,7 +319,7 @@ router.post('/api/banners', async (ctx) => {
   }
 });
 
-// 更新 Banner
+// 修改更新 Banner 接口
 router.put('/api/banners/:id', async (ctx) => {
   const { id } = ctx.params;
   const data = ctx.request.body as BannerRequestBody;
@@ -329,7 +332,8 @@ router.put('/api/banners/:id', async (ctx) => {
         subtitle: data.subtitle,
         description: data.description,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加order字段
       }
     });
     ctx.body = banner;
