@@ -32,10 +32,19 @@
   margin-bottom: 20px;
 }
 
+
+
 .content {
-  max-width: 1200px;
+  max-width: var(--ifm-container-width);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 0 var(--ifm-spacing-horizontal);
+  width: 100%
+}
+
+@media (min-width: 1440px) {
+  .content {
+    max-width: var(--ifm-container-width-xl);
+  }
 }
 
 .productDisplay {
