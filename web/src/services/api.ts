@@ -95,6 +95,16 @@ export interface CustomDoc {
   updatedAt: string;
 }
 
+export interface ApplicationItem {
+  id: number;
+  order: number;
+  title: string;
+  description: string;
+  image: string;
+  link?: string;
+  details?: string;
+}
+
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';
 const API_BASE_URL = location.host.indexOf('localhost') !== -1
   ? 'http://localhost:4000/api'  // 开发环境
@@ -172,6 +182,14 @@ export const customDocApi = {
     const docs = response.data;
     return docs.find(doc => doc.type === type);
   }
+};
+
+export const applicationApi = {
+  // 获取应用领域列表
+  getApplicationList: () => api.get<ApplicationItem[]>('/applications').then(res => res.data),
+
+  // 获取单个应用领域
+  getApplicationById: (id: number) => api.get<ApplicationItem>(`/applications/${id}`).then(res => res.data),
 };
 
 export const getFullUrl = (path: string) => {

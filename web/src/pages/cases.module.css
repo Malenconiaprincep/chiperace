@@ -96,4 +96,12 @@
 .applicationContent p {
   margin: 0;
   color: #666;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
 } 
