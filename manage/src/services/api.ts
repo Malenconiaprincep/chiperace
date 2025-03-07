@@ -51,6 +51,18 @@ export interface CustomDocData {
   updatedAt?: Date;
 }
 
+// 添加 ApplicationData 接口
+export interface ApplicationData {
+  id?: number;
+  order: number;
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  details?: string;
+  subtitle?: string;
+}
+
 // 添加基础URL配置
 const isDev = process.env.NODE_ENV === 'development';
 const BASE_URL = isDev ? 'http://localhost:4000' : '';
@@ -155,6 +167,24 @@ export const customDocApi = {
   createDoc: (data: Partial<CustomDocData>) => api.post<CustomDocData>('/custom-docs', data),
   updateDoc: (id: number, data: Partial<CustomDocData>) => api.put<CustomDocData>(`/custom-docs/${id}`, data),
   deleteDoc: (id: number) => api.delete(`/custom-docs/${id}`),
+};
+
+// 添加应用领域 API
+export const applicationApi = {
+  // 获取应用领域列表
+  getApplicationList: () => api.get<ApplicationData[]>('/applications'),
+
+  // 获取单个应用领域
+  getApplicationById: (id: number) => api.get<ApplicationData>(`/applications/${id}`),
+
+  // 创建应用领域
+  createApplication: (data: ApplicationData) => api.post<ApplicationData>('/applications', data),
+
+  // 更新应用领域
+  updateApplication: (id: number, data: ApplicationData) => api.put<ApplicationData>(`/applications/${id}`, data),
+
+  // 删除应用领域
+  deleteApplication: (id: number) => api.delete(`/applications/${id}`),
 };
 
 export default api; 

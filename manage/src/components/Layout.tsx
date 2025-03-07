@@ -1,6 +1,6 @@
 import { Layout, Menu } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { DashboardOutlined, FileTextOutlined, PictureOutlined, ShoppingOutlined, FormOutlined, BookOutlined } from '@ant-design/icons';
+import { DashboardOutlined, FileTextOutlined, PictureOutlined, ShoppingOutlined, FormOutlined, BookOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
 
@@ -37,6 +37,11 @@ const MainLayout = () => {
       key: 'custom-docs',
       icon: <BookOutlined />,
       label: '自定义文档',
+    },
+    {
+      key: 'applications',
+      icon: <AppstoreOutlined />,
+      label: '应用领域管理',
     },
   ];
 

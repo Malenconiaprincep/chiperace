@@ -65,7 +65,7 @@ export default function OfflinePurchase(): JSX.Element {
             <div className={styles.contactGrid}>
               <div className={styles.contactItem}>
                 <strong>公司电话：</strong>
-                <a href="tel:400-123-4567">400-123-4567</a>
+                <a href="tel:18620129969">18620129969</a>
               </div>
               <div className={styles.contactItem}>
                 <strong>公司邮箱：</strong>
