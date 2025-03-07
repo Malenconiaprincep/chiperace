@@ -49,7 +49,7 @@ const ApplicationForm = () => {
   }, [id, form]);
 
   const editorConfig: Partial<IEditorConfig> = {
-    placeholder: '请输入应用领域详情...',
+    placeholder: '请输入应用领域详情（可选）...',
     MENU_CONF: {
       uploadImage: {
         customUpload(file: File, insertFn: any) {
@@ -89,31 +89,24 @@ const ApplicationForm = () => {
       return;
     }
 
-    if (!html || html.trim() === '<p><br></p>') {
-      message.error('请输入应用领域详情');
-      return;
-    }
-
     try {
       setLoading(true);
-      const formData = {
+      const data = {
         ...values,
         image: imageUrl,
-        details: html,
+        details: html
       };
 
       if (id) {
-        formData.order = Number(values.order);
-        await applicationApi.updateApplication(Number(id), formData);
+        await applicationApi.updateApplication(Number(id), data);
+        message.success('更新成功');
       } else {
-        formData.order = Number(values.order);
-        await applicationApi.createApplication(formData);
+        await applicationApi.createApplication(data);
+        message.success('创建成功');
       }
-
-      message.success('保存成功');
       navigate('/applications');
     } catch (error) {
-      console.error('保存应用领域失败:', error);
+      console.error('保存失败:', error);
       message.error('保存失败');
     } finally {
       setLoading(false);
@@ -132,37 +125,31 @@ const ApplicationForm = () => {
     return isImage && isLt5M;
   };
 
-  const handleChange = async (info: UploadChangeParam<UploadFile>) => {
+  const handleChange = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === 'uploading') {
       setUploading(true);
       return;
     }
-
     if (info.file.status === 'done') {
-      try {
-        const response = await uploadApi.uploadFile(info.file.originFileObj as File);
-        setImageUrl(response.data.url);
-      } catch (error) {
-        message.error('上传图片失败');
-      } finally {
-        setUploading(false);
-      }
+      setUploading(false);
+      setImageUrl(info.file.response.url);
     }
   };
 
   const uploadButton = (
     <div>
       {uploading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>上传图片</div>
+      <div style={{ marginTop: 8 }}>上传</div>
     </div>
   );
 
   return (
-    <Card title={id ? "编辑应用领域" : "新建应用领域"} style={{ maxWidth: 1000, margin: '0 auto' }}>
+    <Card title={id ? '编辑应用领域' : '新建应用领域'}>
       <Form
         form={form}
         layout="vertical"
         onFinish={onFinish}
+        initialValues={{ order: 0 }}
       >
         <Form.Item
           name="order"
@@ -230,18 +217,7 @@ const ApplicationForm = () => {
         </Form.Item>
 
         <Form.Item
-          label="应用领域详情"
-          required
-          rules={[{
-            required: true,
-            message: '请输入应用领域详情',
-            validator: (_) => {
-              if (html && html.trim() !== '<p><br></p>') {
-                return Promise.resolve();
-              }
-              return Promise.reject('请输入应用领域详情');
-            }
-          }]}
+          label="应用领域详情（可选）"
         >
           <div style={{ border: '1px solid #d9d9d9', borderRadius: '2px' }}>
             <Toolbar

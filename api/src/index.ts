@@ -715,7 +715,127 @@ router.delete('/api/custom-docs/:id', async (ctx) => {
   }
 });
 
+// 应用领域接口
 
+// 获取应用领域列表
+router.get('/api/applications', async (ctx) => {
+  try {
+    const applications = await prisma.application.findMany({
+      orderBy: {
+        order: 'asc'
+      }
+    });
+    ctx.body = applications;
+  } catch (error) {
+    console.error('获取应用领域列表失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取应用领域列表失败' };
+  }
+});
+
+// 获取单个应用领域
+router.get('/api/applications/:id', async (ctx) => {
+  const { id } = ctx.params;
+  try {
+    const application = await prisma.application.findUnique({
+      where: { id: Number(id) }
+    });
+
+    if (!application) {
+      ctx.status = 404;
+      ctx.body = { error: '应用领域不存在' };
+      return;
+    }
+
+    ctx.body = application;
+  } catch (error) {
+    console.error('获取应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取应用领域失败' };
+  }
+});
+
+// 创建应用领域
+router.post('/api/applications', async (ctx) => {
+  const data = ctx.request.body;
+
+  try {
+    // 验证必填字段
+    if (!data.title || !data.description || !data.image) {
+      ctx.status = 400;
+      ctx.body = { error: '标题、描述和图片为必填项' };
+      return;
+    }
+
+    const application = await prisma.application.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        image: data.image,
+        link: data.link || null,
+        details: data.details || null,
+        order: data.order || 0
+      }
+    });
+
+    ctx.status = 201;
+    ctx.body = application;
+  } catch (error) {
+    console.error('创建应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '创建应用领域失败' };
+  }
+});
+
+// 更新应用领域
+router.put('/api/applications/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const data = ctx.request.body;
+
+  try {
+    // 验证必填字段
+    if (!data.title || !data.description || !data.image) {
+      ctx.status = 400;
+      ctx.body = { error: '标题、描述和图片为必填项' };
+      return;
+    }
+
+    const application = await prisma.application.update({
+      where: { id: Number(id) },
+      data: {
+        title: data.title,
+        description: data.description,
+        image: data.image,
+        link: data.link || null,
+        details: data.details || null,
+        order: data.order
+      }
+    });
+
+    ctx.body = application;
+  } catch (error) {
+    console.error('更新应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '更新应用领域失败' };
+  }
+});
+
+// 删除应用领域
+router.delete('/api/applications/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.application.delete({
+      where: { id: Number(id) }
+    });
+    ctx.status = 204;
+    ctx.body = { success: true };
+  } catch (error) {
+    console.error('删除应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '删除应用领域失败' };
+  }
+});
 
 app.use(router.routes()).use(router.allowedMethods());
 
