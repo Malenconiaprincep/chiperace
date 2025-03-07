@@ -39,44 +39,45 @@ const ApplicationDetailPage = (): JSX.Element => {
       <div className={styles.applicationContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>{application?.title || '应用领域详情'}</h1>
+            <h1>应用案例</h1>
+            <p>高性能计算的实际应用场景</p>
           </div>
         </div>
 
         <div className={styles.content}>
-          {application ? (
-            <div className={styles.applicationDisplay}>
-              <div className={styles.applicationMainImage}>
-                <img 
-                  src={getFullUrl(application.image)} 
-                  alt={application.title} 
-                />
-              </div>
-
-              <div className={styles.applicationInfo}>
-                <h2>{application.title}</h2>
-                <p className={styles.applicationDescription}>{application.description}</p>
-                
-                {application.details && (
-                  <div
-                    className={styles.applicationContent}
-                    dangerouslySetInnerHTML={{ __html: application.details }}
-                  />
-                )}
-
-                {application.link && (
-                  <div className={styles.applicationLink}>
-                    <h3>相关链接</h3>
-                    <a href={application.link} target="_blank" rel="noopener noreferrer">
-                      {application.link}
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
+          {loading ? (
+            <div className={styles.loading}>加载中...</div>
+          ) : !application ? (
+            <div className={styles.notFound}>应用领域不存在</div>
           ) : (
-            <div className={styles.noApplication}>
-              {loading ? <p>加载应用领域信息中...</p> : <p>应用领域不存在</p>}
+            <div className={styles.applicationDetail}>
+              <h1 className={styles.applicationTitle}>{application.title}</h1>
+
+              {/* {application.image && (
+                <div className={styles.applicationDetailImage}>
+                  <img src={getFullUrl(application.image)} alt={application.title} />
+                </div>
+              )} */}
+
+              <div className={styles.applicationDescription}>
+                <p>{application.description}</p>
+              </div>
+
+              {application.details && (
+                <div
+                  className={styles.applicationDetailContent}
+                  dangerouslySetInnerHTML={{ __html: application.details }}
+                />
+              )}
+
+              {/* {application.link && (
+                <div className={styles.applicationLink}>
+                  <h3>相关链接</h3>
+                  <a href={application.link} target="_blank" rel="noopener noreferrer">
+                    {application.link}
+                  </a>
+                </div>
+              )} */}
             </div>
           )}
         </div>
