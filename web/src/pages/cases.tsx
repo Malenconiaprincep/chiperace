@@ -4,6 +4,7 @@ import styles from './cases.module.css';
 import bannerStyles from '../styles/banner.module.css';
 import { applicationApi, getFullUrl, type ApplicationItem } from '../services/api';
 import { Spin } from 'antd';
+import { Link } from 'react-router-dom';
 
 const CasePage = (): JSX.Element => {
   const [applications, setApplications] = useState<ApplicationItem[]>([]);
@@ -46,13 +47,15 @@ const CasePage = (): JSX.Element => {
               <div className={styles.applications}>
                 {applications.map((app) => (
                   <div key={app.id} className={styles.applicationItem}>
-                    <div className={styles.applicationImages}>
-                      <img src={getFullUrl(app.image)} alt={app.title} />
-                    </div>
-                    <div className={styles.applicationContent}>
-                      <h4>{app.title}</h4>
-                      <p>{app.description}</p>
-                    </div>
+                    <a href={`/cases/detail?id=${app.id}`} className={styles.applicationLink}>
+                      <div className={styles.applicationImages}>
+                        <img src={getFullUrl(app.image)} alt={app.title} />
+                      </div>
+                      <div className={styles.applicationContent}>
+                        <h4>{app.title}</h4>
+                        <p>{app.description}</p>
+                      </div>
+                    </a>
                   </div>
                 ))}
               </div>
