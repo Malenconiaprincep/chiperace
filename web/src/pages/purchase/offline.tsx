@@ -69,7 +69,7 @@ export default function OfflinePurchase(): JSX.Element {
               </div>
               <div className={styles.contactItem}>
                 <strong>公司邮箱：</strong>
-                <a href="mailto:****@chipierce.com">****@chipierce.com</a>
+                <a href="mailto:sales@chipierce.com">sales@chipierce.com</a>
               </div>
             </div>
             <div className={styles.divider}></div>

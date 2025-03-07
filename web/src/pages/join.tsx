@@ -60,7 +60,7 @@ const JoinPage: React.FC = () => {
           </p>
           <p>
             如果您对我们的职位感兴趣，请将简历发送至：
-            <a href="mailto:hr@chipforce.com">hr@chipforce.com</a>
+            <a href="mailto:hr@chipierce.com">hr@chipierce.com</a>
           </p>
         </div>
 
