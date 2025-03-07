@@ -117,4 +117,33 @@
   text-decoration: none;
   color: inherit;
   height: 100%;
-} 
+}
+
+.applicationLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 添加可点击的应用项样式 */
+.hasDetails {
+  cursor: pointer;
+  position: relative;
+}
+
+.hasDetails:after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.hasDetails:hover:after {
+  opacity: 1;
+}
+
+/* 外部链接样式 */
