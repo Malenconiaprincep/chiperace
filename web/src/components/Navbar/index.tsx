@@ -114,10 +114,13 @@ export default function Navbar() {
       <div className="container">
         <div className={styles.navContent}>
           <div className={styles.leftSection}>
-            <Link to="/" className={styles.logo}>
-              <img src="/img/logo.png" alt="Logo" />
+            <Link to="/" className={`${styles.logo} ${isMobileMenuOpen ? styles.mobileLogoActive : ''}`}>
+              {isMobileView ? (
+                <img src="/img/logo.png" alt="Mobile Logo" className={`${styles.mobileLogo}`} />
+              ) : (
+                <img src="/img/logo.png" alt="Logo" />
+              )}
             </Link>
-
 
             {isMobileView && (
               <button

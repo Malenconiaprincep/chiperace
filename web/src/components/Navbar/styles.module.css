@@ -38,6 +38,15 @@
   transition: filter 0.3s ease;
 }
 
+.logo.mobileLogoActive {
+  position: relative;
+  z-index: 1001;
+}
+
+.logo.mobileLogoActive img {
+  filter: none;
+}
+
 .sticky .logo img {
   filter: none;
 }
@@ -192,8 +201,23 @@
   }
 
   .leftSection {
-    flex: 1;
-    justify-content: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .logo {
+    display: block;
+    margin-right: auto;
+  }
+  
+  .logo img {
+    height: 30px; /* 调整移动端logo大小 */
+  }
+  
+  .hamburger {
+    margin-left: auto;
   }
 
   /* 隐藏移动端的社交链接 */
