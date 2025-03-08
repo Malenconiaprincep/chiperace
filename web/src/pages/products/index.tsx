@@ -149,6 +149,9 @@ const ProductsPage = (): JSX.Element => {
                 <img src="/img/customers/huazhong.png" alt="华中科技大学" />
               </div>
               <div className={styles.logoItem}>
+                <img src="/img/customers/zsdx.png" alt="中山大学" />
+              </div>
+              <div className={styles.logoItem}>
                 <img src="/img/customers/hunan.png" alt="湖南大学" />
               </div>
             </div>
