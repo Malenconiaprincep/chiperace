@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import Link from '@docusaurus/Link';
-import Slider from 'react-slick';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import styles from './styles.module.css';
 import { bannerApi, getFullUrl, type BannerItem } from '../../services/api';
 
-// 引入 slick 的样式
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// 引入 Swiper 样式
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 export default function MainProduct() {
   const [bannerData, setBannerData] = useState<BannerItem[]>([]);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchBannerData = async () => {
@@ -24,43 +37,55 @@ export default function MainProduct() {
     fetchBannerData();
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: true,
-    fade: true
-  };
-
   return (
     <section className={styles.mainProduct}>
-      <Slider {...settings} className={styles.slider}>
+      <Swiper
+        modules={[Autoplay, Pagination, Navigation]}
+        spaceBetween={0}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={!isMobileView}
+        className={styles.slider}
+      >
         {bannerData.map((banner, index) => (
-          <div key={index}>
-            <div
-              className={styles.slide}
-              style={{ backgroundImage: `url(${getFullUrl(banner.image)})` }}
-            >
+          <SwiperSlide key={index}>
+            <div className={styles.slide}>
               <div className={styles.overlay}>
-                <div className="container">
-                  <div className={styles.content}>
-                    <h2>{banner.title}</h2>
-                    <p className={styles.subtitle}>{banner.subtitle}</p>
-                    <p className={styles.description}>{banner.description}</p>
-                    <Link className="button button--primary" to={banner.link}>
-                      了解更多
-                    </Link>
-                  </div>
+                <div className={styles.container}>
+                  <Link to={banner.link} className={styles.slideLink}>
+                    <div className={styles.contentContainer}>
+                      <div className={styles.content}>
+                        <h2>{banner.title}</h2>
+                        {isMobileView && <p className={styles.subtitle}>{banner.subtitle}</p>}
+                        {/* {!isMobileView && (
+                        <>
+                          <p className={styles.description}>{banner.description}</p>
+                          <span className="button button--primary">
+                            了解更多
+                          </span>
+                        </>
+                      )} */}
+                      </div>
+                      {!isMobileView && (
+                        <div className={styles.productImage}>
+                          <img src={getFullUrl(banner.image)} alt={banner.title} />
+                        </div>
+                      )}
+                    </div>
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </section>
   );
 } 

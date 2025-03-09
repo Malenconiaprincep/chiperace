@@ -12,6 +12,10 @@ import BannerForm from './pages/BannerForm';
 import ProductList from './pages/ProductList';
 import ProductForm from './pages/ProductForm';
 import PurchaseList from './pages/PurchaseList';
+import CustomDocList from './pages/CustomDocList';
+import CustomDocForm from './pages/CustomDocForm';
+import ApplicationList from './pages/ApplicationList';
+import ApplicationForm from './pages/ApplicationForm';
 
 function App() {
   return (
@@ -32,6 +36,12 @@ function App() {
             <Route path="products/new" element={<ProductForm />} />
             <Route path="products/edit/:id" element={<ProductForm />} />
             <Route path="purchases" element={<PurchaseList />} />
+            <Route path="custom-docs" element={<CustomDocList />} />
+            <Route path="custom-docs/new" element={<CustomDocForm />} />
+            <Route path="custom-docs/edit/:id" element={<CustomDocForm />} />
+            <Route path="applications" element={<ApplicationList />} />
+            <Route path="applications/new" element={<ApplicationForm />} />
+            <Route path="applications/edit/:id" element={<ApplicationForm />} />
           </Route>
         </Routes>
       </Router>

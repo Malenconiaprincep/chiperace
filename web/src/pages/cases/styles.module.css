@@ -1,0 +1,192 @@
+.applicationContainer {
+  width: 100%;
+}
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 0;
+  font-size: 1.2rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.notFound {
+  text-align: center;
+  padding: 60px 0;
+  font-size: 1.2rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.applicationDetail {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.applicationTitle {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--ifm-heading2-color);
+  text-align: center;
+}
+
+.applicationDetailImage {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.applicationDetailImage img {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+}
+
+.applicationDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.applicationDetailContent {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.applicationDetailContent img {
+  max-width: 100%;
+  height: auto;
+  margin: 16px 0;
+  border-radius: 4px;
+}
+
+.applicationDetailContent h1,
+.applicationDetailContent h2,
+.applicationDetailContent h3,
+.applicationDetailContent h4,
+.applicationDetailContent h5,
+.applicationDetailContent h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  color: var(--ifm-heading2-color);
+}
+
+.applicationDetailContent p {
+  margin-bottom: 16px;
+}
+
+.applicationDetailContent ul,
+.applicationDetailContent ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+.applicationDetailContent li {
+  margin-bottom: 8px;
+}
+
+.applicationLink {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.applicationLink h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: var(--ifm-color-primary-dark);
+}
+
+.applicationLink a {
+  color: var(--ifm-color-primary);
+  word-break: break-all;
+  text-decoration: none;
+}
+
+.applicationLink a:hover {
+  text-decoration: none;
+}
+
+.applicationDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .applicationDisplay {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .applicationMainImage {
+    flex: 0 0 40%;
+  }
+  
+  .applicationInfo {
+    flex: 1;
+  }
+}
+
+.applicationMainImage {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.applicationMainImage img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.applicationInfo h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--ifm-color-primary);
+}
+
+.applicationContent {
+  margin-bottom: 30px;
+}
+
+.applicationContent h1,
+.applicationContent h2,
+.applicationContent h3,
+.applicationContent h4,
+.applicationContent h5,
+.applicationContent h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  color: var(--ifm-color-primary-dark);
+}
+
+.applicationContent p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.applicationContent ul,
+.applicationContent ol {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+.applicationContent li {
+  margin-bottom: 8px;
+}
+
+.noApplication {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 1.2rem;
+} 

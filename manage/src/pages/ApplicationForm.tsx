@@ -1,15 +1,15 @@
-import { Form, Input, Button, Card, message, Upload } from 'antd';
+import { Form, Input, Button, Card, message, Upload, InputNumber } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
 import { IDomEditor, IEditorConfig } from '@wangeditor/editor';
 import { useState, useEffect } from 'react';
-import { productApi, uploadApi, getFullUrl } from '../services/api';
+import { applicationApi, uploadApi, getFullUrl } from '../services/api';
 import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 
-const ProductForm = () => {
+const ApplicationForm = () => {
   const { id } = useParams<{ id: string }>();
   const [form] = Form.useForm();
   const navigate = useNavigate();
@@ -21,36 +21,35 @@ const ProductForm = () => {
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchApplication = async () => {
       if (!id) return;
 
       try {
         setInitialLoading(true);
-        const response = await productApi.getProductById(Number(id));
-        const product = response.data;
+        const response = await applicationApi.getApplicationById(Number(id));
+        const application = response.data;
 
         form.setFieldsValue({
-          title: product.title,
-          subtitle: product.subtitle,
-          description: product.description,
-          link: product.link,
-          order: product.order,
+          title: application.title,
+          description: application.description,
+          link: application.link,
+          order: application.order,
         });
-        setHtml(product.details || '');
-        setImageUrl(product.image);
+        setHtml(application.details || '');
+        setImageUrl(application.image);
       } catch (error) {
-        console.error('获取产品失败:', error);
-        message.error('获取产品失败');
+        console.error('获取应用领域失败:', error);
+        message.error('获取应用领域失败');
       } finally {
         setInitialLoading(false);
       }
     };
 
-    fetchProduct();
+    fetchApplication();
   }, [id, form]);
 
   const editorConfig: Partial<IEditorConfig> = {
-    placeholder: '请输入产品详情...',
+    placeholder: '请输入应用领域详情（可选）...',
     MENU_CONF: {
       uploadImage: {
         customUpload(file: File, insertFn: any) {
@@ -86,35 +85,28 @@ const ProductForm = () => {
 
   const onFinish = async (values: any) => {
     if (!imageUrl) {
-      message.error('请上传产品图片');
-      return;
-    }
-
-    if (!html || html.trim() === '<p><br></p>') {
-      message.error('请输入产品详情');
+      message.error('请上传应用领域图片');
       return;
     }
 
     try {
       setLoading(true);
-      const formData = {
+      const data = {
         ...values,
         image: imageUrl,
-        details: html,
+        details: html
       };
 
       if (id) {
-        formData.order = Number(values.order);
-        await productApi.updateProduct(Number(id), formData);
+        await applicationApi.updateApplication(Number(id), data);
+        message.success('更新成功');
       } else {
-        formData.order = Number(values.order);
-        await productApi.createProduct(formData);
+        await applicationApi.createApplication(data);
+        message.success('创建成功');
       }
-
-      message.success('保存成功');
-      navigate('/products');
+      navigate('/applications');
     } catch (error) {
-      console.error('保存产品失败:', error);
+      console.error('保存失败:', error);
       message.error('保存失败');
     } finally {
       setLoading(false);
@@ -133,80 +125,66 @@ const ProductForm = () => {
     return isImage && isLt5M;
   };
 
-  const handleChange = async (info: UploadChangeParam<UploadFile>) => {
+  const handleChange = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === 'uploading') {
       setUploading(true);
       return;
     }
-
     if (info.file.status === 'done') {
-      try {
-        const response = await uploadApi.uploadFile(info.file.originFileObj as File);
-        setImageUrl(response.data.url);
-      } catch (error) {
-        message.error('上传图片失败');
-      } finally {
-        setUploading(false);
-      }
+      setUploading(false);
+      setImageUrl(info.file.response.url);
     }
   };
 
   const uploadButton = (
     <div>
       {uploading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>上传图片</div>
+      <div style={{ marginTop: 8 }}>上传</div>
     </div>
   );
 
   return (
-    <Card title={id ? "编辑产品" : "新建产品"} style={{ maxWidth: 1000, margin: '0 auto' }}>
+    <Card title={id ? '编辑应用领域' : '新建应用领域'}>
       <Form
         form={form}
         layout="vertical"
         onFinish={onFinish}
+        initialValues={{ order: 0 }}
       >
         <Form.Item
           name="order"
           label="序号"
           rules={[{ required: true, message: '请输入序号' }]}
         >
-          <Input type="number" placeholder="请输入序号" />
+          <InputNumber placeholder="请输入序号" style={{ width: '100%' }} />
         </Form.Item>
 
         <Form.Item
           name="title"
-          label="产品名称"
-          rules={[{ required: true, message: '请输入产品名称' }]}
+          label="应用领域名称"
+          rules={[{ required: true, message: '请输入应用领域名称' }]}
         >
-          <Input placeholder="请输入产品名称" />
-        </Form.Item>
-
-        <Form.Item
-          name="subtitle"
-          label="副标题"
-          rules={[{ required: true, message: '请输入副标题' }]}
-        >
-          <Input placeholder="请输入副标题" />
+          <Input placeholder="请输入应用领域名称" />
         </Form.Item>
 
         <Form.Item
           name="description"
-          label="产品描述"
-          rules={[{ required: true, message: '请输入产品描述' }]}
+          label="应用领域描述"
+          rules={[{ required: true, message: '请输入应用领域描述' }]}
         >
-          <Input.TextArea rows={4} placeholder="请输入产品描述" />
+          <Input.TextArea rows={4} placeholder="请输入应用领域描述" />
         </Form.Item>
 
         <Form.Item
           name="link"
-          label="产品链接"
-          rules={[{ message: '请输入产品链接' }]}
+          label="应用领域链接"
+          rules={[{ message: '请输入应用领域链接' }]}
         >
-          <Input placeholder="请输入产品链接" />
+          <Input placeholder="请输入应用领域链接" />
         </Form.Item>
 
         <Form.Item
-          label="产品图片"
+          label="应用领域图片"
           required
           extra="支持jpg、png格式，大小不超过5MB"
         >
@@ -229,7 +207,7 @@ const ProductForm = () => {
             {imageUrl ? (
               <img
                 src={getFullUrl(imageUrl)}
-                alt="产品图片"
+                alt="应用领域图片"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             ) : (
@@ -239,18 +217,7 @@ const ProductForm = () => {
         </Form.Item>
 
         <Form.Item
-          label="产品详情"
-          required
-          rules={[{
-            required: true,
-            message: '请输入产品详情',
-            validator: (_) => {
-              if (html && html.trim() !== '<p><br></p>') {
-                return Promise.resolve();
-              }
-              return Promise.reject('请输入产品详情');
-            }
-          }]}
+          label="应用领域详情（可选）"
         >
           <div style={{ border: '1px solid #d9d9d9', borderRadius: '2px' }}>
             <Toolbar
@@ -279,7 +246,7 @@ const ProductForm = () => {
           >
             保存
           </Button>
-          <Button onClick={() => navigate('/products')}>
+          <Button onClick={() => navigate('/applications')}>
             取消
           </Button>
         </Form.Item>
@@ -288,4 +255,4 @@ const ProductForm = () => {
   );
 };
 
-export default ProductForm; 
+export default ApplicationForm; 

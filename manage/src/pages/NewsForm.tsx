@@ -1,4 +1,4 @@
-import { Form, Input, Switch, Button, Card, message, Upload } from 'antd';
+import { Form, Input, Switch, Button, Card, message, Upload, DatePicker } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import '@wangeditor/editor/dist/css/style.css';
@@ -10,6 +10,7 @@ import type { UploadChangeParam } from 'antd/es/upload';
 import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 // @ts-expect-error
 import type { NewsData } from '../services/api';
+import dayjs from 'dayjs';
 
 // @ts-expect-error
 interface NewsFormData {
@@ -19,6 +20,7 @@ interface NewsFormData {
   content: string;
   image?: string;
   isFeature?: boolean;
+  date?: Date;
 }
 
 const NewsForm = () => {
@@ -46,7 +48,8 @@ const NewsForm = () => {
           title: news.title,
           source: news.source,
           link: news.link,
-          isFeature: news.isFeature
+          isFeature: news.isFeature,
+          date: news.date ? dayjs(news.date) : undefined
         });
         setHtml(news.content || '');
         setImageUrl(news.image);
@@ -106,7 +109,7 @@ const NewsForm = () => {
       const formData = {
         ...values,
         content: html,
-        date: new Date()
+        date: values.date ? values.date.toDate() : new Date()
       };
 
       if (id) {
@@ -230,6 +233,17 @@ const NewsForm = () => {
                 uploadButton
               )}
             </Upload>
+          </Form.Item>
+
+          <Form.Item
+            name="date"
+            label="发布时间"
+          >
+            <DatePicker
+              showTime
+              placeholder="请选择发布时间"
+              style={{ width: '100%' }}
+            />
           </Form.Item>
 
           <Form.Item

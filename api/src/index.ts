@@ -34,10 +34,10 @@ app.use(mount('/uploads', serve(path.join(__dirname, '../public/uploads'))));
 
 // 获取新闻列表
 router.get('/api/news', async (ctx) => {
-  const { year, month, page = 1, pageSize = 10 } = ctx.query;
+  const { year, month, page = 1, pageSize = 10, isNormal = false } = ctx.query;
 
   try {
-    let whereClause = {};
+    let whereClause: any = {};
 
     // 确保 year 和 month 是有效的数字
     const numYear = year ? Number(year) : null;
@@ -71,6 +71,10 @@ router.get('/api/news', async (ctx) => {
 
     console.log('查询条件:', whereClause); // 添加日志以便调试
 
+    if (isNormal) {
+      whereClause.isFeature = false
+    }
+
     const [total, items] = await Promise.all([
       prisma.news.count({ where: whereClause }),
       prisma.news.findMany({
@@ -91,6 +95,26 @@ router.get('/api/news', async (ctx) => {
     console.error('获取新闻列表失败:', error);
     ctx.status = 500;
     ctx.body = { error: '获取新闻列表失败' };
+  }
+});
+
+router.get('/api/news/feature', async (ctx) => {
+  try {
+    const featureNews = await prisma.news.findMany({
+      where: {
+        isFeature: true,
+      },
+      orderBy: {
+        date: 'desc'
+      },
+      take: 3 // 限制返回的特色新闻数量
+    });
+
+    ctx.body = featureNews;
+  } catch (error) {
+    console.error('获取特色新闻失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取特色新闻失败' };
   }
 });
 
@@ -236,21 +260,23 @@ router.post('/api/upload', async (ctx) => {
   }
 });
 
-// Banner 接口类型定义
+// 更新 Banner 接口类型定义
 interface BannerRequestBody {
   title: string;
   subtitle: string;
   description: string;
   image: string;
   link: string;
+  order: number;  // 添加order字段
 }
 
-// 获取 Banner 列表
+// 修改获取 Banner 列表接口，按order排序
 router.get('/api/banners', async (ctx) => {
   const banners = await prisma.banner.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
+    orderBy: [
+      { order: 'asc' },  // 首先按order排序
+      { createdAt: 'desc' }  // 其次按创建时间排序
+    ]
   });
   ctx.body = banners;
 });
@@ -271,7 +297,7 @@ router.get('/api/banners/:id', async (ctx) => {
   ctx.body = banner;
 });
 
-// 创建 Banner
+// 修改创建 Banner 接口
 router.post('/api/banners', async (ctx) => {
   const data = ctx.request.body as BannerRequestBody;
 
@@ -282,7 +308,8 @@ router.post('/api/banners', async (ctx) => {
         subtitle: data.subtitle,
         description: data.description,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加order字段
       }
     });
     ctx.body = banner;
@@ -292,7 +319,7 @@ router.post('/api/banners', async (ctx) => {
   }
 });
 
-// 更新 Banner
+// 修改更新 Banner 接口
 router.put('/api/banners/:id', async (ctx) => {
   const { id } = ctx.params;
   const data = ctx.request.body as BannerRequestBody;
@@ -305,7 +332,8 @@ router.put('/api/banners/:id', async (ctx) => {
         subtitle: data.subtitle,
         description: data.description,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加order字段
       }
     });
     ctx.body = banner;
@@ -330,7 +358,7 @@ router.delete('/api/banners/:id', async (ctx) => {
   }
 });
 
-// 产品接口类型定义
+// 修改产品接口类型定义
 interface ProductRequestBody {
   title: string;
   subtitle: string;
@@ -338,14 +366,16 @@ interface ProductRequestBody {
   details?: string;
   image: string;
   link?: string;
+  order: number;  // 添加序号字段
 }
 
-// 获取产品列表
+// 修改获取产品列表接口，按序号排序
 router.get('/api/products', async (ctx) => {
   const products = await prisma.product.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
+    orderBy: [
+      { order: 'asc' },  // 首先按序号排序
+      { createdAt: 'desc' }  // 其次按创建时间排序
+    ]
   });
   ctx.body = products;
 });
@@ -366,7 +396,7 @@ router.get('/api/products/:id', async (ctx) => {
   ctx.body = product;
 });
 
-// 创建产品
+// 修改创建产品接口
 router.post('/api/products', async (ctx) => {
   const data = ctx.request.body as ProductRequestBody;
 
@@ -378,7 +408,8 @@ router.post('/api/products', async (ctx) => {
         description: data.description,
         details: data.details,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加序号字段
       }
     });
     ctx.body = product;
@@ -388,7 +419,7 @@ router.post('/api/products', async (ctx) => {
   }
 });
 
-// 更新产品
+// 修改更新产品接口
 router.put('/api/products/:id', async (ctx) => {
   const { id } = ctx.params;
   const data = ctx.request.body as ProductRequestBody;
@@ -402,7 +433,8 @@ router.put('/api/products/:id', async (ctx) => {
         description: data.description,
         details: data.details,
         image: data.image,
-        link: data.link
+        link: data.link,
+        order: data.order  // 添加序号字段
       }
     });
     ctx.body = product;
@@ -559,7 +591,251 @@ router.delete('/api/purchases/:id', async (ctx) => {
   }
 });
 
+// 自定义文档路由
 
+// 获取所有文档
+router.get('/api/custom-docs', async (ctx) => {
+  try {
+    const docs = await prisma.customDoc.findMany({
+      orderBy: {
+        updatedAt: 'desc'
+      }
+    });
+    ctx.body = docs;
+  } catch (error) {
+    console.error('获取文档列表失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取文档列表失败' };
+  }
+});
+
+// 获取单个文档
+router.get('/api/custom-docs/:id', async (ctx) => {
+  const { id } = ctx.params;
+  try {
+    const doc = await prisma.customDoc.findUnique({
+      where: { id: Number(id) }
+    });
+
+    if (!doc) {
+      ctx.status = 404;
+      ctx.body = { error: '文档不存在' };
+      return;
+    }
+
+    ctx.body = doc;
+  } catch (error) {
+    console.error('获取文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取文档失败' };
+  }
+});
+
+// 创建文档
+router.post('/api/custom-docs', async (ctx) => {
+  const { type, content } = ctx.request.body;
+
+  try {
+    // 检查是否已存在同类型的文档
+    const existingDoc = await prisma.customDoc.findFirst({
+      where: { type }
+    });
+
+    if (existingDoc) {
+      ctx.status = 400;
+      ctx.body = { error: '该类型的文档已存在' };
+      return;
+    }
+
+    const doc = await prisma.customDoc.create({
+      data: {
+        type,
+        content
+      }
+    });
+
+    ctx.status = 201;
+    ctx.body = doc;
+  } catch (error) {
+    console.error('创建文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '创建文档失败' };
+  }
+});
+
+// 更新文档
+router.put('/api/custom-docs/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const { type, content } = ctx.request.body;
+
+  try {
+    // 检查是否存在其他同类型的文档
+    const existingDoc = await prisma.customDoc.findFirst({
+      where: {
+        type,
+        NOT: { id: Number(id) }
+      }
+    });
+
+    if (existingDoc) {
+      ctx.status = 400;
+      ctx.body = { error: '该类型的文档已存在' };
+      return;
+    }
+
+    const doc = await prisma.customDoc.update({
+      where: { id: Number(id) },
+      data: {
+        type,
+        content
+      }
+    });
+
+    ctx.body = doc;
+  } catch (error) {
+    console.error('更新文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '更新文档失败' };
+  }
+});
+
+// 删除文档
+router.delete('/api/custom-docs/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.customDoc.delete({
+      where: { id: Number(id) }
+    });
+    ctx.status = 204;
+  } catch (error) {
+    console.error('删除文档失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '删除文档失败' };
+  }
+});
+
+// 应用领域接口
+
+// 获取应用领域列表
+router.get('/api/applications', async (ctx) => {
+  try {
+    const applications = await prisma.application.findMany({
+      orderBy: {
+        order: 'asc'
+      }
+    });
+    ctx.body = applications;
+  } catch (error) {
+    console.error('获取应用领域列表失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取应用领域列表失败' };
+  }
+});
+
+// 获取单个应用领域
+router.get('/api/applications/:id', async (ctx) => {
+  const { id } = ctx.params;
+  try {
+    const application = await prisma.application.findUnique({
+      where: { id: Number(id) }
+    });
+
+    if (!application) {
+      ctx.status = 404;
+      ctx.body = { error: '应用领域不存在' };
+      return;
+    }
+
+    ctx.body = application;
+  } catch (error) {
+    console.error('获取应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '获取应用领域失败' };
+  }
+});
+
+// 创建应用领域
+router.post('/api/applications', async (ctx) => {
+  const data = ctx.request.body;
+
+  try {
+    // 验证必填字段
+    if (!data.title || !data.description || !data.image) {
+      ctx.status = 400;
+      ctx.body = { error: '标题、描述和图片为必填项' };
+      return;
+    }
+
+    const application = await prisma.application.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        image: data.image,
+        link: data.link || null,
+        details: data.details || null,
+        order: data.order || 0
+      }
+    });
+
+    ctx.status = 201;
+    ctx.body = application;
+  } catch (error) {
+    console.error('创建应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '创建应用领域失败' };
+  }
+});
+
+// 更新应用领域
+router.put('/api/applications/:id', async (ctx) => {
+  const { id } = ctx.params;
+  const data = ctx.request.body;
+
+  try {
+    // 验证必填字段
+    if (!data.title || !data.description || !data.image) {
+      ctx.status = 400;
+      ctx.body = { error: '标题、描述和图片为必填项' };
+      return;
+    }
+
+    const application = await prisma.application.update({
+      where: { id: Number(id) },
+      data: {
+        title: data.title,
+        description: data.description,
+        image: data.image,
+        link: data.link || null,
+        details: data.details || null,
+        order: data.order
+      }
+    });
+
+    ctx.body = application;
+  } catch (error) {
+    console.error('更新应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '更新应用领域失败' };
+  }
+});
+
+// 删除应用领域
+router.delete('/api/applications/:id', async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    await prisma.application.delete({
+      where: { id: Number(id) }
+    });
+    ctx.status = 204;
+    ctx.body = { success: true };
+  } catch (error) {
+    console.error('删除应用领域失败:', error);
+    ctx.status = 500;
+    ctx.body = { error: '删除应用领域失败' };
+  }
+});
 
 app.use(router.routes()).use(router.allowedMethods());
 

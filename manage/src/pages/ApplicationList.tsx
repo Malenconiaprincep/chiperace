@@ -2,36 +2,36 @@ import { Table, Button, Space, Modal, message } from 'antd';
 import { useState, useEffect } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { bannerApi, getFullUrl } from '../services/api';
-import type { BannerData } from '../services/api';
+import { applicationApi, getFullUrl } from '../services/api';
+import type { ApplicationData } from '../services/api';
 
-const BannerList = () => {
+const ApplicationList = () => {
   const [loading, setLoading] = useState(false);
-  const [banners, setBanners] = useState<BannerData[]>([]);
+  const [applications, setApplications] = useState<ApplicationData[]>([]);
   const navigate = useNavigate();
 
-  const fetchBanners = async () => {
+  const fetchApplications = async () => {
     try {
       setLoading(true);
-      const response = await bannerApi.getBannerList();
-      setBanners(response.data);
+      const response = await applicationApi.getApplicationList();
+      setApplications(response.data);
     } catch (error) {
-      console.error('获取Banner列表失败:', error);
-      message.error('获取Banner列表失败');
+      console.error('获取应用领域列表失败:', error);
+      message.error('获取应用领域列表失败');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchBanners();
+    fetchApplications();
   }, []);
 
   const handleDelete = async (id: number) => {
     try {
-      await bannerApi.deleteBanner(id);
+      await applicationApi.deleteApplication(id);
       message.success('删除成功');
-      fetchBanners();
+      fetchApplications();
     } catch (error) {
       console.error('删除失败:', error);
       message.error('删除失败');
@@ -40,7 +40,7 @@ const BannerList = () => {
 
   const showDeleteConfirm = (id: number) => {
     Modal.confirm({
-      title: '确定要删除这个Banner吗？',
+      title: '确定要删除这个应用领域吗？',
       icon: <ExclamationCircleOutlined />,
       content: '删除后将无法恢复',
       okText: '确定',
@@ -56,37 +56,29 @@ const BannerList = () => {
     {
       title: '序号',
       dataIndex: 'order',
-      sorter: (a: BannerData, b: BannerData) => (a.order || 0) - (b.order || 0),
+      sorter: (a: ApplicationData, b: ApplicationData) => (a.order || 0) - (b.order || 0),
     },
     {
-      title: '标题',
-      dataIndex: 'title',
-    },
-    {
-      title: '副标题',
-      dataIndex: 'subtitle',
-    },
-    {
-      title: '图片',
+      title: '应用领域图片',
       dataIndex: 'image',
       render: (image: string) => (
         <img
           src={getFullUrl(image)}
-          alt="banner"
+          alt="应用领域图片"
           style={{ width: '120px', height: '60px', objectFit: 'cover' }}
         />
       ),
     },
     {
-      title: '链接',
-      dataIndex: 'link',
+      title: '应用领域名称',
+      dataIndex: 'title',
     },
     {
       title: '操作',
       key: 'action',
-      render: (_: any, record: BannerData) => (
+      render: (_: any, record: ApplicationData) => (
         <Space size="middle">
-          <Button type="link" onClick={() => navigate(`/banners/edit/${record.id}`)}>
+          <Button type="link" onClick={() => navigate(`/applications/edit/${record.id}`)}>
             编辑
           </Button>
           <Button type="link" danger onClick={() => showDeleteConfirm(record.id!)}>
@@ -102,14 +94,14 @@ const BannerList = () => {
       <div style={{ marginBottom: 16 }}>
         <Button
           type="primary"
-          onClick={() => navigate('/banners/new')}
+          onClick={() => navigate('/applications/new')}
         >
-          新建Banner
+          新建应用领域
         </Button>
       </div>
       <Table
         columns={columns}
-        dataSource={banners}
+        dataSource={applications}
         rowKey="id"
         loading={loading}
       />
@@ -117,4 +109,4 @@ const BannerList = () => {
   );
 };
 
-export default BannerList; 
+export default ApplicationList; 

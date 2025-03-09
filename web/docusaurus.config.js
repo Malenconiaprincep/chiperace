@@ -12,4 +12,8 @@ module.exports = {
       },
     },
   },
+  stylesheets: [
+    // 添加 Font Awesome
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+  ],
 }; 

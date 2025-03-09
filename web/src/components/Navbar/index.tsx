@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from '@docusaurus/Link';
+import { Button } from 'antd';
+import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 import styles from './styles.module.css';
 
 const menuItems = [
@@ -8,7 +10,7 @@ const menuItems = [
     link: '/about'
   },
   {
-    label: '产品中心',
+    label: '产品技术',
     link: '/products',
     subMenu: [
       { label: '产品介绍', link: '/products' },
@@ -18,6 +20,7 @@ const menuItems = [
   },
   {
     label: '购买渠道',
+    link: '/purchase',
     subMenu: [
       {
         label: '线下购买',
@@ -52,12 +55,12 @@ const socialLinks = [
   }
 ];
 
-
-
 export default function Navbar() {
   const [isSticky, setIsSticky] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activeQRCode, setActiveQRCode] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,32 +71,104 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 768);
+    };
+
+    // 初始化
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setActiveMenu(null);
+  };
+
+  const handleMenuClick = (item: typeof menuItems[0]) => {
+    if (isMobileMenuOpen) {
+      if (item.subMenu) {
+        setActiveMenu(activeMenu === item.label ? null : item.label);
+      } else {
+        closeMobileMenu();
+      }
+    }
+  };
+
   return (
     <nav className={`${styles.navbar} ${isSticky ? styles.sticky : ''}`}>
       <div className="container">
         <div className={styles.navContent}>
           <div className={styles.leftSection}>
-            <Link to="/" className={styles.logo}>
-              <img src="/img/logo.png" alt="Logo" />
+            <Link to="/" className={`${styles.logo} ${isMobileMenuOpen ? styles.mobileLogoActive : ''}`}>
+              {isMobileView ? (
+                <img src="/img/logo.png" alt="Mobile Logo" className={`${styles.mobileLogo}`} />
+              ) : (
+                <img src="/img/logo.png" alt="Logo" />
+              )}
             </Link>
 
-            <div className={styles.menuContainer}>
+            {isMobileView && (
+              <button
+                className={`${styles.hamburger} ${isMobileMenuOpen ? styles.active : ''}`}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? '关闭菜单' : '打开菜单'}
+              >
+                {isMobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
+              </button>
+            )}
+
+            <div className={`${styles.menuContainer} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
               {menuItems.map((item) => (
                 <div
                   key={item.label}
-                  className={styles.menuItem}
-                  onMouseEnter={() => setActiveMenu(item.label)}
-                  onMouseLeave={() => setActiveMenu(null)}
+                  className={`${styles.menuItem} ${activeMenu === item.label ? styles.active : ''}`}
+                  onMouseEnter={() => !isMobileMenuOpen && setActiveMenu(item.label)}
+                  onMouseLeave={() => !isMobileMenuOpen && setActiveMenu(null)}
                 >
-                  <Link
-                    to={item.link}
-                    className={`${styles.menuLink} ${activeMenu === item.label ? styles.active : ''}`}
+                  <div
+                    className={styles.menuItemWrapper}
+                  // onClick={() => handleMenuClick(item)}
                   >
-                    {item.label}
-                  </Link>
+                    <Link
+                      to={item.link}
+                      className={styles.menuLink}
+                      onClick={(e) => {
+                        // if (isMobileMenuOpen && item.subMenu) {
+                        //   e.preventDefault();
+                        // }
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                    {item.subMenu && (
+                      <span className={`${styles.expandIcon} ${activeMenu === item.label ? styles.expanded : ''}`}>
+                        <svg width="12" height="12" viewBox="0 0 12 12">
+                          <path
+                            fill="currentColor"
+                            d="M6 8.825L11.4 3.425L10.675 2.7L6 7.375L1.325 2.7L0.6 3.425L6 8.825Z"
+                          />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
 
-                  {item.subMenu && activeMenu === item.label && (
-                    <div className={styles.subMenu}>
+                  {item.subMenu && (
+                    <div className={`${styles.subMenu} ${activeMenu === item.label ? styles.subMenuActive : ''}`}>
                       <div className={styles.subMenuContent}>
                         <div className={styles.subMenuColumn}>
                           {item.subMenu.map((subItem) => (
@@ -101,6 +176,7 @@ export default function Navbar() {
                               key={subItem.label}
                               to={subItem.link}
                               className={styles.subMenuLink}
+                              onClick={closeMobileMenu}
                             >
                               {subItem.label}
                             </Link>
@@ -114,24 +190,27 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className={styles.socialLinks}>
-            {socialLinks.map((social) => (
-              <div
-                key={social.label}
-                className={styles.socialLinkWrapper}
-                onMouseEnter={() => setActiveQRCode(social.qrCode)}
-                onMouseLeave={() => setActiveQRCode(null)}
-              >
-                <div className={`${styles.socialLink} ${activeQRCode === social.qrCode ? styles.active : ''}`} />
-                {activeQRCode === social.qrCode && (
-                  <div className={styles.qrCodePopup}>
-                    <img src={social.qrCode} alt={`${social.label} QR Code`} />
-                    <div className={styles.qrCodeText}>微信公众号</div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          {/* 只在非移动端显示社交链接 */}
+          {!isMobileView && (
+            <div className={styles.socialLinks}>
+              {socialLinks.map((social) => (
+                <div
+                  key={social.label}
+                  className={styles.socialLinkWrapper}
+                  onMouseEnter={() => setActiveQRCode(social.qrCode)}
+                  onMouseLeave={() => setActiveQRCode(null)}
+                >
+                  <div className={`${styles.socialLink} ${activeQRCode === social.qrCode ? styles.active : ''}`} />
+                  {activeQRCode === social.qrCode && (
+                    <div className={styles.qrCodePopup}>
+                      <img src={social.qrCode} alt={`${social.label} QR Code`} />
+                      <div className={styles.qrCodeText}>微信公众号</div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </nav>

@@ -4,11 +4,12 @@
 
 .banner {
   /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
-  background-color: #6A1E8C;
+  background-color: #772a8a;
   color: white;
   padding: 4rem 2rem;
   text-align: center;
   position: relative;
+  /* background-image: url('/img/banner.jpg'); */
 }
 
 .banner h1 {
@@ -38,10 +39,16 @@
   font-size: 28px;
   margin-bottom: 1.5rem;
   position: relative;
-  padding-left: 15px;
+  text-align: center;
+
+  /* padding-left: 15px; */
 }
 
-.section h2::before {
+.section p {
+  text-align: justify
+}
+
+/* .section h2::before {
   content: '';
   position: absolute;
   left: 0;
@@ -51,7 +58,7 @@
   height: 20px;
   background: #1890ff;
   border-radius: 2px;
-}
+} */
 
 .timeline {
   display: flex;
@@ -109,6 +116,10 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
+.cultureItem p {
+  text-align: center;
+}
+
 .cultureItem h3 {
   color: #333;
   margin-bottom: 15px;
@@ -131,6 +142,7 @@
 
 .contactItem p {
   color: #666;
+  text-align: center;
 }
 
 /* 响应式布局 */
@@ -165,4 +177,50 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
+}
+
+.addressGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.addressCard {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.addressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: #1677ff;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.locationIcon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.addressDetail {
+  color: #666;
+  line-height: 1.8;
+  margin: 0;
+  text-align: center !important
+}
+
+.addressDetail p {
+  margin: 0;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.addressDetail p:last-child {
+  margin-bottom: 0;
 }

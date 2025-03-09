@@ -10,7 +10,7 @@
 
 .bannerBg {
   /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
-  background-color: #6A1E8C;
+  background-image: url('/img/banner.jpg');
   position: absolute;
   top: 0;
   left: 0;
@@ -48,6 +48,13 @@
   margin-top: 40px;
 }
 
+.applicationSection h2 {
+  color: var(--ifm-heading2-color);
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: var(--ifm-h2-font-size);
+}
+
 .applicationSection h3 {
   text-align: center;
   margin-bottom: 40px;
@@ -64,6 +71,12 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.applicationItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .applicationImages {
@@ -89,4 +102,48 @@
 .applicationContent p {
   margin: 0;
   color: #666;
-} 
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+.applicationLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.applicationLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 添加可点击的应用项样式 */
+.hasDetails {
+  cursor: pointer;
+  position: relative;
+}
+
+.hasDetails:after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.hasDetails:hover:after {
+  opacity: 1;
+}
+
+/* 外部链接样式 */

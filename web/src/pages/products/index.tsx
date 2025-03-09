@@ -30,8 +30,8 @@ const ProductsPage = (): JSX.Element => {
       <div className={styles.productsContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>产品方案</h1>
-            <p>专业的高性能计算解决方案</p>
+            <h1>产品技术</h1>
+            <p>原子级高性能计算解决方案</p>
           </div>
         </div>
 
@@ -39,7 +39,7 @@ const ProductsPage = (): JSX.Element => {
           <section className={styles.section}>
             <div className="container">
               <div className={styles.sectionHeader}>
-                <h2>产品方案</h2>
+                <h2>产品与解决方案</h2>
               </div>
 
               {loading ? (
@@ -47,27 +47,29 @@ const ProductsPage = (): JSX.Element => {
               ) : (
                 <div className={styles.productsGrid}>
                   {products.map((product) => (
-                    <div key={product.id} className={styles.productCard}>
-                      <div className={styles.productImageWrapper}>
-                        <img
-                          src={getFullUrl(product.image)}
-                          alt={product.title}
-                          className={styles.productImage}
-                        />
-                      </div>
-                      <div className={styles.productContent}>
-                        <h3 className={styles.productTitle}>{product.title}</h3>
-                        <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
-                        <p className={styles.productDescription}>{product.description}</p>
-                        <Link
+                    <Link key={product.id} to={`/products/detail?id=${product.id}`}>
+                      <div key={product.id} className={styles.productCard}>
+                        <div className={styles.productImageWrapper}>
+                          <img
+                            src={getFullUrl(product.image)}
+                            alt={product.title}
+                            className={styles.productImage}
+                          />
+                        </div>
+                        <div className={styles.productContent}>
+                          <h3 className={styles.productTitle}>{product.title}</h3>
+                          <h4 className={styles.productSubtitle}>{product.subtitle}</h4>
+                          <p className={styles.productDescription}>{product.description}</p>
+                          {/* <Link
                           className={styles.learnMore}
                           to={`/products/detail?id=${product.id}`}
                         >
                           了解更多
                           <span className={styles.arrow}>→</span>
-                        </Link>
+                        </Link> */}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -83,9 +85,9 @@ const ProductsPage = (): JSX.Element => {
               <div className={styles.logoItem}>
                 <img src="/img/customers/aist.png" alt="北京量子智能研究院" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/nudt.png" alt="国防科技大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/jilin.png" alt="吉林大学" />
               </div>
@@ -145,6 +147,9 @@ const ProductsPage = (): JSX.Element => {
               </div>
               <div className={styles.logoItem}>
                 <img src="/img/customers/huazhong.png" alt="华中科技大学" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="/img/customers/zsdx.png" alt="中山大学" />
               </div>
               <div className={styles.logoItem}>
                 <img src="/img/customers/hunan.png" alt="湖南大学" />

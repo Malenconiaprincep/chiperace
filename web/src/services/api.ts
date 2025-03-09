@@ -69,6 +69,7 @@ export interface NewsListParams {
   month?: number | null;
   page?: number;
   pageSize?: number;
+  isNormal?: boolean;
 }
 
 export interface NewsListResponse {
@@ -85,6 +86,23 @@ export interface PurchaseFormData {
   requirements: string;
   status?: 'pending' | 'processing' | 'completed';
   submitTime?: string;
+}
+
+export interface CustomDoc {
+  id: number;
+  type: string;
+  content: string;
+  updatedAt: string;
+}
+
+export interface ApplicationItem {
+  id: number;
+  order: number;
+  title: string;
+  description: string;
+  image: string;
+  link?: string;
+  details?: string;
 }
 
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';
@@ -107,7 +125,9 @@ export const newsApi = {
   },
 
   // 获取新闻详情
-  getNewsById: (id: string) => api.get<NewsItem>(`/news/${id}`)
+  getNewsById: (id: string) => api.get<NewsItem>(`/news/${id}`),
+
+  getFeatureNews: () => api.get<NewsItem[]>('/news/feature').then(res => res.data),
 };
 
 export const bannerApi = {
@@ -150,6 +170,26 @@ export const purchaseApi = {
   // 搜索采购申请
   searchPurchases: (params: { query?: string; status?: string }) =>
     api.get<PurchaseFormData[]>('/purchases/search', { params }),
+};
+
+export const customDocApi = {
+  // 获取所有文档
+  getDocs: () => api.get<CustomDoc[]>('/custom-docs'),
+
+  // 根据类型获取文档
+  getDocByType: async (type: string) => {
+    const response = await api.get<CustomDoc[]>('/custom-docs');
+    const docs = response.data;
+    return docs.find(doc => doc.type === type);
+  }
+};
+
+export const applicationApi = {
+  // 获取应用领域列表
+  getApplicationList: () => api.get<ApplicationItem[]>('/applications').then(res => res.data),
+
+  // 获取单个应用领域
+  getApplicationById: (id: number) => api.get<ApplicationItem>(`/applications/${id}`).then(res => res.data),
 };
 
 export const getFullUrl = (path: string) => {

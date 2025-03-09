@@ -10,7 +10,7 @@
 
 .bannerBg {
   /* PANTONE 2593C (C:64 M:93 Y:0 K:0) */
-  background-color: #6A1E8C;
+  background-image: url('/img/banner.jpg');
   position: absolute;
   top: 0;
   left: 0;
