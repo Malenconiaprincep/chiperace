@@ -39,8 +39,8 @@ const ApplicationDetailPage = (): JSX.Element => {
       <div className={styles.applicationContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>应用案例</h1>
-            <p>高性能计算的实际应用场景</p>
+            <h1>跨领域赋能实践</h1>
+            <p>研究基因 产业表达</p>
           </div>
         </div>
 
