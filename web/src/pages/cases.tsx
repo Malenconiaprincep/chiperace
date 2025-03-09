@@ -95,14 +95,14 @@ const CasePage = (): JSX.Element => {
       <div className={styles.caseContainer}>
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
-            <h1>跨领域赋能实践</h1>
+            <h1>应用案例</h1>
             <p>研究基因 产业表达</p>
           </div>
         </div>
 
         <div className={styles.content}>
           <div className={styles.applicationSection}>
-            <h2>应用领域</h2>
+            <h2>跨领域赋能实践</h2>
             {loading ? (
               <div className={styles.loadingContainer}>
                 <Spin size="large" />
