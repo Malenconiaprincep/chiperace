@@ -15,10 +15,8 @@ Au被用作抗辐照损伤的特种材料，可以通过分子动力学仿真进
 
 最后得到冲击状态下的状态方程：体系的温度、压强以及密度，结果如图 1所示。
 
-<figure style="text-align: center;">
-    <figcaption>图 1 Au体系冲击测试：（a）冲击示意图，（b）压强 - 温度状态方程，（c）压强 - 密度状态方程</figcaption>
-    <img src="./img/image-11.png" alt="Au体系冲击测试">
-</figure>
+![Au体系冲击测试](./img/image-11.png)
+*图 1 Au体系冲击测试：（a）冲击示意图，（b）压强 - 温度状态方程，（c）压强 - 密度状态方程*
 
 ## 二、合金，Cu体系，拉伸应变
 
@@ -34,10 +32,8 @@ Au被用作抗辐照损伤的特种材料，可以通过分子动力学仿真进
 
 测试示意图如图 2所示，Cu体系在z方向上产生应变，同时测试z方向上的压强。右图中的实线表示5个体系测试的均值，阴影部分表示5个体系测试引入的随机误差（即方差）。可以看出，在极端的拉伸测试下，通过微观尺度仿真能够Cu金属材料的宏观力学特性。
 
-<figure style="text-align: center;">
-    <figcaption>图 2  Cu体系的拉伸测试：（a）拉伸示意图，（b）应力应变曲线</figcaption>
-    <img src="./img/image-12.png" alt="Cu体系的拉伸测试">
-</figure>
+![Cu体系的拉伸测试：（a）拉伸示意图，（b）应力应变曲线](./img/image-12.png)
+*图 2  Cu体系的拉伸测试：（a）拉伸示意图，（b）应力应变曲线*
 
 ## 三、合金，Mg体系，形变层错能
 
@@ -51,10 +47,8 @@ Au被用作抗辐照损伤的特种材料，可以通过分子动力学仿真进
 
 结果很好地从微观尺度反映了Mg体系的层错能。
 
-<figure style="text-align: center;">
-    <figcaption>图 3 Mg的层错能测试</figcaption>
-    <img src="./img/image-13.png" alt="Mg的层错能测试">
-</figure>
+![Mg的层错能测试](./img/image-13.png)
+*图 3 Mg的层错能测试*
 
 ## 四、相变存储器，GeTe体系，相变过程和结构性质
 
@@ -72,10 +66,9 @@ GeTe是一种相变材料，通过晶态的“SET”和不定形态的“RESET�
 
 从不定形态的仿真轨迹中提取出了GeTe的径向分布函数、角度分布函数、配位数以及ALTBC（angular - limited three - body correlation）。这里的ALTBC是考察了Ge - Te - Ge和Te - Ge - Te键大于155°的构型（Ge - Te键长）组合分布，是对GeTe微结构特性的有效观测手段，结果如图 4所示。
 
-<figure style="text-align: center;">
-    <figcaption>图 4 GeTe体系不定形态结构性质：（a）径向分布函数，（b）角度分布函数；（c）配位数；（d）ALTBC</figcaption>
-    <img src="./img/image-14.png" alt="GeTe体系不定形态结构性质">
-</figure>
+![GeTe体系不定形态结构性质](./img/image-14.png)
+
+*图 4 GeTe体系不定形态结构性质：（a）径向分布函数，（b）角度分布函数；（c）配位数；（d）ALTBC*
 
 ## 五、扩散工艺，Si64Li体系，迁移路径
 
@@ -84,10 +77,8 @@ GeTe是一种相变材料，通过晶态的“SET”和不定形态的“RESET�
 仿真过程如下：
 通过执行微动弹性带（nudged elastic band，NEB）来探索已知的初态构型和末态构型之间的能量最小的过渡态，即最小能量路径（minimum energy path，MEP）。首先设定体系的初态和末态构型，并且固定这两个构型（原子受力强行设置为0）。然后执行NEB计算，使得中间生成7个副本（加上初态和末态，一共9个副本），每个副本间近似有相互之间的弹力影响，并最小化能量。这样就能够得到中间过渡态的构型和能量，结果如图 5所示。
 
-<figure style="text-align: center;">
-    <figcaption>图 5 Si64Li的最小能量路径测试:（左）最小能量路径的构型，（右）最小能量路径上能量势垒</figcaption>
-    <img src="./img/image-15.png" alt="Si64Li的最小能量路径测试">
-</figure>
+![Si64Li的最小能量路径测试](./img/image-15.png)
+*图 5 Si64Li的最小能量路径测试:（左）最小能量路径的构型，（右）最小能量路径上能量势垒*
 
 ## 六、锂电池固态电解质，LiGePS体系，锂离子扩散系数
 
@@ -97,11 +88,9 @@ GeTe是一种相变材料，通过晶态的“SET”和不定形态的“RESET�
 
 1. 平衡态仿真：读取初始构型之后，使用设定温度来初始化速度，之后进行4 ps的NVT仿真，时间步长2 fs，目标温度为设定温度。
 2. 采样仿真：在设定温度下，进行1 ns的NVT仿真，时间步长2 fs，并每100步导出1帧体系结构，从而得到运行轨迹。通过分析原子的轨迹，能够计算锂离子随时间变化的偏移量r，即其均方位移（mean square displacement, MSD）。使用MSD和时间的关系可以计算得到锂离子的扩散系数。
-$$D = (\frac{1}{6t})\langle |\mathbf{r}(t)-\mathbf{r}(0)|^2\rangle$$
+<!-- $$D = (\frac{1}{6t})\langle |\mathbf{r}(t)-\mathbf{r}(0)|^2\rangle$$ -->
 
 在Li₁₀GeP₂S₁₂的扩散系数测试中，使用300K、400K、500K以及666K这4个温度条件进行仿真。由于不同温度会导致构型的热膨胀程度不一致，因此不同温度下的计算使用不同的构型。每个温度下使用不同的随机种子跑3个轨迹得到统计值，结果如图 6所示。
  
-<figure style="text-align: center;">
-    <figcaption>图 6  Li₁₀GeP₂S₁₂的扩散系数测试</figcaption>
-    <img src="./img/image-16.png" alt="Li₁₀GeP₂S₁₂的扩散系数测试">
-</figure>
+![Li₁₀GeP₂S₁₂的扩散系数测试](./img/image-16.png)
+*图 6  Li₁₀GeP₂S₁₂的扩散系数测试*
