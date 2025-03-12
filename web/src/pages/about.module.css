@@ -45,7 +45,12 @@
 }
 
 .section p {
-  text-align: justify
+  /* text-align: justify */
+  text-align: justify;
+  text-justify: inter-ideograph; /* 针对中文文本实现两端对齐 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 /* .section h2::before {
