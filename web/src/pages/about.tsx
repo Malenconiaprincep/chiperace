@@ -68,7 +68,7 @@ const AboutPage = (): JSX.Element => {
                   <EnvironmentOutlined className={styles.locationIcon} />
                   <span>广州</span>
                 </div>
-                <p className={styles.addressDetail}>⼴州市⻩埔区⾹雪⼋路98号F栋1705-1</p>
+                <p className={styles.addressDetail}>广州市黄埔区香雪八路98号F栋清华大学珠三角研究院1705-1</p>
               </div>
               <div className={styles.addressCard}>
                 <div className={styles.addressHeader}>
@@ -76,7 +76,7 @@ const AboutPage = (): JSX.Element => {
                   <span>长沙</span>
                 </div>
                 <div className={styles.addressDetail}>
-                  <p>长沙市岳麓区湖大路中建智慧谷E13-1栋2楼</p>
+                  <p>长沙市岳麓区湖大路中建智慧谷E13-1栋长沙半导体技术与应用创新研究院A205、A206</p>
                 </div>
               </div>
             </div>

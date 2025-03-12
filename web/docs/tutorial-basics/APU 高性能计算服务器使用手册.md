@@ -301,6 +301,7 @@ sudo load_pcie.sh i
 ```
 
 输入密码后完成对加速卡的配置。
+
 ![alt text](./img/image1.png)
 
 <!-- <img src="./img/image1.png" alt="alt text" class="image-center"> -->
@@ -310,6 +311,7 @@ sudo load_pcie.sh i
 查看`example/`路径下内容，其中`train/`为训练文件夹，`GeTe_APU/`为测试文件夹。
 
 使用`cd`指令进入训练文件夹，该目录下`data/`为GeTe算例的训练数据集，`train_cnn.json`和`train_qnn.json`分别为CNN和QNN模型的训练脚本，脚本中的参数在第一节中有详细的介绍。
+
 ![alt text](./img/image2.png)
 <!-- <center><img src="./img/image2.png" alt="alt text"></center> -->
 
@@ -320,24 +322,30 @@ conda activate apu
 ```
 
 将conda环境由`base`切换为`apu`，输入CNN训练指令
+
 ![alt text](./img/image-1.png)
 <!-- <center><img src="./img/image-1.png" alt="alt text"></center> -->
 
 CNN训练完成后继续训练QNN
+
 ![alt text](./img/image-2.png)
 <!-- <center><img src="./img/image-2.png" alt="alt text"></center> -->
 训练结束后，训练目录中文件如下，`train_cnn`与`train_qnn`分别包含CNN和QNN的训练过程文件和结果文件。
+
 ![alt text](./img/image-3.png)
 <!-- <center><img src="./img/image-3.png" alt="alt text"></center> -->
 
 ### C. 测试
 
 进入`~/Desktop/example/GeTe_APU/`测试目录下，将上述`train_qnn/`目录下QNN训练最终得到的模型`model.pb`拷贝到`GeTe_APU/`，该目录下包含lammps输入文件、GeTe坐标文件、APU模型文件。
+
 ![alt text](./img/image-4.png)
 <!-- <center><img src="./img/image-4.png" alt="alt text"></center> -->
 使用mpi多核运行分子动力学
+
 ![alt text](./img/image-5.png)
 <!-- <center><img src="./img/image-5.png" alt="alt text"></center> -->
 执行完毕后可在`log.lammps`中查看输出信息。
+
 ![alt text](./img/image-6.png)
 <!-- <center><img src="./img/image-6.png" alt="alt text"></center> -->
