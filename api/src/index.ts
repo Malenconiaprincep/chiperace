@@ -751,13 +751,29 @@ router.get('/api/applications', async (ctx) => {
         description: true,
         image: true,
         link: true,
+        details: true,
         // 不包含details字段
       },
       orderBy: {
         order: 'asc'
       }
     });
-    ctx.body = applications;
+
+    // 处理结果，添加hasDetails字段并移除details内容
+    const processedApplications = applications.map(app => {
+      const hasDetails = app.details !== null && app.details !== undefined && app.details.trim() !== '';
+      const { details, ...rest } = app;
+      return {
+        ...rest,
+        hasDetails // 添加表示是否有details内容的字段
+      };
+    });
+
+
+    ctx.body = processedApplications;
+
+
+
   } catch (error) {
     console.error('获取应用领域列表失败:', error);
     ctx.status = 500;

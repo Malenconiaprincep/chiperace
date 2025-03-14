@@ -103,6 +103,7 @@ export interface ApplicationItem {
   image: string;
   link?: string;
   details?: string;
+  hasDetails?: boolean;
 }
 
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';

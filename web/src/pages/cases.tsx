@@ -27,7 +27,7 @@ const CasePage = (): JSX.Element => {
 
   // 判断应用领域是否有详情内容
   const hasDetails = (app: ApplicationItem): boolean => {
-    return !!(app.details && app.details !== '<p><br></p>' && app.details !== '');
+    return !!(app.hasDetails && app.hasDetails !== '<p><br></p>' && app.hasDetails !== '');
   };
 
   // 判断链接类型并返回适当的链接
