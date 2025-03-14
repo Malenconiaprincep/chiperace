@@ -119,6 +119,18 @@ router.get('/api/news/feature', async (ctx) => {
       orderBy: {
         date: 'desc'
       },
+      select: {
+        id: true,
+        title: true,
+        source: true,
+        image: true,
+        link: true,
+        isFeature: true,
+        date: true,
+        "createdAt": true,
+        "updatedAt": true,
+        // 不包含details字段
+      },
       take: 3 // 限制返回的特色新闻数量
     });
 
