@@ -721,6 +721,15 @@ router.delete('/api/custom-docs/:id', async (ctx) => {
 router.get('/api/applications', async (ctx) => {
   try {
     const applications = await prisma.application.findMany({
+      select: {
+        id: true,
+        order: true,
+        title: true,
+        description: true,
+        image: true,
+        link: true,
+        // 不包含details字段
+      },
       orderBy: {
         order: 'asc'
       }
