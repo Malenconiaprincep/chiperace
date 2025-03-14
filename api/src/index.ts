@@ -83,7 +83,19 @@ router.get('/api/news', async (ctx) => {
         take: Number(pageSize),
         orderBy: {
           date: 'desc'
-        }
+        },
+        select: {
+          id: true,
+          title: true,
+          source: true,
+          image: true,
+          link: true,
+          isFeature: true,
+          date: true,
+          "createdAt": true,
+          "updatedAt": true,
+          // 不包含details字段
+        },
       })
     ]);
 
@@ -372,6 +384,17 @@ interface ProductRequestBody {
 // 修改获取产品列表接口，按序号排序
 router.get('/api/products', async (ctx) => {
   const products = await prisma.product.findMany({
+    select: {
+      id: true,
+      order: true,
+      title: true,
+      subtitle: true,
+      description: true,
+      image: true,
+      link: true,
+      "createdAt": true,
+      "updatedAt": true,
+    },
     orderBy: [
       { order: 'asc' },  // 首先按序号排序
       { createdAt: 'desc' }  // 其次按创建时间排序
