@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 import { getFullUrl, newsApi, type NewsItem } from '../../services/api';
 import bannerStyles from '../../styles/banner.module.css';
+import { Spin, Pagination } from 'antd';
 
 const NewsPage = (): JSX.Element => {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -14,7 +15,7 @@ const NewsPage = (): JSX.Element => {
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
-  const pageSize = 10;
+  const pageSize = 12;
 
   const years = Array.from(
     new Set(
@@ -214,35 +215,16 @@ const NewsPage = (): JSX.Element => {
             ))}
           </div>
 
-          <div className={styles.pagination}>
-            <button
-              onClick={() => setPage(page - 1)}
-              disabled={page === 1}
-              className={styles.pageButton}
-            >
-              上一页
-            </button>
-            {Array.from({ length: Math.ceil(total / pageSize) }, (_, i) => i + 1)
-              .filter(p => Math.abs(p - page) <= 2 || p === 1 || p === Math.ceil(total / pageSize))
-              .map((p, index, array) => (
-                <React.Fragment key={p}>
-                  {index > 0 && array[index - 1] !== p - 1 && <span>...</span>}
-                  <button
-                    onClick={() => setPage(p)}
-                    className={`${styles.pageButton} ${page === p ? styles.active : ''}`}
-                  >
-                    {p}
-                  </button>
-                </React.Fragment>
-              ))}
-            <button
-              onClick={() => setPage(page + 1)}
-              disabled={page >= Math.ceil(total / pageSize)}
-              className={styles.pageButton}
-            >
-              下一页
-            </button>
-            <span>共{total}条</span>
+          <div className={styles.paginationContainer}>
+            {total > pageSize && (
+              <Pagination
+                current={page}
+                pageSize={pageSize}
+                total={total}
+                onChange={(page) => setPage(page)}
+                showSizeChanger={false}
+              />
+            )}
           </div>
         </div>
       </div>
