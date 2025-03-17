@@ -3,18 +3,31 @@ import { useState, useEffect } from 'react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { applicationApi, getFullUrl } from '../services/api';
-import type { ApplicationData } from '../services/api';
+import type { ApplicationData, ApplicationListParams } from '../services/api';
 
 const ApplicationList = () => {
   const [loading, setLoading] = useState(false);
   const [applications, setApplications] = useState<ApplicationData[]>([]);
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 10,
+    total: 0
+  });
   const navigate = useNavigate();
 
-  const fetchApplications = async () => {
+  const fetchApplications = async (params: ApplicationListParams = {}) => {
     try {
       setLoading(true);
-      const response = await applicationApi.getApplicationList();
+      const response = await applicationApi.getApplicationList({
+        page: params.page || pagination.current,
+        pageSize: params.pageSize || pagination.pageSize
+      });
       setApplications(response.data);
+      setPagination({
+        current: response.page,
+        pageSize: response.pageSize,
+        total: response.total
+      });
     } catch (error) {
       console.error('获取应用领域列表失败:', error);
       message.error('获取应用领域列表失败');
@@ -49,6 +62,13 @@ const ApplicationList = () => {
       onOk() {
         return handleDelete(id);
       },
+    });
+  };
+
+  const handleTableChange = (pagination: any) => {
+    fetchApplications({
+      page: pagination.current,
+      pageSize: pagination.pageSize
     });
   };
 
@@ -104,6 +124,14 @@ const ApplicationList = () => {
         dataSource={applications}
         rowKey="id"
         loading={loading}
+        pagination={{
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+          total: pagination.total,
+          showSizeChanger: true,
+          showTotal: (total) => `共 ${total} 条记录`
+        }}
+        onChange={handleTableChange}
       />
     </div>
   );

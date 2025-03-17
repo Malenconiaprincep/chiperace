@@ -61,6 +61,20 @@ export interface ApplicationData {
   link: string;
   details?: string;
   subtitle?: string;
+  hasDetails?: boolean;
+}
+
+export interface ApplicationListParams {
+  page?: number;
+  pageSize?: number;
+}
+
+export interface ApplicationListResponse {
+  data: ApplicationData[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
 }
 
 // 添加基础URL配置
@@ -172,7 +186,8 @@ export const customDocApi = {
 // 添加应用领域 API
 export const applicationApi = {
   // 获取应用领域列表
-  getApplicationList: () => api.get<ApplicationData[]>('/applications'),
+  getApplicationList: (params?: ApplicationListParams) =>
+    api.get<ApplicationListResponse>('/applications', { params }).then(res => res.data),
 
   // 获取单个应用领域
   getApplicationById: (id: number) => api.get<ApplicationData>(`/applications/${id}`),

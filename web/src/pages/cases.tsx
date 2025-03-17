@@ -2,32 +2,51 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@site/src/components/Layout';
 import styles from './cases.module.css';
 import bannerStyles from '../styles/banner.module.css';
-import { applicationApi, getFullUrl, type ApplicationItem } from '../services/api';
-import { Spin } from 'antd';
+import { applicationApi, getFullUrl, type ApplicationItem, type ApplicationListResponse } from '../services/api';
+import { Spin, Pagination } from 'antd';
+
+const pageSize = 12;
 
 const CasePage = (): JSX.Element => {
   const [applications, setApplications] = useState<ApplicationItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: pageSize,
+    total: 0,
+    totalPages: 0
+  });
+
+  const fetchApplications = async (page = 1, pageSize = 12) => {
+    try {
+      setLoading(true);
+      const response = await applicationApi.getApplicationList({ page, pageSize });
+      setApplications(response.data);
+      setPagination({
+        current: response.page,
+        pageSize: response.pageSize,
+        total: response.total,
+        totalPages: response.totalPages
+      });
+    } catch (error) {
+      console.error('获取应用领域失败:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchApplications = async () => {
-      try {
-        setLoading(true);
-        const data = await applicationApi.getApplicationList();
-        setApplications(data);
-      } catch (error) {
-        console.error('获取应用领域失败:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchApplications();
+    fetchApplications(1, pageSize);
   }, []);
+
+  // 处理分页变化
+  const handlePageChange = (page: number, pageSize?: number) => {
+    fetchApplications(page, pageSize);
+  };
 
   // 判断应用领域是否有详情内容
   const hasDetails = (app: ApplicationItem): boolean => {
-    return !!(app.hasDetails && app.hasDetails !== '<p><br></p>' && app.hasDetails !== '');
+    return !!app.hasDetails;
   };
 
   // 判断链接类型并返回适当的链接
@@ -108,9 +127,22 @@ const CasePage = (): JSX.Element => {
                 <Spin size="large" />
               </div>
             ) : (
-              <div className={styles.applications}>
-                {applications.map(app => renderApplicationItem(app))}
-              </div>
+              <>
+                <div className={styles.applications}>
+                  {applications.map(app => renderApplicationItem(app))}
+                </div>
+                {pagination.total > pagination.pageSize && (
+                  <div className={styles.paginationContainer}>
+                    <Pagination
+                      current={pagination.current}
+                      pageSize={pagination.pageSize}
+                      total={pagination.total}
+                      onChange={handlePageChange}
+                      showSizeChanger={false}
+                    />
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

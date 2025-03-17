@@ -755,6 +755,14 @@ router.delete('/api/custom-docs/:id', async (ctx) => {
 // 获取应用领域列表
 router.get('/api/applications', async (ctx) => {
   try {
+    const { page = 1, pageSize = 12 } = ctx.query;
+    const pageNum = Number(page);
+    const pageSizeNum = Number(pageSize);
+
+    // 获取总数
+    const total = await prisma.application.count();
+
+    // 获取分页数据
     const applications = await prisma.application.findMany({
       select: {
         id: true,
@@ -764,11 +772,12 @@ router.get('/api/applications', async (ctx) => {
         image: true,
         link: true,
         details: true,
-        // 不包含details字段
       },
       orderBy: {
         order: 'asc'
-      }
+      },
+      skip: (pageNum - 1) * pageSizeNum,
+      take: pageSizeNum
     });
 
     // 处理结果，添加hasDetails字段并移除details内容
@@ -781,10 +790,13 @@ router.get('/api/applications', async (ctx) => {
       };
     });
 
-
-    ctx.body = processedApplications;
-
-
+    ctx.body = {
+      data: processedApplications,
+      total,
+      page: pageNum,
+      pageSize: pageSizeNum,
+      totalPages: Math.ceil(total / pageSizeNum)
+    };
 
   } catch (error) {
     console.error('获取应用领域列表失败:', error);

@@ -106,6 +106,19 @@ export interface ApplicationItem {
   hasDetails?: boolean;
 }
 
+export interface ApplicationListParams {
+  page?: number;
+  pageSize?: number;
+}
+
+export interface ApplicationListResponse {
+  data: ApplicationItem[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 export const BASE_URL = location.host.indexOf('localhost') !== -1 ? 'http://localhost:4000' : '';
 const API_BASE_URL = location.host.indexOf('localhost') !== -1
   ? 'http://localhost:4000/api'  // 开发环境
@@ -187,7 +200,8 @@ export const customDocApi = {
 
 export const applicationApi = {
   // 获取应用领域列表
-  getApplicationList: () => api.get<ApplicationItem[]>('/applications').then(res => res.data),
+  getApplicationList: (params?: ApplicationListParams) =>
+    api.get<ApplicationListResponse>('/applications', { params }).then(res => res.data),
 
   // 获取单个应用领域
   getApplicationById: (id: number) => api.get<ApplicationItem>(`/applications/${id}`).then(res => res.data),
