@@ -65,7 +65,7 @@ const NewsDetailPage = (): JSX.Element => {
           <div className={styles.newsDetail}>
             <h1 className={styles.newsTitle}>{news.title}</h1>
             <div className={styles.newsInfo}>
-              <span>{news.source}</span>
+              {/* <span>{news.source}</span> */}
               <span>{new Date(news.date).toLocaleDateString()}</span>
             </div>
             {/* {news.image && (
