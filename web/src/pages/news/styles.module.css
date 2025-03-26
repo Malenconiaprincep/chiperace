@@ -74,6 +74,10 @@
   padding: 60px 20px;
 }
 
+.newsContent .newsInfo {
+  min-height: 120px;
+}
+
 .filterBar {
   display: flex;
   justify-content: space-between;
@@ -347,6 +351,10 @@
   margin-bottom: 32px;
   display: flex;
   gap: 24px;
+}
+
+.newsInfo h2 {
+  font-size: 24px;
 }
 
 .newsDetailImage {
