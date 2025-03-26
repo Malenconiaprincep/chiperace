@@ -26,7 +26,10 @@ app.use(koaBody({
     uploadDir,
     keepExtensions: true,
     maxFileSize: 200 * 1024 * 1024, // 5MB
-  }
+  },
+  jsonLimit: '50mb',    // JSON 请求体大小限制
+  formLimit: '50mb',    // 表单请求体大小限制
+  textLimit: '50mb',    // 文本请求体大小限制
 }));
 
 // 静态文件服务
