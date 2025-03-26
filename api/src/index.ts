@@ -25,7 +25,7 @@ app.use(koaBody({
   formidable: {
     uploadDir,
     keepExtensions: true,
-    maxFileSize: 5 * 1024 * 1024, // 5MB
+    maxFileSize: 200 * 1024 * 1024, // 5MB
   }
 }));
 
