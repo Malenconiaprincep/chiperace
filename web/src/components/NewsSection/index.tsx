@@ -64,7 +64,7 @@ export default function NewsSection() {
                       </span>
                     </div>
                     <h3 className={styles.newsTitle}>{item.title}</h3>
-                    <p className={styles.newsSource}>{item.source}</p>
+                    {/* <p className={styles.newsSource}>{item.source}</p> */}
                   </div>
                 </div>
               </div>

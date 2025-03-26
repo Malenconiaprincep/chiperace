@@ -163,12 +163,12 @@ const NewsPage = (): JSX.Element => {
                     </div>
                     <div className={styles.newsInfo}>
                       <h2>{item.title}</h2>
-                      {item.source === '本地' && (
+                      {/* {item.source === '本地' && (
                         <span className={styles.localTag}>
                           <i className="fas fa-location-dot"></i>
                           本地
                         </span>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </Link>
@@ -203,12 +203,12 @@ const NewsPage = (): JSX.Element => {
                   </div>
                   <div className={styles.newsInfo}>
                     <h2>{item.title}</h2>
-                    {item.source === '本地' && (
+                    {/* {item.source === '本地' && (
                       <span className={styles.localTag}>
                         <i className="fas fa-location-dot"></i>
                         本地
                       </span>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </Link>
