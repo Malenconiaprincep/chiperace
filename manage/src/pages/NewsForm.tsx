@@ -68,8 +68,8 @@ const NewsForm = () => {
     placeholder: '请输入内容...',
     MENU_CONF: {
       uploadImage: {
-        // 使用 base64 上传图片
-        customUpload(file: File, insertFn: any) {
+        // 修改为服务器上传
+        customUpload: async (file: File, insertFn: any) => {
           // 校验文件大小
           const isLt5M = file.size / 1024 / 1024 < 5;
           if (!isLt5M) {
@@ -84,16 +84,16 @@ const NewsForm = () => {
             return;
           }
 
-          // 转换为 base64
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-            const base64Str = reader.result as string;
-            insertFn(base64Str);
-          };
-          reader.onerror = () => {
+          try {
+            // 使用 uploadApi 上传文件
+            const response = await uploadApi.uploadFile(file);
+            // 获取上传后的 URL 并插入编辑器
+            const imageUrl = getFullUrl(response.data.url);
+            insertFn(imageUrl);
+          } catch (error) {
+            console.error('上传图片失败:', error);
             message.error('图片上传失败');
-          };
+          }
         }
       }
     }

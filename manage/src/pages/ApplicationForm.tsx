@@ -52,28 +52,31 @@ const ApplicationForm = () => {
     placeholder: '请输入应用领域详情（可选）...',
     MENU_CONF: {
       uploadImage: {
-        customUpload(file: File, insertFn: any) {
+        customUpload: async (file: File, insertFn: any) => {
+          // 校验文件大小
           const isLt5M = file.size / 1024 / 1024 < 5;
           if (!isLt5M) {
             message.error('图片必须小于5MB!');
             return;
           }
 
+          // 校验文件类型
           const isImage = file.type.startsWith('image/');
           if (!isImage) {
             message.error('只能上传图片文件!');
             return;
           }
 
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-            const base64Str = reader.result as string;
-            insertFn(base64Str);
-          };
-          reader.onerror = () => {
+          try {
+            // 使用 uploadApi 上传文件
+            const response = await uploadApi.uploadFile(file);
+            // 获取上传后的 URL 并插入编辑器
+            const imageUrl = getFullUrl(response.data.url);
+            insertFn(imageUrl);
+          } catch (error) {
+            console.error('上传图片失败:', error);
             message.error('图片上传失败');
-          };
+          }
         }
       }
     }
