@@ -28,7 +28,7 @@ const menuItems = [
       },
       {
         label: '线上购买',
-        link: 'https://www.baidu.com', // 替换为实际的线上购买链接
+        link: 'https://item.jd.com/100200452284.html ', // 替换为实际的线上购买链接
       },
       {
         label: '云上服务',

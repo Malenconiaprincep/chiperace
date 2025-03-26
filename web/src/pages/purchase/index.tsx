@@ -40,7 +40,7 @@ export default function Purchase(): JSX.Element {
                 <Button
                   type="primary"
                   size="large"
-                  href="https://www.baidu.com"
+                  href="https://item.jd.com/100200452284.html "
                   target="_blank"
                   className={styles.button}
                 >
