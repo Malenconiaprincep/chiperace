@@ -7,7 +7,7 @@ const Login = () => {
 
   const onFinish = (values: any) => {
     // 这里添加实际的登录逻辑
-    if (values.username === 'admin' && values.password === 'admin') {
+    if (values.username === 'admin_chipierce' && values.password === 'ChiPierce123@GD&CS') {
       localStorage.setItem('token', 'dummy-token');
       message.success('登录成功');
       navigate('/dashboard');
