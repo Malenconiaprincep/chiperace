@@ -928,8 +928,8 @@ router.delete('/api/applications/:id', async (ctx) => {
 
 // 添加钉钉机器人配置
 const robot = new ChatBot({
-  webhook: process.env.DINGTALK_WEBHOOK || '', // 从环境变量获取webhook地址
-  secret: process.env.DINGTALK_SECRET || ''    // 从环境变量获取加签密钥
+  webhook: process.env.DINGTALK_WEBHOOK || 'https://oapi.dingtalk.com/robot/send?access_token=0be9137b533f0fa7bd6fa38a59bba86b6383ce0cd9397bd66add65089ba457f8', // 从环境变量获取webhook地址
+  secret: process.env.DINGTALK_SECRET || 'SECfd0293980fdacadd64c6e71175a0870e645eca1675c3fc303e24c78aa81d4dc7'    // 从环境变量获取加签密钥
 });
 
 // 添加发送钉钉消息的接口
