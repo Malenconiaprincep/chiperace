@@ -18,9 +18,9 @@ const Login = () => {
       // localStorage.setItem('token', response.token);
       if (values.username === 'admin_chipierce' && values.password === 'ChiPierce123@GD&CS') {
         localStorage.setItem('token', 'dummy-token');
+        message.success('登录成功');
+        navigate('/dashboard');
       }
-      message.success('登录成功');
-      navigate('/dashboard');
     } catch (error: any) {
       message.error(error.message || '登录失败');
     }
