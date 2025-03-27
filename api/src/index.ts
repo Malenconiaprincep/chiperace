@@ -926,6 +926,137 @@ router.delete('/api/applications/:id', async (ctx) => {
   }
 });
 
+// 用户认证相关路由
+router.post('/api/auth/register', async (ctx) => {
+  const { username, password } = ctx.request.body;
+
+  try {
+    // 检查用户名是否已存在
+    const existingUser = await prisma.user.findUnique({
+      where: { username }
+    });
+
+    if (existingUser) {
+      ctx.status = 400;
+      ctx.body = { error: '用户名已存在' };
+      return;
+    }
+
+    // 创建新用户
+    const user = await prisma.user.create({
+      data: {
+        username,
+        password,
+      }
+    });
+
+    ctx.body = {
+      id: user.id,
+      username: user.username,
+      createdAt: user.createdAt
+    };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '注册失败' };
+  }
+});
+
+router.post('/api/auth/login', async (ctx) => {
+  const { username, password } = ctx.request.body;
+
+  try {
+    // 查找用户
+    const user = await prisma.user.findUnique({
+      where: { username }
+    });
+
+    if (!user || user.password !== password) {
+      ctx.status = 401;
+      ctx.body = { error: '用户名或密码错误' };
+      return;
+    }
+
+    // 生成一个简单的token
+    const token = Buffer.from(`${user.id}:${user.username}:${Date.now()}`).toString('base64');
+
+    ctx.body = {
+      token,
+      user: {
+        id: user.id,
+        username: user.username
+      }
+    };
+  } catch (error) {
+    ctx.status = 401;
+    ctx.body = { error: '登录失败' };
+  }
+});
+
+router.post('/api/auth/change-password', async (ctx) => {
+  const { oldPassword, newPassword } = ctx.request.body;
+  const authHeader = ctx.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    ctx.status = 401;
+    ctx.body = { error: '未授权' };
+    return;
+  }
+
+  try {
+    const token = authHeader.split(' ')[1];
+    const [userId] = Buffer.from(token, 'base64').toString().split(':');
+
+    const user = await prisma.user.findUnique({
+      where: { id: parseInt(userId) }
+    });
+
+    if (!user || user.password !== oldPassword) {
+      ctx.status = 401;
+      ctx.body = { error: '当前密码错误' };
+      return;
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { password: newPassword }
+    });
+
+    ctx.body = { message: '密码修改成功' };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '密码修改失败' };
+  }
+});
+
+// 忘记密码
+router.post('/api/auth/reset-password', async (ctx) => {
+  const { username, newPassword } = ctx.request.body;
+
+  try {
+    // 查找用户
+    const user = await prisma.user.findUnique({
+      where: { username }
+    });
+
+    if (!user) {
+      ctx.status = 404;
+      ctx.body = { error: '用户不存在' };
+      return;
+    }
+
+    // 更新密码
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { password: newPassword }
+    });
+
+    ctx.body = { message: '密码重置成功' };
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: '密码重置失败' };
+  }
+});
+
 // 添加钉钉机器人配置
 const robot = new ChatBot({
   webhook: process.env.DINGTALK_WEBHOOK || 'https://oapi.dingtalk.com/robot/send?access_token=0be9137b533f0fa7bd6fa38a59bba86b6383ce0cd9397bd66add65089ba457f8', // 从环境变量获取webhook地址

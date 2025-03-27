@@ -1,18 +1,22 @@
-import { Form, Input, Button, Card, message } from 'antd';
+import { Form, Input, Button, Card, message, Space } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { login } from '../services/auth';
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const onFinish = (values: any) => {
-    // 这里添加实际的登录逻辑
-    if (values.username === 'admin_chipierce' && values.password === 'ChiPierce123@GD&CS') {
-      localStorage.setItem('token', 'dummy-token');
+  const onFinish = async (values: any) => {
+    try {
+      // const response: any = await login(values);
+      // localStorage.setItem('token', response.token);
+      if (values.username === 'admin_chipierce' && values.password === 'ChiPierce123@GD&CS') {
+        localStorage.setItem('token', 'dummy-token');
+      }
       message.success('登录成功');
       navigate('/dashboard');
-    } else {
-      message.error('用户名或密码错误');
+    } catch (error: any) {
+      message.error(error.message || '登录失败');
     }
   };
 
@@ -47,10 +51,16 @@ const Login = () => {
               登录
             </Button>
           </Form.Item>
+          {/* <Form.Item style={{ marginBottom: 0, textAlign: 'center' }}>
+            <Space>
+              <Link to="/register">注册新账号</Link>
+              <Link to="/forgot-password">忘记密码</Link>
+            </Space>
+          </Form.Item> */}
         </Form>
       </Card>
     </div>
   );
 };
 
-export default Login; 
+export default Login;
