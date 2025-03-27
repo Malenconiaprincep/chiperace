@@ -12,8 +12,8 @@ import {
   FormOutlined,
   BookOutlined,
   AppstoreOutlined,
-  UserOutlined,
-  LogoutOutlined
+  // UserOutlined,
+  // LogoutOutlined
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -21,10 +21,10 @@ const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   navigate('/login');
+  // };
 
   const menuItems = [
     {
