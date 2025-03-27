@@ -1,7 +1,13 @@
-import { Form, Input, Button, Card, message, Space } from 'antd';
+import {
+  Form, Input, Button, Card, message,
+  // Space
+} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../services/auth';
+import {
+  useNavigate,
+  // Link
+} from 'react-router-dom';
+// import { login } from '../services/auth';
 
 const Login = () => {
   const navigate = useNavigate();

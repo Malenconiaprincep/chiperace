@@ -1,4 +1,8 @@
-import { Layout, Menu, Dropdown, Button } from 'antd';
+import {
+  Layout, Menu,
+  // Dropdown,
+  // Button
+} from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
   DashboardOutlined,
@@ -60,26 +64,26 @@ const MainLayout = () => {
     },
   ];
 
-  const userMenuItems = [
-    {
-      key: 'change-password',
-      icon: <UserOutlined />,
-      label: '修改密码',
-    },
-    {
-      key: 'logout',
-      icon: <LogoutOutlined />,
-      label: '退出登录',
-    },
-  ];
+  // const userMenuItems = [
+  //   {
+  //     key: 'change-password',
+  //     icon: <UserOutlined />,
+  //     label: '修改密码',
+  //   },
+  //   {
+  //     key: 'logout',
+  //     icon: <LogoutOutlined />,
+  //     label: '退出登录',
+  //   },
+  // ];
 
-  const handleUserMenuClick = ({ key }: { key: string }) => {
-    if (key === 'logout') {
-      handleLogout();
-    } else if (key === 'change-password') {
-      navigate('/change-password');
-    }
-  };
+  // const handleUserMenuClick = ({ key }: { key: string }) => {
+  //   if (key === 'logout') {
+  //     handleLogout();
+  //   } else if (key === 'change-password') {
+  //     navigate('/change-password');
+  //   }
+  // };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
