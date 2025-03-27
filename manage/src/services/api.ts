@@ -173,6 +173,9 @@ export const purchaseApi = {
 
   // 搜索采购申请
   searchPurchases: (params: { query?: string; status?: string }) => api.get<PurchaseFormData[]>('/purchases/search', { params }),
+
+  // 删除采购申请
+  deletePurchase: (id: string) => api.delete(`/purchases/${id}`),
 };
 
 export const customDocApi = {

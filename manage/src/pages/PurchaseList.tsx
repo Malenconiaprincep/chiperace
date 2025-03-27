@@ -1,4 +1,4 @@
-import { Table, Button, Modal, message, Input, Select } from 'antd';
+import { Table, Button, Modal, message, Input, Select, Popconfirm } from 'antd';
 import { useState, useEffect } from 'react';
 import { purchaseApi, type PurchaseFormData } from '../services/api';
 
@@ -42,6 +42,16 @@ const PurchaseList = () => {
       fetchPurchases();
     } catch (error) {
       message.error('状态更新失败');
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await purchaseApi.deletePurchase(id);
+      message.success('删除成功');
+      fetchPurchases();
+    } catch (error) {
+      message.error('删除失败');
     }
   };
 
@@ -113,9 +123,19 @@ const PurchaseList = () => {
       title: '操作',
       key: 'action',
       render: (_: any, record: PurchaseFormData) => (
-        <Button type="link" onClick={() => showDetails(record)}>
-          查看详情
-        </Button>
+        <div>
+          <Button type="link" onClick={() => showDetails(record)}>
+            查看详情
+          </Button>
+          <Popconfirm
+            title="确定要删除这条记录吗？"
+            onConfirm={() => handleDelete(record.id)}
+            okText="确定"
+            cancelText="取消"
+          >
+            <Button type="link" danger>删除</Button>
+          </Popconfirm>
+        </div>
       ),
     },
   ];
