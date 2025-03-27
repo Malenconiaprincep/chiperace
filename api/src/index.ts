@@ -7,6 +7,7 @@ import serve from 'koa-static';
 import mount from 'koa-mount';
 import path from 'path';
 import fs from 'fs';
+import ChatBot from 'dingtalk-robot-sender';
 
 const app = new Koa();
 const router = new Router();
@@ -535,6 +536,19 @@ router.post('/api/purchases', async (ctx) => {
         requirements: data.requirements,
       }
     });
+
+    await robot.send({
+      msgtype: 'text',
+      text: {
+        content: `芯培森通知 采购申请已提交，请及时处理。
+        公司名称：${data.company}
+        联系人：${data.contact}
+        联系电话：${data.phone}
+        邮箱：${data.email}
+        需求：${data.requirements}`
+      },
+    });
+
     ctx.body = purchase;
   } catch (error) {
     ctx.status = 400;
@@ -909,6 +923,60 @@ router.delete('/api/applications/:id', async (ctx) => {
     console.error('删除应用领域失败:', error);
     ctx.status = 500;
     ctx.body = { error: '删除应用领域失败' };
+  }
+});
+
+// 添加钉钉机器人配置
+const robot = new ChatBot({
+  webhook: process.env.DINGTALK_WEBHOOK || 'https://oapi.dingtalk.com/robot/send?access_token=21d4b55816a328a4cea97da5e1004ab0e4e7ad2b720d2cda89b03ae3958855ee', // 从环境变量获取webhook地址
+  secret: process.env.DINGTALK_SECRET || 'SECef85b359e1e60816febcbb0c5e7ed72b95d0227bd224c0d3f6ee7d66395dd6db'    // 从环境变量获取加签密钥
+});
+
+// 添加发送钉钉消息的接口
+interface DingMessageBody {
+  msgtype: 'text' | 'link' | 'markdown';
+  content: string;
+  title?: string;
+  picUrl?: string;
+  messageUrl?: string;
+  atMobiles?: string[];
+  isAtAll?: boolean;
+}
+
+router.post('/api/send-ding-message', async (ctx) => {
+  const data = ctx.request.body as DingMessageBody;
+
+  try {
+    let response;
+    switch (data.msgtype) {
+      case 'text':
+        response = await robot.send({
+          msgtype: 'text',
+          text: {
+            content: data.content
+          },
+          at: {
+            atMobiles: data.atMobiles || [],
+            isAtAll: data.isAtAll || false
+          }
+        });
+        break;
+
+
+      default:
+        throw new Error('不支持的消息类型');
+    }
+
+    ctx.body = {
+      success: true,
+    };
+  } catch (error) {
+    console.error('发送钉钉消息失败:', error);
+    ctx.status = 500;
+    ctx.body = {
+      success: false,
+      error: error instanceof Error ? error.message : '发送钉钉消息失败'
+    };
   }
 });
 
