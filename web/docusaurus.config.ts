@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'CHI PIERCE',
+  title: '广东芯培森技术有限公司',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
