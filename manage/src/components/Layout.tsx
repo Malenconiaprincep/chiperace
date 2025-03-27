@@ -1,12 +1,12 @@
 import { Layout, Menu, Dropdown, Button } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { 
-  DashboardOutlined, 
-  FileTextOutlined, 
-  PictureOutlined, 
-  ShoppingOutlined, 
-  FormOutlined, 
-  BookOutlined, 
+import {
+  DashboardOutlined,
+  FileTextOutlined,
+  PictureOutlined,
+  ShoppingOutlined,
+  FormOutlined,
+  BookOutlined,
   AppstoreOutlined,
   UserOutlined,
   LogoutOutlined
@@ -87,11 +87,11 @@ const MainLayout = () => {
         <div style={{ fontSize: '18px' }}>
           后台管理系统
         </div>
-        <Dropdown menu={{ items: userMenuItems, onClick: handleUserMenuClick }} placement="bottomRight">
+        {/* <Dropdown menu={{ items: userMenuItems, onClick: handleUserMenuClick }} placement="bottomRight">
           <Button type="link" icon={<UserOutlined />}>
             管理员
           </Button>
-        </Dropdown>
+        </Dropdown> */}
       </Header>
       <Layout>
         <Sider width={200} style={{ background: '#fff' }}>
