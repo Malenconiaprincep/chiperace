@@ -53,6 +53,7 @@ export default function MainProduct() {
         }}
         navigation={!isMobileView}
         className={styles.slider}
+        onSwiper={(swiper) => swiper.animating = false}
       >
         {bannerData.map((banner, index) => (
           <SwiperSlide key={index}>
