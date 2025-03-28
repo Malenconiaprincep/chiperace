@@ -62,7 +62,11 @@ export default function MainProduct() {
           }
           isAnimating = setInterval(() => {
             swiper.animating = false
+
           }, 1000)
+
+          console.log(swiper)
+          swiper.slideTo(0)
         }}
       >
         {bannerData.map((banner, index) => (
