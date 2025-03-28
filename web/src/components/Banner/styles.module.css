@@ -287,3 +287,7 @@
   text-decoration: none;
   color: inherit;
 }
+
+.contentContainer {
+  user-select: none;
+}
