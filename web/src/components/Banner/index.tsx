@@ -55,7 +55,9 @@ export default function MainProduct() {
         className={styles.slider}
         onSwiper={(swiper) => {
           console.log(swiper)
-          swiper.animating = false
+          setTimeout(() => {
+            swiper.animating = false
+          }, 2000)
         }}
       >
         {bannerData.map((banner, index) => (
