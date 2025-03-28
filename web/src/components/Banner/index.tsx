@@ -10,9 +10,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+
+
 export default function MainProduct() {
   const [bannerData, setBannerData] = useState<BannerItem[]>([]);
   const [isMobileView, setIsMobileView] = useState(false);
+  let isAnimating = null
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,10 +57,12 @@ export default function MainProduct() {
         navigation={!isMobileView}
         className={styles.slider}
         onSwiper={(swiper) => {
-          console.log(swiper)
-          setTimeout(() => {
+          if (!swiper.animating) {
+            clearInterval(isAnimating)
+          }
+          isAnimating = setInterval(() => {
             swiper.animating = false
-          }, 2000)
+          }, 1000)
         }}
       >
         {bannerData.map((banner, index) => (
