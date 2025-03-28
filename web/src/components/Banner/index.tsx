@@ -65,11 +65,9 @@ export default function MainProduct() {
 
           }, 1000)
 
-          console.log(swiper)
-
           setTimeout(() => {
             swiper.slideTo(0)
-          }, 3000)
+          }, 500)
         }}
       >
         {bannerData.map((banner, index) => (
