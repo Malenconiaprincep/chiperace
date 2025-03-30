@@ -1,7 +1,7 @@
 import {
   Layout, Menu,
-  // Dropdown,
-  // Button
+  Dropdown,
+  Button
 } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
@@ -12,8 +12,8 @@ import {
   FormOutlined,
   BookOutlined,
   AppstoreOutlined,
-  // UserOutlined,
-  // LogoutOutlined
+  UserOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -21,10 +21,10 @@ const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const navigate = useNavigate();
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token');
-  //   navigate('/login');
-  // };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   const menuItems = [
     {
@@ -64,26 +64,26 @@ const MainLayout = () => {
     },
   ];
 
-  // const userMenuItems = [
-  //   {
-  //     key: 'change-password',
-  //     icon: <UserOutlined />,
-  //     label: '修改密码',
-  //   },
-  //   {
-  //     key: 'logout',
-  //     icon: <LogoutOutlined />,
-  //     label: '退出登录',
-  //   },
-  // ];
+  const userMenuItems = [
+    {
+      key: 'change-password',
+      icon: <UserOutlined />,
+      label: '修改密码',
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: '退出登录',
+    },
+  ];
 
-  // const handleUserMenuClick = ({ key }: { key: string }) => {
-  //   if (key === 'logout') {
-  //     handleLogout();
-  //   } else if (key === 'change-password') {
-  //     navigate('/change-password');
-  //   }
-  // };
+  const handleUserMenuClick = ({ key }: { key: string }) => {
+    if (key === 'logout') {
+      handleLogout();
+    } else if (key === 'change-password') {
+      navigate('/change-password');
+    }
+  };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -91,11 +91,11 @@ const MainLayout = () => {
         <div style={{ fontSize: '18px' }}>
           后台管理系统
         </div>
-        {/* <Dropdown menu={{ items: userMenuItems, onClick: handleUserMenuClick }} placement="bottomRight">
+        <Dropdown menu={{ items: userMenuItems, onClick: handleUserMenuClick }} placement="bottomRight">
           <Button type="link" icon={<UserOutlined />}>
             管理员
           </Button>
-        </Dropdown> */}
+        </Dropdown>
       </Header>
       <Layout>
         <Sider width={200} style={{ background: '#fff' }}>
