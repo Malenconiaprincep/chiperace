@@ -18,6 +18,7 @@ export interface ChangePasswordParams {
 export interface ResetPasswordParams {
   username: string;
   newPassword: string;
+  code: string;
 }
 
 export async function login(params: LoginParams) {

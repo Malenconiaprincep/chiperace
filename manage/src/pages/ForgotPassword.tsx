@@ -12,6 +12,7 @@ const ForgotPassword: React.FC = () => {
       await resetPassword({
         username: values.username,
         newPassword: values.newPassword,
+        code: values.code,
       });
       message.success('密码重置成功');
       navigate('/login');
@@ -75,7 +76,7 @@ const ForgotPassword: React.FC = () => {
 
           <Form.Item
             name="code"
-            label=" "
+            label="验证码"
             rules={[{ required: true, message: '请输入验证码' }]}
           >
             <Input />
