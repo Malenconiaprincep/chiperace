@@ -69,8 +69,8 @@ const Register: React.FC = () => {
 
           <Form.Item
             name="code"
-            label="验证码"
-            rules={[{ required: true, message: '验证码' }]}
+            label="管理员验证码"
+            rules={[{ required: true, message: '管理员验证码' }]}
           >
             <Input />
           </Form.Item>

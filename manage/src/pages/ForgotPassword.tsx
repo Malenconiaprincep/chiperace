@@ -76,8 +76,8 @@ const ForgotPassword: React.FC = () => {
 
           <Form.Item
             name="code"
-            label="验证码"
-            rules={[{ required: true, message: '请输入验证码' }]}
+            label="管理员验证码"
+            rules={[{ required: true, message: '请输入管理员验证码' }]}
           >
             <Input />
           </Form.Item>
