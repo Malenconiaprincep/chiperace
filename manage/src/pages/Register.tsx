@@ -67,6 +67,14 @@ const Register: React.FC = () => {
             <Input.Password />
           </Form.Item>
 
+          <Form.Item
+            name="code"
+            label="验证码"
+            rules={[{ required: true, message: '验证码' }]}
+          >
+            <Input />
+          </Form.Item>
+
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
               注册

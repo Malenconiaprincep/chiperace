@@ -13,6 +13,8 @@ const app = new Koa();
 const router = new Router();
 const prisma = new PrismaClient();
 
+const verifyCode = 'pWc8ptwrXHe54PN5gMNG';
+
 // 确保上传目录存在
 const uploadDir = path.join(__dirname, '../public/uploads');
 if (!fs.existsSync(uploadDir)) {
@@ -928,7 +930,7 @@ router.delete('/api/applications/:id', async (ctx) => {
 
 // 用户认证相关路由
 router.post('/api/auth/register', async (ctx) => {
-  const { username, password } = ctx.request.body;
+  const { username, password, code } = ctx.request.body;
 
   try {
     // 检查用户名是否已存在
@@ -939,6 +941,12 @@ router.post('/api/auth/register', async (ctx) => {
     if (existingUser) {
       ctx.status = 400;
       ctx.body = { error: '用户名已存在' };
+      return;
+    }
+
+    if (code !== verifyCode) {
+      ctx.status = 400;
+      ctx.body = { error: '验证码错误' };
       return;
     }
 
@@ -1030,7 +1038,7 @@ router.post('/api/auth/change-password', async (ctx) => {
 
 // 忘记密码
 router.post('/api/auth/reset-password', async (ctx) => {
-  const { username, newPassword } = ctx.request.body;
+  const { username, newPassword, code } = ctx.request.body;
 
   try {
     // 查找用户
@@ -1041,6 +1049,12 @@ router.post('/api/auth/reset-password', async (ctx) => {
     if (!user) {
       ctx.status = 404;
       ctx.body = { error: '用户不存在' };
+      return;
+    }
+
+    if (code !== verifyCode) {
+      ctx.status = 400;
+      ctx.body = { error: '验证码错误' };
       return;
     }
 
