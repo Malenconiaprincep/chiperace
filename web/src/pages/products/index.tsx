@@ -79,24 +79,24 @@ const ProductsPage = (): JSX.Element => {
           <div className={styles.customersSection}>
             <h3>产品与服务用户</h3>
             <div className={styles.customerLogos}>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/huawei.png" alt="华为" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/aist.png" alt="北京量子智能研究院" />
               </div>
               {/* <div className={styles.logoItem}>
                 <img src="/img/customers/nudt.png" alt="国防科技大学" />
               </div> */}
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/jilin.png" alt="吉林大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/dp.png" alt="深势科技" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/ustb.png" alt="北京科技大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/xmu.png" alt="厦门大学" />
               </div>
@@ -109,18 +109,18 @@ const ProductsPage = (): JSX.Element => {
               <div className={styles.logoItem}>
                 <img src="/img/customers/hbnu.png" alt="湖北第二师范学院" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/scut.png" alt="华南理工大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/whu.png" alt="武汉大学" />
               </div>
               <div className={styles.logoItem}>
                 <img src="/img/customers/cityu.png" alt="香港城市大学" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/nwpu.png" alt="西北工业大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/kunming.png" alt="昆明理工大学" />
               </div>
@@ -130,30 +130,30 @@ const ProductsPage = (): JSX.Element => {
               <div className={styles.logoItem}>
                 <img src="/img/customers/inner-mongolia.png" alt="内蒙古师范大学" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/physics-cas.png" alt="中国科学院物理研究所" />
-              </div>
-              <div className={styles.logoItem}>
+              </div> */}
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/bit.png" alt="北京理工大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/tsinghua.png" alt="清华大学" />
               </div>
               <div className={styles.logoItem}>
                 <img src="/img/customers/chongqing.png" alt="重庆大学" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/caep.png" alt="中国工程物理研究院" />
-              </div>
-              <div className={styles.logoItem}>
+              </div> */}
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/huazhong.png" alt="华中科技大学" />
-              </div>
+              </div> */}
               <div className={styles.logoItem}>
                 <img src="/img/customers/zsdx.png" alt="中山大学" />
               </div>
-              <div className={styles.logoItem}>
+              {/* <div className={styles.logoItem}>
                 <img src="/img/customers/hunan.png" alt="湖南大学" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
