@@ -25,7 +25,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: '使用手册',
       items: [
-        'tutorial-basics/APU 服务器使用手册',
+        'tutorial-basics/APU服务器使用手册',
         'tutorial-basics/APU服务器对比测试报告V1.0',
         // 'tutorial-basics/APU高性能计算服务器产品应用案例'
       ],
