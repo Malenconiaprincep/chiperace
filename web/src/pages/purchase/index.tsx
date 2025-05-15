@@ -50,7 +50,7 @@ export default function Purchase(): JSX.Element {
 
               <div className={styles.purchaseOption}>
                 <h3>云上服务</h3>
-                <p>订阅我们的云服务，随时随地使用高性能计算资源</p>
+                <p>订阅我们的云服务，随时随地使用资源</p>
                 <Button
                   type="primary"
                   size="large"

@@ -31,7 +31,7 @@ const ProductsPage = (): JSX.Element => {
         <div className={bannerStyles.banner}>
           <div className={bannerStyles.bannerContent}>
             <h1>产品技术</h1>
-            <p>原子级高性能计算解决方案</p>
+            <p>原子级计算解决方案</p>
           </div>
         </div>
 
