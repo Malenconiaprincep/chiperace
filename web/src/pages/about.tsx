@@ -51,7 +51,8 @@ const AboutPage = (): JSX.Element => {
               </div>
               <div className={styles.cultureItem}>
                 <h3>使命</h3>
-                <p>持续创造用于原子级科学计算的高效算力工具</p>
+                <p>持续创造用于原子级科学计算的</p>
+                <p>高效算力工具</p>
               </div>
               <div className={styles.cultureItem}>
                 <h3>价值观</h3>

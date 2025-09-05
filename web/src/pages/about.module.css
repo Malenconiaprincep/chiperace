@@ -124,6 +124,7 @@
 .cultureItem p {
   text-align: center;
   display: block !important;
+  margin-bottom: 0;
 }
 
 .cultureItem h3 {
