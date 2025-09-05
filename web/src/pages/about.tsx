@@ -42,23 +42,23 @@ const AboutPage = (): JSX.Element => {
             </div>
           </div> */}
 
-          {/* <div className={styles.section}>
+          <div className={styles.section}>
             <h2>企业文化</h2>
             <div className={styles.cultureGrid}>
               <div className={styles.cultureItem}>
                 <h3>愿景</h3>
-                <p>成为全球领先的AI芯片设计公司</p>
+                <p>实现微观世界数字孪生</p>
               </div>
               <div className={styles.cultureItem}>
                 <h3>使命</h3>
-                <p>用创新科技推动产业智能化升级</p>
+                <p>持续创造用于原子级科学计算的高效算力工具</p>
               </div>
               <div className={styles.cultureItem}>
                 <h3>价值观</h3>
-                <p>创新、专注、协作、共赢</p>
+                <p>求真、自强、厚德、共美</p>
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className={styles.section}>
             <h2>公司地址</h2>
