@@ -59,11 +59,15 @@ APU服务器在分子动力学计算任务中,在确保计算精度的前提下,
 - 图3 8核计算耗时对比
 ![alt text](image-9.png) -->
 
-<figure>
-  <img src="./img/image-7.png" alt="图1 2核计算耗时对比" />
-  <figcaption>图1 2核计算耗时对比</figcaption>
-</figure>
+<div style="text-align: center;">
+  ![图1 2核计算耗时对比](./img/image-7.png "图1 2核计算耗时对比")
+  <p><em>图1 2核计算耗时对比</em></p>
+</div>
 
+<em>图1 2核计算耗时对比</em>
+![图1 2核计算耗时对比](./img/image-7.png "图2 4核计算耗时对比")
+
+<em>图2 4核计算耗时对比</em>
 ![图2 4核计算耗时对比](./img/image-8.png "图2 4核计算耗时对比")
 
 <em>图3 8核计算耗时对比</em>
