@@ -61,7 +61,7 @@ APU服务器在分子动力学计算任务中,在确保计算精度的前提下,
 
 <em>图1 2核计算耗时对比</em>
 
-<img src="./img/image-7.png" alt="图1 2核计算耗时对比" class="centered-image">
+<img src="./img/image-7.png" alt="图1 2核计算耗时对比" />
 
 <em>图2 4核计算耗时对比</em>
 
