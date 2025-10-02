@@ -40,5 +40,17 @@
 }
 
 .custom-figure figcaption {
-  margin-bottom: 0.5em; /* 可选：添加图注和图片之间的间距 */
+  margin-bottom: 0.8em; /* 可选：添加图注和图片之间的间距 */
+}
+.centered-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.centered-image + em {
+  display: block;
+  text-align: center;
+  font-style: normal;
+  font-size: 0.9em;
+  color: #666;
 }
