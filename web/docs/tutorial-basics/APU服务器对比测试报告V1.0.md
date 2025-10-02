@@ -52,12 +52,8 @@ APU服务器在分子动力学计算任务中,在确保计算精度的前提下,
 
 分别将CPU、APU单卡和双卡的2核、4核、8核计算速度进行对比,结果如图1、图2、图3。
 
-<div style="text-align: center;">
-  <image-card alt="图1 2核计算耗时对比" src="./img/image-7.png "图1 2核计算耗时对比"" ></image-card>
-  <p><em>图1 2核计算耗时对比</em></p>
-</div>
-
-   <em>图1 2核计算耗时对比</em>
+                  图1 2核计算耗时对比
+  <p style="text-align: center;">图1 2核计算耗时对比</p>
 ![图1 2核计算耗时对比](./img/image-7.png "图2 4核计算耗时对比")
 
    <em>图2 4核计算耗时对比</em>
