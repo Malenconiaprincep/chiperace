@@ -15,12 +15,12 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ifm-heading2-color: #8B3DAF;
+  --ifm-heading2-color: #8b3daf;
   --ifm-h2-font-size: 28px;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -54,3 +54,12 @@
   font-size: 0.9em;
   color: #666;
 }
+
+table {
+  margin: 0 auto;
+  display: table;
+}
+
+/* img {
+  margin: 0 auto;
+} */
