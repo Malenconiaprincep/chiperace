@@ -17,7 +17,7 @@
 }
 
 .banner::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -34,7 +34,7 @@
 }
 
 .banner::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -75,7 +75,7 @@
 }
 
 .newsContent .newsInfo {
-  min-height: 120px;
+  min-height: 40px;
 }
 
 .filterBar {
@@ -94,7 +94,7 @@
 }
 
 .filterItem::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;
@@ -119,7 +119,7 @@
 
 .yearFilter span:hover {
   color: #1890ff;
-  background: rgba(24,144,255,0.1);
+  background: rgba(24, 144, 255, 0.1);
 }
 
 .newsList {
@@ -137,12 +137,12 @@
   transition: all 0.3s;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .newsItem:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .newsImage {
@@ -153,13 +153,13 @@
 }
 
 .newsImage::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 60px;
-  background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
 }
 
 .newsImage img {
@@ -231,7 +231,7 @@
 }
 
 .pagination span:hover:not(.active) {
-  background: rgba(24,144,255,0.1);
+  background: rgba(24, 144, 255, 0.1);
   color: #1890ff;
 }
 
@@ -250,7 +250,7 @@
   margin-bottom: 40px;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
@@ -289,19 +289,19 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
-  
+
   .featureNews {
     grid-template-columns: 1fr;
   }
-  
+
   .featureNews .newsImage {
     height: 360px;
   }
-  
+
   .featureNews .newsContent {
     padding: 30px;
   }
-  
+
   .featureNews .newsInfo h3 {
     font-size: 22px;
   }
@@ -311,22 +311,22 @@
   .banner {
     height: 240px;
   }
-  
+
   .banner h1 {
     font-size: 32px;
   }
-  
+
   .newsList {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .filterBar {
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
   }
-  
+
   .newsContent {
     padding: 40px 16px;
   }
@@ -336,7 +336,7 @@
   background: white;
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .newsTitle {
@@ -497,7 +497,7 @@
 /* 特色新闻的内容区域 */
 .featureNews .newsContent {
   padding: 30px;
-} 
+}
 
 /* 添加以下样式 */
 .featureNewsSection {
