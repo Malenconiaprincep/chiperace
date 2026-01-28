@@ -218,7 +218,7 @@ dp train-apu -h
 dp train-apu train_qnn.json -s s2 --skip-neighbor-stat
 ```
 
-3. QNN 输入脚本（`train_qnn.json`）中运行步数（`stop_batch`）设置为 1 步即可
+3. QNN 输入脚本（`train_qnn.json`）中运行步数（`stop_batch`）设置为 0 步即可
 
 <!-- ![alt text](./img/image.png) -->
 <!-- ![alt text](./img/image.png) -->
