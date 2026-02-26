@@ -47,12 +47,12 @@ const AboutPage = (): JSX.Element => {
             <div className={styles.cultureGrid}>
               <div className={styles.cultureItem}>
                 <h3>愿景</h3>
-                <p>实现微观世界数字孪生</p>
+                <p>成为全球领先的科学计算芯片公司</p>
               </div>
               <div className={styles.cultureItem}>
                 <h3>使命</h3>
-                <p>持续创造微观科学计算</p>
-                <p>高效算力工具</p>
+                <p>持续创造高效易用的</p>
+                <p>科学计算工具</p>
               </div>
               <div className={styles.cultureItem}>
                 <h3>价值观</h3>
