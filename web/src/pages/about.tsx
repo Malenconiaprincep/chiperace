@@ -51,8 +51,7 @@ const AboutPage = (): JSX.Element => {
               </div>
               <div className={styles.cultureItem}>
                 <h3>使命</h3>
-                <p>持续创造高效易用的</p>
-                <p>科学计算工具</p>
+                <p>持续创造高效易用的科学计算工具</p>
               </div>
               <div className={styles.cultureItem}>
                 <h3>价值观</h3>
